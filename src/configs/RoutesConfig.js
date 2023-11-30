@@ -1,1 +1,21 @@
-export const PATHS = {};
+export const PATHS = {
+  HOME: "/",
+  PAGE404: "*",
+  PRODUCTS: "/products",
+  PRODUCTS_CAT: "/products/:categoryName",
+  PRODUCTS_CAT_PAGINATION: "/products/:categoryName/:pageNumber",
+  PRODUCT: "/product/:productId",
+  BASKET: "/basket",
+  CHECKOUT: "/checkout",
+  PAYMENT: "/payment",
+  LOGIN: "/login",
+  REGISTER: "/resgister",
+
+  DASHBOARD: "/dashboard",
+  DASHBOARD_ORDERS: "/dashboard/orders",
+  DASHBOARD_PRODUCTS: "/dashboard/products",
+  DASHBOARD_CATEGORIES: "/dashboard/categories",
+  DASHBOARD_USERS: "/dashboard/users",
+  DASHBOARD_SETTINGS: "/dashboard/settings",
+  DASHBOARD_EXIT: "/dashboard/logout",
+};
