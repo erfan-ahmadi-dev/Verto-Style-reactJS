@@ -1,5 +1,13 @@
 
-<img src="[/path/to/img.jpg](https://raw.githubusercontent.com/dornadev/maktab99-project-erfan-ahmadi/develop/ComponentStructureMap.jpg" alt="Component Structure Map" title="Component Structure Map">
+<H2>Verto Style</H2>
+A clothing store made by React JS
+
+<h3>ComponentStructureMap</h3>
+
+![ComponentStructureMap](https://github.com/dornadev/maktab99-project-erfan-ahmadi/assets/40805510/4429b10d-54c8-4869-a415-91a9c53d1d7a)
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
