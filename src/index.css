@@ -26,3 +26,21 @@
   font-family: "IranMedium";
   src: url("/src/assets/fonts/IRANSansXFaNum-Medium.woff");
 }
+
+@layer utilities {
+  .hideOnLarge {
+    @apply md:hidden lg:hidden xl:hidden 2xl:hidden;
+  }
+  .hideOnSmall {
+    @apply hidden sm:hidden md:flex lg:flex xl:flex 2xl:flex;
+  }
+  .visibleOnSmall {
+    @apply flex sm:flex md:hidden lg:hidden xl:hidden 2xl:hidden;
+  }
+  .activeMenu {
+    @apply text-red-500 opacity-100;
+  }
+  .preventSelect {
+    @apply select-none;
+  }
+}
