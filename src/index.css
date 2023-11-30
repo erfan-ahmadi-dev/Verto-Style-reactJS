@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "IranRegular";
+  src: url("/src/assets/fonts/IRANSansXFaNum-Bold.woff") format("truetype");
+}
+@font-face {
+  font-family: "IranLight";
+  src: url("/src/assets/fonts/IRANSansXFaNum-Light.woff");
+}
+@font-face {
+  font-family: "IranBold";
+  src: url("/src/assets/fonts/IRANSansXFaNum-Bold.woff");
+}
+@font-face {
+  font-family: "IranSemiBold";
+  src: url("/src/assets/fonts/IRANSansXFaNum-SemiBold.woff");
+}
+@font-face {
+  font-family: "IranExtraBold";
+  src: url("/src/assets/fonts/IRANSansXFaNum-ExtraBold.woff");
+}
+@font-face {
+  font-family: "IranMedium";
+  src: url("/src/assets/fonts/IRANSansXFaNum-Medium.woff");
+}

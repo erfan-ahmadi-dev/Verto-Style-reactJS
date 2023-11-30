@@ -5,7 +5,15 @@ module.exports = {
     "node_modules/flowbite-react/lib/esm/**/*.js",
   ],
   theme: {
+    fontFamily: {
+      IranRegular: ["IranRegular"],
+      IranLight: ["IranLight"],
+      IranBold: ["IranBold"],
+      IranSemiBold: ["IranSemiBold"],
+      IranExtraBold: ["IranExtraBold"],
+      IranMedium: ["IranMedium"],
+    },
     extend: {},
   },
-  plugins: [],
+  plugins: [require("flowbite/plugin")],
 };
