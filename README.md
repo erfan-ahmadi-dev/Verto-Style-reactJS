@@ -1,3 +1,5 @@
+
+<img src="[/path/to/img.jpg](https://raw.githubusercontent.com/dornadev/maktab99-project-erfan-ahmadi/develop/ComponentStructureMap.jpg" alt="Component Structure Map" title="Component Structure Map">
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
