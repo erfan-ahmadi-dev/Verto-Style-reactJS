@@ -27,6 +27,13 @@
   src: url("/src/assets/fonts/IRANSansXFaNum-Medium.woff");
 }
 
+@layer base {
+  input[type="search"],
+  input[type="text"] {
+    @apply bg-neutral-100 w-full text-gray-800 p-2 text-sm focus:border-none rounded-full focus:outline-none border-none outline-none focus:ring-transparent placeholder-gray-400;
+  }
+}
+
 @layer utilities {
   .hideOnLarge {
     @apply md:hidden lg:hidden xl:hidden 2xl:hidden;
@@ -42,5 +49,11 @@
   }
   .preventSelect {
     @apply select-none;
+  }
+  .primaryButton {
+    @apply w-full bg-red-500  text-white py-2 px-4 rounded-full font-bold hover:bg-red-600;
+  }
+  .primaryInput {
+    @apply bg-neutral-100 rounded-lg w-1/4 px-2 gap-2 items-center  focus:outline-none focus:border-none border-none font-[IranRegular] text-sm;
   }
 }
