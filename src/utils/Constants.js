@@ -19,4 +19,10 @@ export const Texts = {
   connectionLost:
     "متاسفانه اتصال شما به وب سایت قطع شده است. لطفاً دوباره سعی کنید.",
   refresh: "بارگذاری مجدد",
+  menClothe: " پیراهن مردانه",
+  menShoes: "کفش مردانه",
+  menSport: "ورزشی مردانه",
+  womenClothe: "مانتو زنانه",
+  womenShoes: "کفش زنانه",
+  womenSport: "ورزشی زنانه",
 };

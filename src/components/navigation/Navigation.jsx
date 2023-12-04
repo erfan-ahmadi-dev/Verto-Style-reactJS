@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Texts } from "../../utils/Constants";
 import { PATHS } from "../../configs/RoutesConfig";
+import MegaMenu from "../mega-menu/MegaMenu";
 function Navigation() {
+  const [isHovered, setHovered] = useState(false);
+
   return (
     <nav
       className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
@@ -17,7 +20,11 @@ function Navigation() {
             {Texts.home}
           </NavLink>
         </li>
-        <li>
+        <li
+          onMouseEnter={() => {
+            setHovered(true);
+          }}
+        >
           <NavLink
             to={PATHS.PRODUCTS}
             className={({ isActive }) => (isActive ? "activeMenu" : "")}
@@ -25,19 +32,12 @@ function Navigation() {
             {Texts.products}
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to={PATHS.PAGE404}
-            className={({ isActive }) => (isActive ? "activeMenu" : "")}
-          >
-            {Texts.blog}
-          </NavLink>
-          {/* <Link to="/blog">{persianText.blog}</Link> */}
-        </li>
+        {isHovered && <MegaMenu setHovered={setHovered} />}
+
         <li>
           <NavLink
             // TODO change Link to
-            to={PATHS.REGISTER}
+            to={PATHS.CONTACTUS}
             className={({ isActive }) => (isActive ? "activeMenu" : "")}
           >
             {Texts.contactus}
