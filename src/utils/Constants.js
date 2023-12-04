@@ -1,13 +1,19 @@
-export const Texts = {
+const faTexts = {
   home: "صفحه نخست",
   products: "محصولات",
   blog: "بلاگ",
+  login: "ورود",
   contactus: "ارتباط با ما",
   search: "جستجو",
   404: "متاسفانه صفحه مورد نظر یافت نشد",
   backToHome: "برای رفتن به صفحه نخست روی دکمه زیر کلیک کنید",
   emailInput: "ایمیل",
+  username: "نام کاربری",
+  minUserName: "نام کاربری میبایست بیشتر از 3 حرف باشد",
+  usernameRequired: "وارد کردن نام کاربری الزامی هست",
+  wrongUserName: "نام کاربری وارد شده نامعتبر هست",
   passInput: "رمز عبور",
+  minPassword: "رمز عبور میبایست بیشتر از 3 حرف باشد",
   wrongEmail: "ایمیل وارد شده نامعتبر هست",
   emailRequired: "وارد کردن ایمیل الزامی هست",
   passRequired: "وارد کردن رمزعبور الزامی هست",
@@ -26,3 +32,5 @@ export const Texts = {
   womenShoes: "کفش زنانه",
   womenSport: "ورزشی زنانه",
 };
+
+export default faTexts;
