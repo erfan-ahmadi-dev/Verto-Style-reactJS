@@ -27,10 +27,15 @@
   src: url("/src/assets/fonts/IRANSansXFaNum-Medium.woff");
 }
 
-@layer base {
-  input[type="search"],
-  input[type="text"] {
-    @apply bg-neutral-100 w-full text-gray-800 p-2 text-sm focus:border-none rounded-full focus:outline-none border-none outline-none focus:ring-transparent placeholder-gray-400;
+@layer components {
+  .errorStyleText {
+    @apply w-full flex p-2 text-red-500  text-xs text-start;
+  }
+  .InputStyle {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full p-2.5 mt-2;
+  }
+  .loginErrorInput {
+    @apply bg-gray-50 border border-red-500 text-gray-900 sm:text-sm rounded-lg focus:ring-red-600 focus:border-red-600 block w-full;
   }
 }
 
