@@ -1,7 +1,7 @@
 import React from "react";
 
-function IconButton() {
+function ContactUs() {
   return <div></div>;
 }
 
-export default IconButton;
+export default ContactUs;

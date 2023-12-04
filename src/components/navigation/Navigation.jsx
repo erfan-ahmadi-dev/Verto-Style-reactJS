@@ -38,6 +38,7 @@ function Navigation() {
           <NavLink
             // TODO change Link to
             to={PATHS.CONTACTUS}
+            to={PATHS.CONTACTUS}
             className={({ isActive }) => (isActive ? "activeMenu" : "")}
           >
             {Texts.contactus}
