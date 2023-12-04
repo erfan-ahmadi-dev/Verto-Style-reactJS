@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Texts } from "../../utils/Constants";
+import faTexts from "../../utils/Constants";
 
 function MegaMenu({ setHovered }) {
   return (
@@ -14,7 +14,7 @@ function MegaMenu({ setHovered }) {
             to="products/men-clothe"
             className={({ isActive }) => (isActive ? "activeMenu" : "")}
           >
-            {Texts.menClothe}
+            {faTexts.menClothe}
           </Link>
         </li>
         <li>
@@ -22,7 +22,7 @@ function MegaMenu({ setHovered }) {
             to="products/women-clothe"
             className={({ isActive }) => (isActive ? "activeMenu" : "")}
           >
-            {Texts.womenClothe}
+            {faTexts.womenClothe}
           </Link>
         </li>
         <li>
@@ -30,7 +30,7 @@ function MegaMenu({ setHovered }) {
             to="products/men-shoes"
             className={({ isActive }) => (isActive ? "activeMenu" : "")}
           >
-            {Texts.menShoes}
+            {faTexts.menShoes}
           </Link>
         </li>
         <li>
@@ -38,7 +38,7 @@ function MegaMenu({ setHovered }) {
             to="products/women-shoes"
             className={({ isActive }) => (isActive ? "activeMenu" : "")}
           >
-            {Texts.womenShoes}
+            {faTexts.womenShoes}
           </Link>
         </li>
         <li>
@@ -46,7 +46,7 @@ function MegaMenu({ setHovered }) {
             to="products/men-sport"
             className={({ isActive }) => (isActive ? "activeMenu" : "")}
           >
-            {Texts.menSport}
+            {faTexts.menSport}
           </Link>
         </li>
         <li>
@@ -54,7 +54,7 @@ function MegaMenu({ setHovered }) {
             to="products/women-shoes"
             className={({ isActive }) => (isActive ? "activeMenu" : "")}
           >
-            {Texts.womenShoes}
+            {faTexts.womenShoes}
           </Link>
         </li>
       </ul>
