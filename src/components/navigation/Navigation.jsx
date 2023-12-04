@@ -26,7 +26,7 @@ function Navigation() {
           }}
         >
           <NavLink
-            to={PATHS.PRODUCTS}
+            to={`${PATHS.PRODUCTS}`}
             className={({ isActive }) => (isActive ? "activeMenu" : "")}
           >
             {Texts.products}
@@ -37,7 +37,6 @@ function Navigation() {
         <li>
           <NavLink
             // TODO change Link to
-            to={PATHS.CONTACTUS}
             to={PATHS.CONTACTUS}
             className={({ isActive }) => (isActive ? "activeMenu" : "")}
           >
