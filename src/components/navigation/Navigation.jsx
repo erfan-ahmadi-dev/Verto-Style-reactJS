@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Texts } from "../../utils/Constants";
+import faTexts from "../../utils/Constants";
 import { PATHS } from "../../configs/RoutesConfig";
 import MegaMenu from "../mega-menu/MegaMenu";
 function Navigation() {
@@ -17,7 +17,7 @@ function Navigation() {
             to="/"
             className={({ isActive }) => (isActive ? "activeMenu" : "")}
           >
-            {Texts.home}
+            {faTexts.home}
           </NavLink>
         </li>
         <li
@@ -29,7 +29,7 @@ function Navigation() {
             to={`${PATHS.PRODUCTS}`}
             className={({ isActive }) => (isActive ? "activeMenu" : "")}
           >
-            {Texts.products}
+            {faTexts.products}
           </NavLink>
         </li>
         {isHovered && <MegaMenu setHovered={setHovered} />}
@@ -40,7 +40,7 @@ function Navigation() {
             to={PATHS.CONTACTUS}
             className={({ isActive }) => (isActive ? "activeMenu" : "")}
           >
-            {Texts.contactus}
+            {faTexts.contactus}
           </NavLink>
           {/* <Link to="/contact-us">{persianText.contactus}</Link> */}
         </li>
