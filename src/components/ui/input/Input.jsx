@@ -7,28 +7,22 @@ function Input({
   onChange,
   lableVisibilty = "hidden",
   type,
-  className,
+  styleClass,
   disabled,
-  placeholder,
+  placeHolder,
   width = "w-full",
-  value,
-  name,
-  id,
 }) {
   return (
-    <div className={`${width} flex flex-col gap-1 `}>
-      <label className={`${lableVisibilty} text-xs `}>{label}</label>
+    <div className={`${width} `}>
+      <label className={`${lableVisibilty}`}>{label}</label>
       <input
         type={`${type}`}
-        className={className}
+        className={styleClass}
         disabled={disabled}
         onClick={onClick}
         onChange={onChange}
         onBlur={onBlur}
-        placeholder={placeholder}
-        value={value}
-        name={name}
-        id={id}
+        placeholder={placeHolder}
       />
       <span></span>
     </div>

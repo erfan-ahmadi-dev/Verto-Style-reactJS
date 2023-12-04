@@ -1,7 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
 import { loginSchema } from "../../validation/Schema";
-
 import logoPic from "../../assets/images/logoblack.svg";
 import faTexts from "../../utils/Constants";
 import Button from "../../components/ui/button/Button";
@@ -39,10 +38,10 @@ function Login() {
                     id="username"
                     label={faTexts.username}
                     lableVisibilty="true"
+                    placeholder={faTexts.username}
                     className={
                       errors.username ? "loginErrorInput" : "InputStyle  "
                     }
-                    placeholder={faTexts.username}
                     value={values.username}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -75,7 +74,7 @@ function Login() {
 
                 <Button
                   type="submit"
-                  className="mt-4"
+                  className="mt-3"
                   disabled={isSubmitting}
                   label={faTexts.login}
                 />
