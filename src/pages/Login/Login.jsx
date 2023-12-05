@@ -5,8 +5,13 @@ import logoPic from "../../assets/images/logoblack.svg";
 import faTexts from "../../utils/Constants";
 import Button from "../../components/ui/button/Button";
 import Input from "../../components/ui/input/Input";
+import { useNavigate } from "react-router-dom";
 function Login() {
-  const onSubmit = () => {};
+  const navigate = useNavigate();
+  const onSubmit = (value, action) => {
+    action.resetForm();
+    navigate("/dashboard");
+  };
   const {
     values,
     errors,
