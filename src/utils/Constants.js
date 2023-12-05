@@ -31,6 +31,18 @@ const faTexts = {
   womenClothe: "مانتو زنانه",
   womenShoes: "کفش زنانه",
   womenSport: "ورزشی زنانه",
+  orders: "سفارشات",
+
+  entityAndPrice: "موجودی و قیمت ها",
+  productImage: "عکس محصول",
+  producName: "نام محصول",
+  productPrice: "قیمت",
+  productCategory: "دسته بندی",
+  productSubCateory: "زیر دسته بندی",
+  productBrand: "برند",
+  productQuantity: "تعداد محصول",
+  productDescription: "توضیحات محصول",
+  dashborad: "داشبورد",
 };
 
 export default faTexts;

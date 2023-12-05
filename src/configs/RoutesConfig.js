@@ -14,6 +14,7 @@ export const PATHS = {
   DASHBOARD_ORDERS: "/dashboard/orders",
   DASHBOARD_PRODUCTS: "/dashboard/products",
   DASHBOARD_CATEGORIES: "/dashboard/categories",
+  DASHBOARD_PRICES_STOCK: "/dashboard/price-stock",
   DASHBOARD_USERS: "/dashboard/users",
   DASHBOARD_SETTINGS: "/dashboard/settings",
   DASHBOARD_EXIT: "/dashboard/logout",
