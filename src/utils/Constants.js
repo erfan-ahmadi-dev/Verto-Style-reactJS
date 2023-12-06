@@ -1,4 +1,5 @@
 export const BASE_URL = "http://localhost:8000/api/";
+export const BASE_IMAGE_URL = "http://localhost:8000/images/products/images/";
 const faTexts = {
   home: "صفحه نخست",
   products: "محصولات",

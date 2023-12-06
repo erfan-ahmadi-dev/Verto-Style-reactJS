@@ -25,10 +25,10 @@ export const getProductsWithCatAndSubCat = async (
             `${BASE_URL}categories/${product.category}`
           );
           product.category = userData.data.data.category.name;
-        } catch (error) {
+        } catch (categoryError) {
           console.error(
             `${faTexts.errorFetchCategory} ${product._id}:`,
-            error.message
+            categoryError.message
           );
         }
       })
@@ -41,10 +41,10 @@ export const getProductsWithCatAndSubCat = async (
             `${BASE_URL}subcategories/${product.subcategory}`
           );
           product.subcategory = userData.data.data.subcategory.name;
-        } catch (error) {
+        } catch (subcategoryError) {
           console.error(
             `${faTexts.errorFetchSubCategory} ${product._id}:`,
-            error.message
+            subcategoryError.message
           );
         }
       })
