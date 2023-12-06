@@ -34,6 +34,7 @@ const faTexts = {
 
   userFullName: "نام کاربر",
   orders: "سفارشات",
+  ordersMangment: "مدیریت سفارشات",
   orderCopleted: "سفارش های تحویل داده شده ",
   orderPending: "سفارش های در انتظار ارسال ",
   orderDate: " زمان ثبت سفارش",
@@ -49,6 +50,9 @@ const faTexts = {
   productBrand: "برند",
   productQuantity: "تعداد محصول",
   productDescription: "توضیحات محصول",
+  productsManagment: "مدیریت محصولات",
+
+  priceStockMangmant: "مدیریت قیمت و موجودی ها",
   dashborad: "داشبورد",
   totalPrice: "مجموع مبلغ",
   stock: "موجودی",
