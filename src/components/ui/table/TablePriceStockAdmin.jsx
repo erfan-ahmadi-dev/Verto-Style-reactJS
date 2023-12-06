@@ -27,6 +27,7 @@ function TablePriceStockAdmin(data) {
               <tr
                 className="w-full border-b  hover:bg-gray-200 h-fit"
                 colSpan={10}
+                key={item.createdAt}
               >
                 <td
                   colSpan={10}

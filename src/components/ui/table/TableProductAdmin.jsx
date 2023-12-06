@@ -28,7 +28,10 @@ function TableProductAdmin(data) {
         {products &&
           products.map((item) => {
             return (
-              <tr className="w-full border-b  hover:bg-gray-200 h-fit">
+              <tr
+                className="w-full border-b  hover:bg-gray-200 h-fit"
+                key={item.createdAt}
+              >
                 <th className="w-20">
                   <img
                     className="w-20 h-20 "
