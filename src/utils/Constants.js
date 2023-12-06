@@ -31,7 +31,14 @@ const faTexts = {
   womenClothe: "مانتو زنانه",
   womenShoes: "کفش زنانه",
   womenSport: "ورزشی زنانه",
+
+  userFullName: "نام کاربر",
   orders: "سفارشات",
+  orderCopleted: "سفارش های تحویل داده شده ",
+  orderPending: "سفارش های در انتظار ارسال ",
+  orderDate: " زمان ثبت سفارش",
+  orderReview: " بررسی سفارش",
+  operation: "عملیات",
 
   entityAndPrice: "موجودی و قیمت ها",
   productImage: "عکس محصول",
@@ -43,6 +50,11 @@ const faTexts = {
   productQuantity: "تعداد محصول",
   productDescription: "توضیحات محصول",
   dashborad: "داشبورد",
+  totalPrice: "مجموع مبلغ",
+  stock: "موجودی",
+  image: "تصویر",
+  edit: "ویرایش",
+  delete: "حذف",
 };
 
 export default faTexts;
