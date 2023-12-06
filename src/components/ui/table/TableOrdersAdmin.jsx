@@ -1,6 +1,7 @@
 import React from "react";
 import { FaSort as SortIcon } from "react-icons/fa6";
 import faTexts from "../../../utils/Constants";
+import { formatDate } from "../../../utils/functions";
 function TableOrdersAdmin(data) {
   console.log(data.data.orders);
   const { orders } = data.data;
@@ -48,7 +49,7 @@ function TableOrdersAdmin(data) {
                     </div>
                   </div>
                 </td>
-                <td className="px-6 py-4">{item.createdAt}</td>
+                <td className="px-6 py-4">{formatDate(item.createdAt)}</td>
                 <td className="px-6 py-4 gap-4 items-center">
                   <span className="w-fit ml-4 text-red-500 cursor-pointer underline-offset-4 underline">
                     {faTexts.orderReview}
