@@ -18,8 +18,8 @@ const ContactUs = React.lazy(() => import("../pages/contactUs/ContactUs"));
 const AdminDashboard = React.lazy(() =>
   import("../pages/dashboard/Dashboard/Dashborad")
 );
-const AdminCateroies = React.lazy(() =>
-  import("../pages/dashboard/Categories/AdminCategories")
+const AdminPriceStock = React.lazy(() =>
+  import("../pages/dashboard/PriceAndStocks/PriceAndStocks")
 );
 const AdminOrders = React.lazy(() =>
   import("../pages/dashboard/Orders/AdminOrders")
@@ -125,11 +125,11 @@ const routes = createBrowserRouter([
         ),
       },
       {
-        path: PATHS.DASHBOARD_CATEGORIES,
+        path: PATHS.DASHBOARD_PRICES_STOCK,
         element: (
           <React.Suspense fallback={<>...</>}>
             <ProtectedRoute>
-              <AdminCateroies />
+              <AdminPriceStock />
             </ProtectedRoute>
           </React.Suspense>
         ),
