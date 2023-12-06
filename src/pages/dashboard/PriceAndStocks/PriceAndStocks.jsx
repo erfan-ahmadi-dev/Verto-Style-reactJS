@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import faTexts from "../../../utils/Constants";
 import TableOrdersAdmin from "../../../components/ui/table/TablePriceStockAdmin";
 import { getData } from "../../../api/defaultApi";
+import Pagination from "../../../components/ui/pagination/Pagination";
 function PriceAndStocks() {
   const [priceStockData, setData] = useState({ data: [] });
   const [page, setPage] = useState(1);
@@ -17,6 +18,7 @@ function PriceAndStocks() {
       </div>
       <div className="relative h-full overflow-x-auto sm:rounded-lg w-full px-5 ">
         <TableOrdersAdmin data={priceStockData.data} />
+        <Pagination setPage={setPage} data={priceStockData} page={page} />
       </div>
     </div>
   );
