@@ -1,3 +1,4 @@
+export const BASE_URL = "http://localhost:8000/api/";
 const faTexts = {
   home: "صفحه نخست",
   products: "محصولات",
@@ -59,6 +60,12 @@ const faTexts = {
   image: "تصویر",
   edit: "ویرایش",
   delete: "حذف",
+
+  errorFetchCategory:
+    "خطایی در زمان دریافت اطلاعات دسته بندی برای محصول  مورد نظر رخ داده",
+  errorFetchSubCategory:
+    "خطایی در زمان دریافت اطلاعات زیر دسته بندی برای محصول  مورد نظر رخ داده",
+  erroFetchingProduct: "خطایی در زمان دریافت محصولات رخ داده ",
 };
 
 export default faTexts;
