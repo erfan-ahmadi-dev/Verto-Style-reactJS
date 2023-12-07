@@ -5,6 +5,8 @@ import {
   MdOutlineShoppingCartCheckout as OrdersIcon,
   MdPriceCheck as PriceIcon,
   MdDashboard as DashboardIcon,
+  MdLogout as LogoutIcon,
+  MdHome as HomeIcon,
 } from "react-icons/md";
 import { GiClothes as ProductIcon } from "react-icons/gi";
 import faText from "../../utils/Constants";
@@ -17,7 +19,7 @@ function DashBoardSideBar() {
         className=" w-full h-screen max-h-max transition-transform -translate-x-full sm:translate-x-0 shadow-md text-white animate-fade-left "
         aria-label="Sidenav"
       >
-        <div className="overflow-y-auto py-5 px-3 h-full bg-gray-800 border-r border-gray-200  ">
+        <div className="overflow-y-auto py-5 px-3 h-full bg-gray-800 border-r border-gray-200 relative ">
           <div className="flex flex-col gap-4 border-b-2 border-gray-500 pb-4">
             <Link to={PATHS.HOME}>
               <img
@@ -64,6 +66,16 @@ function DashBoardSideBar() {
               </Link>
             </li>
           </ul>
+          <div className="absolute bottom-5 flex  flex-col gap-4">
+            <Link to={PATHS.HOME} className="flex gap-2 items-center">
+              <HomeIcon className="h-5 w-5" />
+              <span className=" ">{faText.home}</span>
+            </Link>
+            <Link to={PATHS.HOME} className="flex gap-2 items-center">
+              <LogoutIcon className="h-5 w-5" />
+              <span className="">{faText.logout}</span>
+            </Link>
+          </div>
         </div>
       </aside>
     </div>

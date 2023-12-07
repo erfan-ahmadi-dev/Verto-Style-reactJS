@@ -5,6 +5,7 @@ const faTexts = {
   products: "محصولات",
   blog: "بلاگ",
   login: "ورود",
+  logout: "خروج از حساب",
   contactus: "ارتباط با ما",
   search: "جستجو",
   404: "متاسفانه صفحه مورد نظر یافت نشد",
