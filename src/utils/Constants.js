@@ -15,7 +15,7 @@ const faTexts = {
   usernameRequired: "وارد کردن نام کاربری الزامی هست",
   wrongUserName: "نام کاربری وارد شده نامعتبر هست",
   passInput: "رمز عبور",
-  minPassword: "رمز عبور میبایست بیشتر از 3 حرف باشد",
+  minPassword: "رمز عبور میبایست بیشتر از 5 حرف باشد",
   wrongEmail: "ایمیل وارد شده نامعتبر هست",
   emailRequired: "وارد کردن ایمیل الزامی هست",
   passRequired: "وارد کردن رمزعبور الزامی هست",

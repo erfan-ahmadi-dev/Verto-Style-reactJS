@@ -9,7 +9,7 @@ function Login() {
   const navigate = useNavigate();
   return (
     <div>
-      <section className="bg-gray-100 dark:bg-gray-900">
+      <section className="bg-gray-100 dark:bg-gray-900 font-IranRegular">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-[30%] bg-white rounded-lg shadow-2xl dark:border md:mt-0  xl:p-0 dark:bg-gray-800 dark:border-gray-700  ">
             <div className=" flex flex-col gap-5 p-6 space-y-4 md:space-y-6 sm:p-8">
