@@ -14,12 +14,12 @@ function Input({
   value,
   name,
   id,
-  ischeked,
+  ischecked,
   flextype,
-  isdisabled,
+  gap,
 }) {
   return (
-    <div className={`${width} flex flex-${flextype} gap-1 `}>
+    <div className={`${width} flex flex-${flextype} gap-${gap} `}>
       <label className={`${lableVisibilty} text-xs `}>{label}</label>
       <input
         type={`${type}`}
@@ -32,8 +32,7 @@ function Input({
         value={value}
         name={name}
         id={id}
-        defaultChecked={ischeked}
-        isdisabled
+        defaultChecked={ischecked}
       />
       <span></span>
     </div>
