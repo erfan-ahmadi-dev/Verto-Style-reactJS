@@ -37,7 +37,7 @@ const faTexts = {
   userFullName: "نام کاربر",
   orders: "سفارشات",
   ordersMangment: "مدیریت سفارشات",
-  orderCopleted: "سفارش های تحویل داده شده ",
+  orderCompleted: "سفارش های تحویل داده شده ",
   orderPending: "سفارش های در انتظار ارسال ",
   orderDate: " زمان ثبت سفارش",
   orderReview: " بررسی سفارش",
