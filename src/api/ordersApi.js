@@ -21,6 +21,7 @@ export const getOrdersWithName = async (
     // Fetch user data for each order
     await Promise.all(
       orders.map(async (order) => {
+        order.totalPrice = order.totalPrice.toLocaleString("fa-IR");
         const userData = await axios.get(`${BASE_URL}users/${order.user}`);
 
         order.user = `${userData.data.data.user.firstname} ${userData.data.data.user.lastname}`;
