@@ -15,10 +15,11 @@ function Input({
   name,
   id,
   ischeked,
+  flextype,
   isdisabled,
 }) {
   return (
-    <div className={`${width} flex flex-col gap-1 `}>
+    <div className={`${width} flex flex-${flextype} gap-1 `}>
       <label className={`${lableVisibilty} text-xs `}>{label}</label>
       <input
         type={`${type}`}
