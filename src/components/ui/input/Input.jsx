@@ -14,6 +14,8 @@ function Input({
   value,
   name,
   id,
+  ischeked,
+  isdisabled,
 }) {
   return (
     <div className={`${width} flex flex-col gap-1 `}>
@@ -29,6 +31,8 @@ function Input({
         value={value}
         name={name}
         id={id}
+        defaultChecked={ischeked}
+        isdisabled
       />
       <span></span>
     </div>
