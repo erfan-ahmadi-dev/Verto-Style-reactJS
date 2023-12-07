@@ -53,6 +53,7 @@ const faTexts = {
   productQuantity: "تعداد محصول",
   productDescription: "توضیحات محصول",
   productsManagment: "مدیریت محصولات",
+  addProduct: "افزودن محصول",
 
   priceStockMangmant: "مدیریت قیمت و موجودی ها",
   dashborad: "داشبورد",
