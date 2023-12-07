@@ -61,4 +61,7 @@
   .primaryInput {
     @apply bg-neutral-100 rounded-lg w-1/4 px-2 gap-2 items-center  focus:outline-none focus:border-none border-none font-[IranRegular] text-sm;
   }
+  .radioButtonStyle {
+    @apply border border-gray-800 text-red-500 sm:text-sm rounded-lg focus:ring-red-600 focus:border-red-600;
+  }
 }
