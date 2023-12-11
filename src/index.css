@@ -26,7 +26,27 @@
   font-family: "IranMedium";
   src: url("/src/assets/fonts/IRANSansXFaNum-Medium.woff");
 }
-
+.swiper-button-prev {
+  background-color: white;
+  left: 10px;
+  padding: 1rem;
+  margin-right: 1rem;
+  border-radius: 100%;
+  color: black !important;
+  fill: black !important;
+  stroke: black !important;
+  box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.74);
+}
+.swiper-button-next {
+  background-color: white;
+  right: 10px;
+  padding: 1rem;
+  margin-left: 1rem;
+  border-radius: 100%;
+  color: black !important;
+  fill: black !important;
+  stroke: black !important;
+}
 @layer components {
   .errorStyleText {
     @apply w-full flex p-2 text-red-500  text-xs text-start;
