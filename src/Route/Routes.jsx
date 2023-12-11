@@ -49,6 +49,14 @@ const routes = createBrowserRouter([
         ),
       },
       {
+        path: `${PATHS.PRODUCTS}/:category`,
+        element: (
+          <React.Suspense fallback={<>...</>}>
+            <Products />
+          </React.Suspense>
+        ),
+      },
+      {
         path: PATHS.PRODUCT,
         element: (
           <React.Suspense fallback={<>...</>}>
