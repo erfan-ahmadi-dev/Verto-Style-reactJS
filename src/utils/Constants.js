@@ -79,42 +79,69 @@ const faTexts = {
   erroFetchingProduct: "خطایی در زمان دریافت محصولات رخ داده ",
 };
 
-export const CATEGOREIS_ITEMS = [
+export const SUB_CATEGOREIS_LINK = [
   {
     title: "لباس مردانه",
-    imgsrc: menClothe,
-    alt: "mens clothe category",
     link: "mens-clothe",
   },
   {
     title: "کفش مردانه",
-    imgsrc: menShoes,
-    alt: "mens shoes category",
     link: "mens-shoes",
   },
   {
     title: "ورزشی مردانه",
-    imgsrc: menSport,
-    alt: "mens sport category",
     link: "mens-sport",
   },
   {
     title: "لباس زنانه",
-    imgsrc: womenClothe,
-    alt: "womens clothe category",
     link: "womens-clothe",
   },
   {
     title: "کفش زنانه",
-    imgsrc: womenShoes,
-    alt: "womens shoes category",
     link: "womens-shoes",
   },
   {
     title: "ورزشی زنانه",
+    link: "womens-sport",
+  },
+];
+
+export const CATEGOREIS_ITEMS = [
+  {
+    title: SUB_CATEGOREIS_LINK[0].title,
+    imgsrc: menClothe,
+    alt: "mens clothe category",
+    link: SUB_CATEGOREIS_LINK[0].link,
+  },
+  {
+    title: SUB_CATEGOREIS_LINK[1].title,
+    imgsrc: menShoes,
+    alt: "mens shoes category",
+    link: SUB_CATEGOREIS_LINK[1].link,
+  },
+  {
+    title: SUB_CATEGOREIS_LINK[2].title,
+    imgsrc: menSport,
+    alt: "mens sport category",
+    link: SUB_CATEGOREIS_LINK[2].link,
+  },
+  {
+    title: SUB_CATEGOREIS_LINK[3].title,
+    imgsrc: womenClothe,
+    alt: "womens clothe category",
+    link: SUB_CATEGOREIS_LINK[3].link,
+  },
+  {
+    title: SUB_CATEGOREIS_LINK[4].title,
+    imgsrc: womenShoes,
+    alt: "womens shoes category",
+    link: SUB_CATEGOREIS_LINK[4].link,
+  },
+  {
+    title: SUB_CATEGOREIS_LINK[5].title,
     imgsrc: womenSport,
     alt: "womens sport category",
-    link: "womens-sport",
+    link: SUB_CATEGOREIS_LINK[5].link,
   },
 ];
 
