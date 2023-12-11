@@ -1,3 +1,11 @@
+import {
+  menClothe,
+  menShoes,
+  menSport,
+  womenClothe,
+  womenShoes,
+  womenSport,
+} from "../assets/images";
 export const BASE_URL = "http://localhost:8000/api/";
 export const BASE_IMAGE_URL = "http://localhost:8000/images/products/images/";
 const faTexts = {
@@ -70,5 +78,44 @@ const faTexts = {
     "خطایی در زمان دریافت اطلاعات زیر دسته بندی برای محصول  مورد نظر رخ داده",
   erroFetchingProduct: "خطایی در زمان دریافت محصولات رخ داده ",
 };
+
+export const CATEGOREIS_ITEMS = [
+  {
+    title: "لباس مردانه",
+    imgsrc: menClothe,
+    alt: "mens clothe category",
+    link: "mens-clothe",
+  },
+  {
+    title: "کفش مردانه",
+    imgsrc: menShoes,
+    alt: "mens shoes category",
+    link: "mens-shoes",
+  },
+  {
+    title: "ورزشی مردانه",
+    imgsrc: menSport,
+    alt: "mens sport category",
+    link: "mens-sport",
+  },
+  {
+    title: "لباس زنانه",
+    imgsrc: womenClothe,
+    alt: "womens clothe category",
+    link: "womens-clothe",
+  },
+  {
+    title: "کفش زنانه",
+    imgsrc: womenShoes,
+    alt: "womens shoes category",
+    link: "womens-shoes",
+  },
+  {
+    title: "ورزشی زنانه",
+    imgsrc: womenSport,
+    alt: "womens sport category",
+    link: "womens-sport",
+  },
+];
 
 export default faTexts;
