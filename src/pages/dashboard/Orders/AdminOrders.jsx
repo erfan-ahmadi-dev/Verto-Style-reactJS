@@ -4,15 +4,19 @@ import faTexts from "../../../utils/Constants";
 import { getOrdersWithName } from "../../../api/ordersApi";
 import Pagination from "../../../components/ui/pagination/Pagination";
 import Input from "../../../components/ui/input/Input";
+import { useQuery } from "@tanstack/react-query";
+import { LuLoader as Loading } from "react-icons/lu";
 function AdminOrders() {
-  const [orderData, setData] = useState({ data: [] });
+  const fetchData = () => {
+    return getOrdersWithName(page, 4, "createdAt", isDelevierd);
+  };
+  const query = useQuery({
+    queryKey: ["orders"],
+    queryFn: fetchData,
+  });
   const [isDelevierd, setDeliverd] = useState(false);
   const [page, setPage] = useState(1);
-  useEffect(() => {
-    getOrdersWithName(page, 4, "createdAt", isDelevierd).then((Response) => {
-      setData(Response || { data: [] });
-    });
-  }, [page, isDelevierd]);
+
   return (
     <div className="w-full flex flex-col ">
       <div className="flex justify-between w-full p-5 items-center bg-gray-800 text-white">
@@ -44,8 +48,15 @@ function AdminOrders() {
             gap={4}
           />
         </div>
-        <TableOrdersAdmin data={orderData.data} />
-        <Pagination setPage={setPage} data={orderData} page={page} />
+
+        {query.isLoading ? (
+          <Loading className="animate-spin aanimate-infinite animate-duration-1000 w-12 h-12" />
+        ) : (
+          <>
+            <TableOrdersAdmin data={query.data.data} />
+            <Pagination setPage={setPage} data={query.data} page={page} />
+          </>
+        )}
       </div>
     </div>
   );
