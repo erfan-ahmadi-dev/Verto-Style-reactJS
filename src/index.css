@@ -90,4 +90,13 @@
   .productSliderDivStyle {
     @apply w-full flex flex-col items-center mt-5 gap-4 py-4;
   }
+  .bannerSideBySide {
+    @apply grid gap-4 grid-cols-1 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 w-full relative overflow-hidden my-4;
+  }
+  .bannerWide {
+    @apply w-full items-center justify-center hidden sm:hidden md:flex lg:flex xl:flex 2xl:flex h-fit my-4;
+  }
+  .bannerImage {
+    @apply w-full hover:scale-110 hover:duration-700;
+  }
 }
