@@ -87,4 +87,7 @@
   .productHeadStyle {
     @apply border-y-2 border-red-500 text-xl font-semibold px-4 py-2 w-fit;
   }
+  .productSliderDivStyle {
+    @apply w-full flex flex-col items-center mt-5 gap-4 py-4;
+  }
 }
