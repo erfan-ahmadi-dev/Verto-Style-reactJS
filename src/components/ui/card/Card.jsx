@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { BASE_IMAGE_URL } from "../../../utils/Constants";
 import { MdOutlineStar as Star } from "react-icons/md";
 import { IconContext } from "react-icons/lib";
-function Card() {
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+function Card({ isLoading }) {
   const data = {
     rating: {
       rate: 4.2,
@@ -12,7 +14,7 @@ function Card() {
     _id: "6569d16f7d8862dfba146f4b",
     category: "6561eaa51adeb81260019942",
     subcategory: "6561eb0c1adeb81260019951",
-    name: "تی شرت آستین بلند مردانه باینت مدل 2261571-571 رنگ مشکی",
+    name: "تی شرت تستی",
     price: 418000,
     quantity: 8,
     brand: "باینت",
@@ -31,34 +33,54 @@ function Card() {
   return (
     <Link to={"product/" + data._id}>
       <div className="w-full max-w-sm bg-white  rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700 ">
-        <div className="overflow-hidden">
-          <img
-            className="rounded-t-lg aspect-auto inset-0 object-center transition duration-700 hover:scale-110"
-            src={`${BASE_IMAGE_URL}${data.images[0]}`}
-            loading="lazy"
-            alt="product"
-          />
+        <div className="overflow-hidden ">
+          {isLoading ? (
+            <Skeleton className="w-52 h-80" />
+          ) : (
+            <img
+              className="rounded-t-lg aspect-auto inset-0 object-center transition duration-700 hover:scale-110"
+              src={`${BASE_IMAGE_URL}${data.images[0]}`}
+              loading="lazy"
+              alt="product"
+            />
+          )}
         </div>
 
         <div className="p-5 flex justify-center flex-col gap-2 ">
-          <h5 className="text-sm h-fit font-IranRegular  tracking-tight text-gray-900 dark:text-white line-clamp-1">
-            {data.name}
-          </h5>
+          {isLoading ? (
+            <Skeleton />
+          ) : (
+            <h5 className="text-sm h-fit font-IranRegular  tracking-tight text-gray-900 dark:text-white line-clamp-1">
+              {data.name}
+            </h5>
+          )}
 
           <div className="flex items-center  ">
-            <div className="flex items-center space-x-1 rtl:space-x-reverse">
-              <IconContext.Provider value={{ color: "#f59e0b" }}>
-                <Star />
-              </IconContext.Provider>
-            </div>
-            <span className=" text-xs font-semibold px-2.5   ">
-              {data.rating.rate}
-            </span>
+            {isLoading ? (
+              <Skeleton className="px-5" />
+            ) : (
+              <>
+                <div className="flex items-center space-x-1 rtl:space-x-reverse">
+                  <IconContext.Provider value={{ color: "#f59e0b" }}>
+                    <Star />
+                  </IconContext.Provider>
+                </div>
+                <span className=" text-xs font-semibold px-2.5   ">
+                  {data.rating.rate}
+                </span>
+              </>
+            )}
           </div>
 
-          <span className="text-base font-bold text-end ">
-            {data.price.toLocaleString("fa-IR")} تومان
-          </span>
+          {isLoading ? (
+            <div className="flex justify-end w-full">
+              <Skeleton className="px-10 py-1" />
+            </div>
+          ) : (
+            <span className="text-base font-bold text-end ">
+              {data.price.toLocaleString("fa-IR")} تومان
+            </span>
+          )}
         </div>
       </div>
     </Link>
