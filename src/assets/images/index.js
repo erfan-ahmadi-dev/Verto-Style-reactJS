@@ -1,6 +1,7 @@
 import slide1 from "../images/slide1.jpg";
 import slide2 from "../images/slide2.jpg";
 import slide3 from "../images/slide3.jpg";
-
-export { slide1, slide2, slide3 };
-export * from "./categoris/index";
+import * as banner from "./banners/index";
+import * as category from "./categoris/index";
+export { slide1, slide2, slide3, banner, category };
+// export * from "./categoris/index";

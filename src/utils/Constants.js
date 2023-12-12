@@ -1,11 +1,5 @@
-import {
-  menClothe,
-  menShoes,
-  menSport,
-  womenClothe,
-  womenShoes,
-  womenSport,
-} from "../assets/images";
+import { banner, category } from "../assets/images";
+
 export const BASE_URL = "http://localhost:8000/api/";
 export const BASE_IMAGE_URL = "http://localhost:8000/images/products/images/";
 const faTexts = {
@@ -79,6 +73,7 @@ const faTexts = {
   erroFetchingProduct: "خطایی در زمان دریافت محصولات رخ داده ",
 };
 
+// TODO define links insde PATHS
 export const SUB_CATEGOREIS_LINK = [
   {
     title: "لباس مردانه",
@@ -106,40 +101,72 @@ export const SUB_CATEGOREIS_LINK = [
   },
 ];
 
+export const BANNERS_DATA = [
+  {
+    imageSrc: banner.menClotheBanner,
+    link: SUB_CATEGOREIS_LINK[0].link,
+    alt: "mens clothe category",
+  },
+  {
+    imageSrc: banner.menShoesBanner,
+    link: SUB_CATEGOREIS_LINK[1].link,
+    alt: "mens shoes category",
+  },
+  {
+    imageSrc: banner.menSportBanner,
+    link: SUB_CATEGOREIS_LINK[2].link,
+    alt: "mens sport category",
+  },
+  {
+    imageSrc: banner.womenClotheBanner,
+    link: SUB_CATEGOREIS_LINK[3].link,
+    alt: "womens clothe category",
+  },
+  {
+    imageSrc: banner.womenShoesBanner,
+    link: SUB_CATEGOREIS_LINK[4].link,
+    alt: "womens shoes category",
+  },
+  {
+    imageSrc: banner.womenSportBanner,
+    link: SUB_CATEGOREIS_LINK[5].link,
+    alt: "womens sport category",
+  },
+];
 export const CATEGOREIS_ITEMS = [
   {
     title: SUB_CATEGOREIS_LINK[0].title,
-    imgsrc: menClothe,
+    imgsrc: category.menClothe,
     alt: "mens clothe category",
     link: SUB_CATEGOREIS_LINK[0].link,
   },
   {
     title: SUB_CATEGOREIS_LINK[1].title,
-    imgsrc: menShoes,
+    imgsrc: category.menShoes,
     alt: "mens shoes category",
     link: SUB_CATEGOREIS_LINK[1].link,
   },
   {
     title: SUB_CATEGOREIS_LINK[2].title,
-    imgsrc: menSport,
+    imgsrc: category.menSport,
     alt: "mens sport category",
     link: SUB_CATEGOREIS_LINK[2].link,
   },
   {
     title: SUB_CATEGOREIS_LINK[3].title,
-    imgsrc: womenClothe,
+    imgsrc: category.womenClothe,
     alt: "womens clothe category",
     link: SUB_CATEGOREIS_LINK[3].link,
   },
   {
     title: SUB_CATEGOREIS_LINK[4].title,
-    imgsrc: womenShoes,
+    imgsrc: category.womenShoes,
     alt: "womens shoes category",
     link: SUB_CATEGOREIS_LINK[4].link,
   },
   {
     title: SUB_CATEGOREIS_LINK[5].title,
-    imgsrc: womenSport,
+    imgsrc: category.womenSport,
     alt: "womens sport category",
     link: SUB_CATEGOREIS_LINK[5].link,
   },
