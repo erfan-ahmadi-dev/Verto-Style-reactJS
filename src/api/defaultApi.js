@@ -11,7 +11,8 @@ const handleRequest = async (request) => {
 };
 
 export const getData = async (query) => {
-  return handleRequest(async () => axios.get(`${BASE_URL}${query}`));
+  const response = await axios.get(`${BASE_URL}${query}`);
+  return response.data;
 };
 
 export const createData = async (query, data) => {
