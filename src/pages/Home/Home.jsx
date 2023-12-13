@@ -1,7 +1,7 @@
 import React from "react";
 import MainSlider from "../../components/slider/mainSlider/MainSlider";
 import CategoriesCard from "../../components/categorisCard/CategoriesCard";
-import faTexts, { BANNERS_DATA, CATEGOREIS_ITEMS } from "../../utils/Constants";
+import faTexts, { CATEGOREIS_ITEMS } from "../../utils/Constants";
 import ProductSlider from "../../components/slider/productSlider/ProductSlider";
 
 import ProductShowCase from "../../components/productShowCase/ProductShowCase";
@@ -10,17 +10,35 @@ import { getData } from "../../api/defaultApi";
 import { useQuery } from "@tanstack/react-query";
 
 function Home() {
-  const fetchProductWithOffer = () => {
-    return getData("products?page=1&limit=6&quantity[lt]=15");
+  const fetchProductWithOffer = (urlQuery) => {
+    return getData(urlQuery);
   };
-  const query = useQuery({
+  const offerQuery = useQuery({
     queryKey: ["productsWithOffer"],
-    queryFn: fetchProductWithOffer,
+    queryFn: () =>
+      fetchProductWithOffer("products?page=1&limit=6&quantity[lt]=15"),
   });
-
-  query.isLoading
-    ? console.log("loading")
-    : console.log(query.data.data.products);
+  const menClotheQuery = useQuery({
+    queryKey: ["manclothe"],
+    queryFn: () =>
+      fetchProductWithOffer(
+        "products?page=1&limit=6&category=6561eaa51adeb81260019942"
+      ),
+  });
+  const womenClotheQuery = useQuery({
+    queryKey: ["womanclothe"],
+    queryFn: () =>
+      fetchProductWithOffer(
+        "products?page=1&limit=6&category=6561eaa51adeb81260019942"
+      ),
+  });
+  const womenShoesQuery = useQuery({
+    queryKey: ["womanShoes"],
+    queryFn: () =>
+      fetchProductWithOffer(
+        "products?page=1&limit=6&category=6561eaa51adeb81260019942"
+      ),
+  });
 
   return (
     <div className="w-full min-w-full h-full flex flex-col items-center justify-center gap-2 ">
@@ -41,35 +59,37 @@ function Home() {
         </div>
         <ProductShowCase title={faTexts.offer}>
           <ProductSlider
-            isLoading={query.isLoading}
-            data={query.data?.data.products}
+            isLoading={offerQuery.isLoading}
+            data={offerQuery.data?.data.products}
           />
         </ProductShowCase>
 
         <Banner classStyle="bannerWide" bannerindex={0} />
+
         <ProductShowCase title={faTexts.offer}>
-          {/* <ProductSlider
-            isLoading={query.isLoading}
-            data={query.data?.data.products}
-          /> */}
+          <ProductSlider
+            isLoading={menClotheQuery.isLoading}
+            data={menClotheQuery.data?.data.products}
+          />
         </ProductShowCase>
         <Banner
           classStyle="bannerSideBySide"
           bannerindex={1}
           bannerindex2={2}
         />
+
         <ProductShowCase title={faTexts.offer}>
-          {/* <ProductSlider
-            isLoading={query.isLoading}
-            data={query.data?.data.products}
-          /> */}
+          <ProductSlider
+            isLoading={womenClotheQuery.isLoading}
+            data={womenClotheQuery.data?.data.products}
+          />
         </ProductShowCase>
         <Banner classStyle="bannerWide" bannerindex={3} />
         <ProductShowCase title={faTexts.offer}>
-          {/* <ProductSlider
-            isLoading={query.isLoading}
-            data={query.data?.data.products}
-          /> */}
+          <ProductSlider
+            isLoading={womenShoesQuery.isLoading}
+            data={womenShoesQuery.data?.data.products}
+          />
         </ProductShowCase>
         <Banner
           classStyle="bannerSideBySide"
