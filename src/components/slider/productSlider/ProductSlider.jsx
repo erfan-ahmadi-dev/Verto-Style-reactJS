@@ -1,11 +1,9 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css";
-import "swiper/css/navigation";
+
 import { Navigation } from "swiper/modules";
 import Card from "../../ui/card/Card";
-
+import "swiper/css";
+import "swiper/css/navigation";
 function ProductSlider({ data, isLoading }) {
   return (
     <div className="h-fit w-full animate-fade">
@@ -34,13 +32,19 @@ function ProductSlider({ data, isLoading }) {
         modules={[Navigation]}
         className="mySwiper w-full h-auto my-4 select-none place-items-center items-center justify-center flex "
       >
-        {data.map((item) => {
-          return (
-            <SwiperSlide className="w-auto p-4 animate-fade">
-              <Card isLoading={true} data={item} />
-            </SwiperSlide>
-          );
-        })}
+        {isLoading
+          ? [...Array(4)].map((_, index) => (
+              <SwiperSlide className="w-auto p-4 animate-fade" key={index}>
+                <Card isLoading={isLoading} />
+              </SwiperSlide>
+            ))
+          : data.map((item, index) => {
+              return (
+                <SwiperSlide className="w-auto p-4 animate-fade" key={index}>
+                  <Card isLoading={isLoading} response={item} />
+                </SwiperSlide>
+              );
+            })}
       </Swiper>
     </div>
   );
