@@ -34,6 +34,7 @@ function AdminOrders() {
             lableVisibilty="visible"
             name="orderstatus"
             type="radio"
+            ischecked={true}
             className="radioButtonStyle"
             checked={!isDelivered}
             onChange={() => setDelivered(false)}
