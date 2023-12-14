@@ -10,6 +10,7 @@ import ModalAddProduct from "../../../components/ui/modal/ModalAddProduct";
 function AdminProducts() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [page, setPage] = useState(1);
+  const [productId, setId] = useState();
   const fetchData = async () => {
     const response = await getProductsWithCatAndSubCat(page, 4, "createdAt");
     return response;
@@ -38,12 +39,20 @@ function AdminProducts() {
           <Loading className="animate-spin aanimate-infinite animate-duration-1000 w-12 h-12" />
         ) : (
           <>
-            <TableProducts data={query.data.data} />
+            <TableProducts
+              data={query.data}
+              setOpenModal={setModalOpen}
+              setId={setId}
+            />
             <Pagination setPage={setPage} data={query.data} page={page} />
           </>
         )}
       </div>
-      <ModalAddProduct openModal={isModalOpen} setOpenModal={setModalOpen} />
+      <ModalAddProduct
+        openModal={isModalOpen}
+        setOpenModal={setModalOpen}
+        productId={productId}
+      />
     </div>
   );
 }

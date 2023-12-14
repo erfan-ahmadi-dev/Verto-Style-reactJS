@@ -1,7 +1,12 @@
 import faTexts, { BASE_IMAGE_URL } from "../../../utils/Constants";
 import { FaSort as SortIcon } from "react-icons/fa6";
-function TableProductAdmin(data) {
+function TableProductAdmin({ data, setOpenModal, setId }) {
   const { products } = data.data;
+  const handleEdit = (id) => {
+    setOpenModal(true);
+    setId(id);
+    console.log(id);
+  };
   return (
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
       <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -44,15 +49,18 @@ function TableProductAdmin(data) {
                   </div>
                 </th>
 
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 ">
                   {item.category.name} / {item.subcategory.name}
                 </td>
-                <td className=" px-6 py-4 ">
-                  <span className="w-fit ml-4 cursor-pointer underline underline-offset-4 ">
-                    {faTexts.edit}{" "}
+                <td className=" px-8 py-4 ">
+                  <span
+                    className="w-fit mx-5 cursor-pointer underline underline-offset-4 "
+                    onClick={() => handleEdit(item._id)}
+                  >
+                    {`  ${faTexts.edit}  `}
                   </span>
                   <span className="w-fit cursor-pointer underline underline-offset-4 text-red-500">
-                    {faTexts.delete}
+                    {`  ${faTexts.delete}  `}
                   </span>
                 </td>
               </tr>
