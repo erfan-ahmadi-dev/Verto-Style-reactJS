@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import TableOrdersAdmin from "../../../components/ui/table/TableOrdersAdmin";
 import faTexts from "../../../utils/Constants";
 import { getOrdersWithName } from "../../../api/ordersApi";
@@ -6,16 +6,21 @@ import Pagination from "../../../components/ui/pagination/Pagination";
 import Input from "../../../components/ui/input/Input";
 import { useQuery } from "@tanstack/react-query";
 import { LuLoader as Loading } from "react-icons/lu";
+
 function AdminOrders() {
-  const fetchData = () => {
-    return getOrdersWithName(page, 4, "createdAt", isDelevierd);
-  };
-  const query = useQuery({
-    queryKey: ["orders"],
-    queryFn: fetchData,
-  });
-  const [isDelevierd, setDeliverd] = useState(false);
+  const [isDelivered, setDelivered] = useState(false);
   const [page, setPage] = useState(1);
+
+  const fetchData = async () => {
+    const response = await getOrdersWithName(page, 4, "createdAt", isDelivered);
+    return response.data; // assuming your API response has a 'data' property
+  };
+
+  const query = useQuery({
+    queryKey: ["orders", isDelivered], // include isDelivered in the queryKey
+    queryFn: fetchData,
+    staleTime: 500,
+  });
 
   return (
     <div className="w-full flex flex-col ">
@@ -30,10 +35,8 @@ function AdminOrders() {
             name="orderstatus"
             type="radio"
             className="radioButtonStyle"
-            ischecked={true}
-            onChange={() => {
-              setDeliverd(false);
-            }}
+            checked={!isDelivered}
+            onChange={() => setDelivered(false)}
             gap={4}
           />
           <Input
@@ -42,9 +45,8 @@ function AdminOrders() {
             className="radioButtonStyle"
             name="orderstatus"
             type="radio"
-            onChange={() => {
-              setDeliverd(true);
-            }}
+            checked={isDelivered}
+            onChange={() => setDelivered(true)}
             gap={4}
           />
         </div>
@@ -53,7 +55,7 @@ function AdminOrders() {
           <Loading className="animate-spin aanimate-infinite animate-duration-1000 w-12 h-12" />
         ) : (
           <>
-            <TableOrdersAdmin data={query.data.data} />
+            <TableOrdersAdmin data={query.data} />
             <Pagination setPage={setPage} data={query.data} page={page} />
           </>
         )}

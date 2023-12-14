@@ -40,7 +40,7 @@ function TableOrdersAdmin(data) {
                 key={item.createdAt}
               >
                 <td className="w-20">
-                  <span>{item.user}</span>
+                  <span>{`${item.user.firstname} ${item.user.lastname}`}</span>
                 </td>
                 <td className="w-fit px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white ">
                   <div className="ps-3">
