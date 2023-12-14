@@ -17,16 +17,6 @@ export const getOrdersWithName = async (
       },
     });
 
-    const orders = response.data.data.orders;
-    // Fetch user data for each order
-    await Promise.all(
-      orders.map(async (order) => {
-        order.totalPrice = order.totalPrice.toLocaleString("fa-IR");
-        const userData = await axios.get(`${BASE_URL}users/${order.user}`);
-
-        order.user = `${userData.data.data.user.firstname} ${userData.data.data.user.lastname}`;
-      })
-    );
     return response.data;
   } catch (error) {
     console.error("Error fetching data:", error);
