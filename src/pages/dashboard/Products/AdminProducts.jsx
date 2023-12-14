@@ -6,7 +6,9 @@ import Pagination from "../../../components/ui/pagination/Pagination";
 import Button from "../../../components/ui/button/Button";
 import { useQuery } from "@tanstack/react-query";
 import { LuLoader as Loading } from "react-icons/lu";
+import ModalAddProduct from "../../../components/ui/modal/ModalAddProduct";
 function AdminProducts() {
+  const [isModalOpen, setModalOpen] = useState(false);
   const [page, setPage] = useState(1);
   const fetchData = async () => {
     const response = await getProductsWithCatAndSubCat(page, 4, "createdAt");
@@ -19,12 +21,16 @@ function AdminProducts() {
     staleTime: 500,
   });
 
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
   return (
     <div className="w-full flex flex-col gap-5">
       <div className="flex justify-between w-full p-5 items-center bg-gray-800 text-white">
         <span>{faTexts.productsManagment}</span>
         <div className="w-32 text-xs">
-          <Button label={faTexts.addProduct} />
+          <Button label={faTexts.addProduct} onClick={openModal} />
         </div>
       </div>
       <div className="relative h-full overflow-x-auto sm:rounded-lg w-full px-5 ">
@@ -37,6 +43,7 @@ function AdminProducts() {
           </>
         )}
       </div>
+      <ModalAddProduct openModal={isModalOpen} setOpenModal={setModalOpen} />
     </div>
   );
 }
