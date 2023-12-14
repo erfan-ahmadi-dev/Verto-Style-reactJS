@@ -1,11 +1,7 @@
-import React, { useState } from "react";
 import faTexts, { BASE_IMAGE_URL } from "../../../utils/Constants";
 import { FaSort as SortIcon } from "react-icons/fa6";
 function TableProductAdmin(data) {
   const { products } = data.data;
-  console.log(products);
-
-  // TODO change Persian Text Tbody
   return (
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
       <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -49,7 +45,7 @@ function TableProductAdmin(data) {
                 </th>
 
                 <td className="px-6 py-4">
-                  {item.category} / {item.subcategory}
+                  {item.category.name} / {item.subcategory.name}
                 </td>
                 <td className=" px-6 py-4 ">
                   <span className="w-fit ml-4 cursor-pointer underline underline-offset-4 ">
