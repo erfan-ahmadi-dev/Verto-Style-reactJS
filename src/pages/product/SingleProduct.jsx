@@ -9,6 +9,7 @@ import { IoIosArrowBack as ArrowIcon } from "react-icons/io";
 // TODO disable button when is loading / add dynamic size
 function SingleProduct() {
   const params = useParams();
+
   let data;
   const fetchProduct = () => {
     return getData(`products/${params.productId}`);
@@ -16,6 +17,7 @@ function SingleProduct() {
   const query = useQuery({
     queryKey: ["productWithId"],
     queryFn: fetchProduct,
+    staleTime: 1000,
   });
   if (!query.isLoading) {
     data = query.data.data.product;
