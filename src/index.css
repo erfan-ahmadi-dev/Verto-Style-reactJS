@@ -47,6 +47,16 @@
   fill: black !important;
   stroke: black !important;
 }
+.ql-snow .ql-picker-label {
+  cursor: pointer;
+  display: inline-block;
+  height: 100%;
+  padding-left: 8px;
+  padding-right: 2px;
+  position: relative;
+  width: 100%;
+  direction: initial;
+}
 @layer components {
   .errorStyleText {
     @apply w-full flex p-2 text-red-500  text-xs text-start;
@@ -78,11 +88,17 @@
   .primaryButton {
     @apply w-full bg-red-500  text-white py-2 px-4 rounded-full font-bold hover:bg-red-600;
   }
+  .cancelButton {
+    @apply w-full bg-gray-800  text-white py-2 px-4 rounded-full font-bold;
+  }
   .outlineButton {
     @apply w-full border border-gray-800  text-black py-2 px-4 rounded-full font-bold hover:bg-red-500 hover:text-white hover:border-red-500;
   }
   .primaryInput {
     @apply bg-neutral-100 rounded-lg w-1/4 px-2 gap-2 items-center  focus:outline-none focus:border-none border-none font-[IranRegular] text-sm;
+  }
+  .editInput {
+    @apply shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-400 focus:border-red-400 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-400 dark:focus:border-red-400;
   }
   .radioButtonStyle {
     @apply border border-gray-800 text-red-500 sm:text-sm rounded-lg focus:ring-red-600 focus:border-red-600;
