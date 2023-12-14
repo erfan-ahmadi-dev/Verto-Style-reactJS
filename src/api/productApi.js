@@ -16,40 +16,6 @@ export const getProductsWithCatAndSubCat = async (
       },
     });
 
-    const products = response.data.data.products;
-
-    await Promise.all(
-      products.map(async (product) => {
-        try {
-          const userData = await axios.get(
-            `${BASE_URL}categories/${product.category}`
-          );
-          product.category = userData.data.data.category.name;
-        } catch (categoryError) {
-          console.error(
-            `${faTexts.errorFetchCategory} ${product._id}:`,
-            categoryError.message
-          );
-        }
-      })
-    );
-
-    await Promise.all(
-      products.map(async (product) => {
-        try {
-          const userData = await axios.get(
-            `${BASE_URL}subcategories/${product.subcategory}`
-          );
-          product.subcategory = userData.data.data.subcategory.name;
-        } catch (subcategoryError) {
-          console.error(
-            `${faTexts.errorFetchSubCategory} ${product._id}:`,
-            subcategoryError.message
-          );
-        }
-      })
-    );
-
     return response.data;
   } catch (error) {
     console.error(faTexts.erroFetchingProduct, error.message);
