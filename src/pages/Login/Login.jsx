@@ -7,18 +7,40 @@ import Button from "../../components/ui/button/Button";
 import { useNavigate } from "react-router-dom";
 import { sendData } from "../../api/defaultApi";
 import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { PATHS } from "../../configs/RoutesConfig";
 function Login() {
   const [userData, setData] = useState(null);
   const navigate = useNavigate();
   const postAuthData = async (values) => {
-    const responone = await sendData("auth/login", values);
-    return responone;
+    const response = await sendData("auth/login", values);
+    console.log("inside", response.status);
+    if (response.status === 200) {
+      console.warn("ok");
+      return response.data;
+    } else if (response.status === 401) {
+      toast.error("رمز و یا نام کاربری اشتباه است", {
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
   const query = useQuery({
-    queryKey: ["login"],
+    queryKey: ["login", userData],
     queryFn: () => postAuthData(userData),
     enabled: !!userData,
   });
+  if (!query.isPending) {
+    localStorage.setItem("accessToken", query.data.token.accessToken);
+    navigate(PATHS.DASHBOARD);
+  }
   query.isPending ? console.log("pending") : console.log(query);
   return (
     <div>
@@ -33,7 +55,7 @@ function Login() {
               <Formik
                 initialValues={{ username: "", password: "" }}
                 validationSchema={loginSchema}
-                onSubmit={(values, { setSubmitting }) => {
+                onSubmit={(values, { setSubmitting, resetForm }) => {
                   setData(values);
 
                   setSubmitting(false);

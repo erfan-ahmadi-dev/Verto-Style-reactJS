@@ -9,7 +9,8 @@ const api = axios.create({
 const handleRequest = async (request) => {
   try {
     const response = await request();
-    return response.data;
+    console.log("safsa", response);
+    return response;
   } catch (error) {
     return error.response;
   }
