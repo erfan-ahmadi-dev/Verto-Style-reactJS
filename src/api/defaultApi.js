@@ -11,7 +11,7 @@ const handleRequest = async (request) => {
     const response = await request();
     return response.data;
   } catch (error) {
-    console.error("Error:", error.message);
+    return error.response;
   }
 };
 
@@ -23,6 +23,7 @@ export const getData = async (query) => {
 export const sendData = async (query, data) => {
   return handleRequest(async () => {
     const response = await api.post(query, data);
+    console.log(response);
     return response;
   });
 };
