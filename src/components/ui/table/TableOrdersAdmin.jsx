@@ -3,8 +3,7 @@ import { FaSort as SortIcon } from "react-icons/fa6";
 import faTexts from "../../../utils/Constants";
 import { formatDate } from "../../../utils/functions";
 function TableOrdersAdmin(data) {
-  console.log(data.data.orders);
-  const { orders } = data.data;
+  const { orders } = data.data.data;
 
   return (
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 px-4">

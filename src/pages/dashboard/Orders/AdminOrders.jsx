@@ -13,11 +13,11 @@ function AdminOrders() {
 
   const fetchData = async () => {
     const response = await getOrdersWithName(page, 4, "createdAt", isDelivered);
-    return response.data; // assuming your API response has a 'data' property
+    return response;
   };
 
   const query = useQuery({
-    queryKey: ["orders", isDelivered], // include isDelivered in the queryKey
+    queryKey: ["orders", isDelivered],
     queryFn: fetchData,
     staleTime: 500,
   });
