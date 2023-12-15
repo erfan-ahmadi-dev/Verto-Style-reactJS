@@ -30,17 +30,9 @@ function Pagination({ data, setPage, page }) {
 
   let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
 
-  const pageArrayLength = Math.max(endPage - startPage + 1, 0); // Ensure non-negative length
-  console.log(
-    "total ",
-    data.total_pages,
-    "start",
-    startPage,
-    " end",
-    endPage,
-    " length ",
-    pageArrayLength
-  );
+  // Ensure non-negative length
+  const pageArrayLength = Math.max(endPage - startPage + 1, 0);
+
   return (
     <nav aria-label="Page navigation example" className="py-5">
       <ul className="flex items-center -space-x-px h-8 text-sm">
@@ -55,20 +47,14 @@ function Pagination({ data, setPage, page }) {
         {Array.from({ length: pageArrayLength }).map((_, index) => {
           const pageNumber = startPage + index;
 
-          // Add your conditions for rendering the <li> element
           const isCurrentPage = pageNumber === page;
 
           return (
-            <li
-              key={index}
-              className={`cursor-pointer ${
-                isCurrentPage ? "current-page" : ""
-              }`}
-            >
+            <li key={index} className="cursor-pointer select-none">
               <span
                 onClick={() => setPage(pageNumber)}
-                className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${
-                  isCurrentPage ? "current-page-span" : ""
+                className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300  ${
+                  isCurrentPage ? "bg-red-500 text-white" : ""
                 }`}
               >
                 {pageNumber}
