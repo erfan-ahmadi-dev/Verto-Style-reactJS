@@ -53,7 +53,7 @@ function Pagination({ data, setPage, page }) {
             <li key={index} className="cursor-pointer select-none">
               <span
                 onClick={() => setPage(pageNumber)}
-                className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300  ${
+                className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500  border border-gray-300  ${
                   isCurrentPage ? "bg-red-500 text-white" : ""
                 }`}
               >
