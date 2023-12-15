@@ -1,6 +1,11 @@
 import axios from "axios";
 import { BASE_URL } from "../utils/Constants";
 
+const api = axios.create({
+  baseURL: BASE_URL,
+  timeout: 5000,
+});
+
 const handleRequest = async (request) => {
   try {
     const response = await request();
@@ -11,26 +16,27 @@ const handleRequest = async (request) => {
 };
 
 export const getData = async (query) => {
-  return handleRequest(async () => axios.get(`${BASE_URL}${query}`));
+  const response = await api.get(query);
+  return response.data;
 };
 
-export const createData = async (query, data) => {
+export const sendData = async (query, data) => {
   return handleRequest(async () => {
-    const response = await axios.post(`${BASE_URL}${query}`, data);
-    return response.data.id;
+    const response = await api.post(query, data);
+    return response;
   });
 };
 
 export const patchData = async (query, id) => {
   return handleRequest(async () => {
-    const response = await axios.patch(`${BASE_URL}${query}${id}`);
+    const response = await api.patch(`${query}${id}`);
     return response.status === 200;
   });
 };
 
 export const deleteData = async (query, id) => {
   return handleRequest(async () => {
-    const response = await axios.delete(`${BASE_URL}${query}${id}`);
+    const response = await api.delete(`${query}${id}`);
     return response.status === 200;
   });
 };
