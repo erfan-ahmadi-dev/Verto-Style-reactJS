@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { loginSchema } from "../../validation/Schema";
 import logoPic from "../../assets/images/logoblack.svg";
 import faTexts from "../../utils/Constants";
 import Button from "../../components/ui/button/Button";
 import { useNavigate } from "react-router-dom";
+import { sendData } from "../../api/defaultApi";
+import { useQuery } from "@tanstack/react-query";
 function Login() {
+  const [userData, setData] = useState(null);
   const navigate = useNavigate();
+  const postAuthData = async (values) => {
+    const responone = await sendData("auth/login", values);
+    return responone;
+  };
+  const query = useQuery({
+    queryKey: ["login"],
+    queryFn: () => postAuthData(userData),
+    enabled: !!userData,
+  });
+  query.isPending ? console.log("pending") : console.log(query);
   return (
     <div>
       <section className="bg-gray-100 dark:bg-gray-900 font-IranRegular">
@@ -21,8 +34,10 @@ function Login() {
                 initialValues={{ username: "", password: "" }}
                 validationSchema={loginSchema}
                 onSubmit={(values, { setSubmitting }) => {
+                  setData(values);
+
                   setSubmitting(false);
-                  navigate("/dashboard");
+                  // navigate("/dashboard");
                 }}
               >
                 {({ isSubmitting }) => (
