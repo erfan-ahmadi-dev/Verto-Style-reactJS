@@ -5,7 +5,9 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { Link, useParams } from "react-router-dom";
 import { getData } from "../../api/defaultApi";
 import { useQuery } from "@tanstack/react-query";
+
 import { IoIosArrowBack as ArrowIcon } from "react-icons/io";
+import QuantityInput from "../../components/ui/input/QuantityInput";
 // TODO disable button when is loading / add dynamic size
 function SingleProduct() {
   const params = useParams();
@@ -24,7 +26,7 @@ function SingleProduct() {
   }
 
   return (
-    <div className=" dark:bg-gray-800 py-8">
+    <div className=" dark:bg-gray-800 py-8 font-IranRegular">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex mb-4 " aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -144,10 +146,31 @@ function SingleProduct() {
                 </ul>
               </div>
             </div>
-
+            <span className="font-IranSemiBold text-gray-700 dark:text-gray-300">
+              {query.isLoading ? (
+                <Skeleton width={70} />
+              ) : (
+                `موجودی : ${data.quantity}`
+              )}
+            </span>
+            <QuantityInput stock={!query.isLoading && data.quantity} />
             <div className="flex   py-4   items-center justify-between">
               <div className="w-2/5 px-2">
-                <button className="outlineButton">افزودن به سبد</button>
+                {query.isLoading ? (
+                  <Skeleton />
+                ) : (
+                  <button
+                    className={
+                      data.quantity <= 0 ? "disableButton" : "outlineButton"
+                    }
+                    disabled={
+                      query.isLoading ||
+                      (!query.isLoading && data.quantity <= 0)
+                    }
+                  >
+                    افزودن به سبد
+                  </button>
+                )}
               </div>
               <div className="mr-4 ">
                 <span className="text-gray-600 dark:text-gray-300 w-2/5">
