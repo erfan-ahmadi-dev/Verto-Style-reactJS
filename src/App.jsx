@@ -4,6 +4,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import { Provider } from "react-redux";
+import { store } from "./Redux/Store";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: { staleTime: 60 * 1000 },
@@ -12,11 +15,11 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className=" font-[IranRegular] scroll-smooth w-full overflow-hidden ">
-        <ToastContainer />
+      <ToastContainer />
+      <Provider store={store}>
         <RouterProvider router={routes} />
-        <ReactQueryDevtools initialIsOpen={false} />
-      </div>
+      </Provider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
