@@ -1,4 +1,5 @@
-import { banner, category } from "../assets/images";
+import { category } from "../assets/images";
+import { banner } from "../assets/images";
 
 export const BASE_URL = "http://localhost:8000/api/";
 export const BASE_IMAGE_URL = "http://localhost:8000/images/products/images/";
