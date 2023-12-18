@@ -5,10 +5,16 @@ import { MdOutlineStar as Star } from "react-icons/md";
 import { IconContext } from "react-icons/lib";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-function Card({ isLoading, response }) {
+function Card({ isLoading, response, isWithUrlPrefix = true }) {
   console.log(response);
   return (
-    <Link to={"product/" + response?._id}>
+    <Link
+      to={
+        isWithUrlPrefix
+          ? "product/" + response?._id
+          : "/product/" + response?._id
+      }
+    >
       <div className="w-full max-w-sm bg-white  rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700 ">
         <div className="overflow-hidden ">
           {isLoading ? (
