@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import faTexts from "../../utils/Constants";
+import { Link, NavLink } from "react-router-dom";
+import faTexts, { SUB_CATEGOREIS_LINK } from "../../utils/Constants";
 import { PATHS } from "../../configs/RoutesConfig";
 import MegaMenu from "../mega-menu/MegaMenu";
+import { Dropdown } from "flowbite-react";
 function Navigation() {
   const [isHovered, setHovered] = useState(false);
 
@@ -20,7 +21,21 @@ function Navigation() {
             {faTexts.home}
           </NavLink>
         </li>
-        <li
+
+        <Dropdown label={faTexts.products} inline>
+          <div className="grid grid-cols-2 grid-rows-3 gap-2 place-content-center-center h-full">
+            {SUB_CATEGOREIS_LINK.map((item, index) => {
+              return (
+                <Dropdown.Item>
+                  <Link to={`${PATHS.PRODUCTS}/${item.link}`}>
+                    {item.title}
+                  </Link>
+                </Dropdown.Item>
+              );
+            })}
+          </div>
+        </Dropdown>
+        {/* <li
           onMouseEnter={() => {
             setHovered(true);
           }}
@@ -32,7 +47,7 @@ function Navigation() {
             {faTexts.products}
           </NavLink>
         </li>
-        {isHovered && <MegaMenu setHovered={setHovered} />}
+        {isHovered && <MegaMenu setHovered={setHovered} />} */}
 
         <li>
           <NavLink
