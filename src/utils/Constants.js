@@ -83,21 +83,22 @@ export const SUB_CATEGOREIS_LINK = [
     link: "6561eb0c1adeb81260019951",
   },
   {
-    title: "کفش مردانه",
-    link: "6561eaf51adeb8126001994d",
-  },
-  {
-    title: "ورزشی مردانه",
-    link: "6561ec0a1adeb8126001995f",
-  },
-  {
     title: "لباس زنانه",
     link: "6561ec371adeb8126001996b",
+  },
+  {
+    title: "کفش مردانه",
+    link: "6561eaf51adeb8126001994d",
   },
   {
     title: "کفش زنانه",
     link: "6561ec3b1adeb8126001996f",
   },
+  {
+    title: "ورزشی مردانه",
+    link: "6561ec0a1adeb8126001995f",
+  },
+
   {
     title: "ورزشی زنانه",
     link: "6561ec301adeb81260019967",
