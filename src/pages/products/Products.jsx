@@ -74,6 +74,26 @@ function Products() {
           </ul>
         ))}
       </aside>
+      <div className="w-full h-fit flex flex-col gap-4 items-center">
+        {queryProducts.data ? (
+          <div className="w-full h-fit flex flex-col gap-4 items-center">
+            <article className="w-full h-fit grid grid-cols-3 gap-4">
+              {queryProducts.data.data.products.map((item, index) => {
+                return (
+                  <Card response={item} key={index} isWithUrlPrefix={false} />
+                );
+              })}
+            </article>
+            <Pagination
+              setPage={setPage}
+              data={queryProducts.data}
+              page={page}
+            />
+          </div>
+        ) : (
+          <span>loading</span>
+        )}
+      </div>
     </div>
   );
 }
