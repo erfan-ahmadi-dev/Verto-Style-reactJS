@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { BASE_IMAGE_URL } from "../../../utils/Constants";
+import { BASE_THUMBNAIL_URL } from "../../../utils/Constants";
 import { MdOutlineStar as Star } from "react-icons/md";
 import { IconContext } from "react-icons/lib";
 import Skeleton from "react-loading-skeleton";
@@ -16,7 +16,7 @@ function Card({ isLoading, response }) {
           ) : (
             <img
               className="rounded-t-lg aspect-auto inset-0 object-center transition duration-700 hover:scale-110"
-              src={`${BASE_IMAGE_URL}${response.images[0]}`}
+              src={`${BASE_THUMBNAIL_URL}${response.thumbnail}`}
               loading="lazy"
               alt="product"
             />
