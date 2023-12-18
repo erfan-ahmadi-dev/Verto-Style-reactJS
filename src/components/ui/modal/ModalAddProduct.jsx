@@ -2,7 +2,8 @@ import { Modal, FileInput } from "flowbite-react";
 import { useRef, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function ModalAddProduct({ openModal, setOpenModal }) {
   const [tempImage, setImage] = useState([]);
   const [value, setValue] = useState("");
@@ -93,6 +94,16 @@ function ModalAddProduct({ openModal, setOpenModal }) {
     }
 
     if (!formIsValid) {
+      toast.error("لطفا اطلاعات را تکمیل کنید", {
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return;
     }
 
@@ -108,12 +119,6 @@ function ModalAddProduct({ openModal, setOpenModal }) {
         thumbnail: URL.createObjectURL(tempImage[0]),
       });
     }
-
-    for (const entry of data.entries()) {
-      console.log(`${entry[0]}: ${entry[1]}`);
-    }
-
-    console.log("State Data:", formData);
   };
 
   const closeModal = () => {
@@ -132,15 +137,11 @@ function ModalAddProduct({ openModal, setOpenModal }) {
             <div className="">
               <div className="flex flex-col gap-6">
                 <div>
-                  <label
-                    htmlFor="file-upload-helper-text"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
+                  <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     عکس محصول
                   </label>
                   <FileInput
                     name="images"
-                    id="file-upload-helper-text"
                     multiple
                     accept="image/*"
                     draggable
