@@ -15,7 +15,7 @@ function Card({ isLoading, response }) {
             <Skeleton className="w-52 h-80" />
           ) : (
             <img
-              className="rounded-t-lg aspect-auto inset-0 object-center transition duration-700 hover:scale-110"
+              className="rounded-t-lg aspect-auto h-80 inset-0 object-center transition duration-700 hover:scale-110"
               src={`${BASE_THUMBNAIL_URL}${response.thumbnail}`}
               loading="lazy"
               alt="product"
