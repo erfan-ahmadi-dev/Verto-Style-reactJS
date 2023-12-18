@@ -75,6 +75,21 @@ function Products() {
         ))}
       </aside>
       <div className="w-full h-fit flex flex-col gap-4 items-center">
+        <div className="w-52 mb-5">
+          <select
+            id="countries"
+            class="editInput"
+            value={sortType}
+            onChange={handleSelectChange}
+          >
+            <option value="price" selected>
+              قیمت از کم به زیاد
+            </option>
+            <option value="-price">قیمت از زیاد به کم</option>
+            <option value="createdAt">جدیدترین</option>
+          </select>
+        </div>
+
         {queryProducts.data ? (
           <div className="w-full h-fit flex flex-col gap-4 items-center">
             <article className="w-full h-fit grid grid-cols-3 gap-4">
