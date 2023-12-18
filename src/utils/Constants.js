@@ -3,6 +3,8 @@ import { banner } from "../assets/images";
 
 export const BASE_URL = "http://localhost:8000/api/";
 export const BASE_IMAGE_URL = "http://localhost:8000/images/products/images/";
+export const BASE_THUMBNAIL_URL =
+  "http://localhost:8000/images/products/thumbnails/";
 const faTexts = {
   home: "صفحه نخست",
   products: "محصولات",
