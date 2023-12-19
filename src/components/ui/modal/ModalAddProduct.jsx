@@ -243,9 +243,8 @@ function ModalAddProduct({ openModal, setOpenModal, productId }) {
                         errors.subcategory ? "border-red-500" : ""
                       }`}
                       required
-                      value={formData.subcategory.name}
+                      value={formData.subcategory.name || "hint"} // Provide a default value to handle the "hint" case
                       onChange={handleInputChange}
-                      defaultValue="hint"
                     >
                       <option value="hint" disabled>
                         لطفا دسته بندی را انتخاب کنید
