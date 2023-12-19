@@ -5,6 +5,16 @@ export const useFormHandler = (query, productId, setOpenModal) => {
   const closeModal = () => {
     setOpenModal(false);
     productId = undefined;
+    setErrors({
+      name: false,
+      stock: false,
+      price: false,
+      sizes: false,
+      category: false,
+      subcategory: false,
+      description: false,
+      images: false,
+    });
     console.log(productId);
   };
 
@@ -76,7 +86,8 @@ export const useFormHandler = (query, productId, setOpenModal) => {
       ...formData,
       [name]: value,
     });
-
+    console.log(name, " ", value);
+    console.log(formData.category);
     setErrors({
       ...errors,
       [name]: false,
