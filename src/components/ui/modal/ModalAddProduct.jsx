@@ -248,7 +248,7 @@ function ModalAddProduct({ openModal, setOpenModal, productId }) {
                       defaultValue="hint"
                     >
                       <option value="hint" disabled>
-                        لطفا زیر دسته بندی را انتخاب کنید
+                        لطفا دسته بندی را انتخاب کنید
                       </option>
                       {querySubCategory.data === undefined
                         ? ""
@@ -269,7 +269,7 @@ function ModalAddProduct({ openModal, setOpenModal, productId }) {
                 </div>
                 <ReactQuill
                   theme="snow"
-                  value={value}
+                  value={formData.description}
                   name="description"
                   onChange={handleQuill}
                   id="my-editor"

@@ -46,8 +46,6 @@ export const useFormHandler = (query, productId, setOpenModal) => {
   useEffect(() => {
     if (query.isFetched && isProductIdDefined) {
       const response = query.data.data.product;
-      console.log(query.data.data.product);
-
       setFormData({
         name: response.name,
         stock: response.quantity,
@@ -69,8 +67,6 @@ export const useFormHandler = (query, productId, setOpenModal) => {
 
   const handleInputFile = async (e) => {
     setImage(e.target.files);
-    console.log("temp", e.target.files);
-    console.log("temp2", e.target.files);
     setFormData({
       ...formData,
       images: e.target.files,
@@ -84,12 +80,10 @@ export const useFormHandler = (query, productId, setOpenModal) => {
   };
 
   const handleQuill = (content, delta, source, editor) => {
-    setValue(content);
-    console.log("value", value);
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       description: content,
-    });
+    }));
   };
 
   const handleInputChange = (e) => {
@@ -161,12 +155,7 @@ export const useFormHandler = (query, productId, setOpenModal) => {
     data.append("price", Number(formData.price));
     data.append("rating", 3.6);
     data.append("description", formData.description);
-    for (let pair of data.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
-    console.log(formData);
 
-    // Reset form after data has been logged
     resetForm();
   };
 
