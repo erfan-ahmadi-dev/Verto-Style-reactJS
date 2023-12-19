@@ -86,8 +86,7 @@ export const useFormHandler = (query, productId, setOpenModal) => {
       ...formData,
       [name]: value,
     });
-    console.log(name, " ", value);
-    console.log(formData.category);
+
     setErrors({
       ...errors,
       [name]: false,

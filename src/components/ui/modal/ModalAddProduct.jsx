@@ -29,6 +29,24 @@ function ModalAddProduct({ openModal, setOpenModal, productId }) {
     // tempImage,
   } = useFormHandler(query, productId, setOpenModal);
 
+  const fetchCategories = () => {
+    const response = getData("categories");
+    return response;
+  };
+  const queryCategory = useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
+  });
+  const fetchSubCategories = () => {
+    const response = getData(`subcategories?category=${formData.category}`);
+    return response;
+  };
+  console.log("cat", formData.category.length >= 1);
+  const querySubCategory = useQuery({
+    queryKey: ["subcategories"],
+    queryFn: fetchSubCategories,
+    enabled: formData.category.length >= 1,
+  });
   return (
     <>
       <Modal dismissible show={openModal}>
@@ -188,11 +206,18 @@ function ModalAddProduct({ openModal, setOpenModal, productId }) {
                       value={formData.category}
                       onChange={handleInputChange}
                     >
-                      <option value="">لطفا دسته بندی را انتخاب کنید</option>
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="mercedes">Mercedes</option>
-                      <option value="audi">Audi</option>
+                      <option value="" disabled>
+                        لطفا دسته بندی را انتخاب کنید
+                      </option>
+                      {queryCategory.isLoading
+                        ? ""
+                        : queryCategory.data.data.categories.map((item) => {
+                            return (
+                              <option value={item._id} key={item._id}>
+                                {item.name}
+                              </option>
+                            );
+                          })}
                     </select>
                   </div>
                   <div className="w-full">
@@ -215,13 +240,21 @@ function ModalAddProduct({ openModal, setOpenModal, productId }) {
                       value={formData.subcategory}
                       onChange={handleInputChange}
                     >
-                      <option value="">
+                      <option value="" disabled>
                         لطفا زیر دسته بندی را انتخاب کنید
                       </option>
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="mercedes">Mercedes</option>
-                      <option value="audi">Audi</option>
+                      {querySubCategory.data === undefined
+                        ? console.log("sub", "undi")
+                        : !querySubCategory.isLoading &&
+                          querySubCategory.data.data.subcategories.map(
+                            (item) => {
+                              return (
+                                <option value={item._id} key={item._id}>
+                                  {item.name}
+                                </option>
+                              );
+                            }
+                          )}
                     </select>
                   </div>
                 </div>
