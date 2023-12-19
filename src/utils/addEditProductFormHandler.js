@@ -123,7 +123,7 @@ export const useFormHandler = (query, productId, setOpenModal) => {
     const data = new FormData(formRef.current);
 
     for (let i = 0; i < tempImage.length; i++) {
-      data.append("images", tempImage[i]);
+      data.append("images", URL.createObjectURL(tempImage[i]));
     }
 
     if (tempImage.length > 0) {
@@ -132,7 +132,7 @@ export const useFormHandler = (query, productId, setOpenModal) => {
         thumbnail: URL.createObjectURL(tempImage[0]),
       });
     }
-    console.log(formData);
+    console.log(data.entries());
     resetForm();
   };
   const resetForm = () => {

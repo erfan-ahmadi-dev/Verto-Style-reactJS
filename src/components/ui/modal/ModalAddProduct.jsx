@@ -26,7 +26,7 @@ function ModalAddProduct({ openModal, setOpenModal, productId }) {
     formData,
     errors,
     value,
-    tempImage,
+    // tempImage,
   } = useFormHandler(query, productId, setOpenModal);
 
   return (
@@ -51,7 +51,7 @@ function ModalAddProduct({ openModal, setOpenModal, productId }) {
                     onChange={handleInputFile}
                     required
                   />
-                  <div className="flex overflow-x-auto gap-2">
+                  {/* <div className="flex overflow-x-auto gap-2">
                     {Array.from(tempImage).map((image, index) => {
                       const src = URL.createObjectURL(image);
                       return (
@@ -67,7 +67,7 @@ function ModalAddProduct({ openModal, setOpenModal, productId }) {
                         />
                       );
                     })}
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="flex gap-4 w-full">
