@@ -15,7 +15,6 @@ export const useFormHandler = (query, productId, setOpenModal) => {
       description: false,
       images: false,
     });
-    console.log(productId);
   };
 
   const [tempImage, setImage] = useState([]);
@@ -30,6 +29,7 @@ export const useFormHandler = (query, productId, setOpenModal) => {
     description: "",
     images: [],
     thumbnail: "",
+    rating: 4,
   });
   const [errors, setErrors] = useState({
     name: false,
@@ -53,8 +53,11 @@ export const useFormHandler = (query, productId, setOpenModal) => {
         stock: response.quantity,
         price: response.price,
         sizes: "",
-        category: response.category.name,
-        subcategory: response.subcategory.name,
+        category: { id: response.category._id, name: response.category.name },
+        subcategory: {
+          id: response.subcategory._id,
+          name: response.subcategory.name,
+        },
         description: response.description,
         images: [response.images],
         thumbnail: response.thumbnail,
@@ -63,8 +66,16 @@ export const useFormHandler = (query, productId, setOpenModal) => {
       resetForm();
     }
   }, [query.isFetched, productId]);
+
   const handleInputFile = async (e) => {
     setImage(e.target.files);
+    console.log("temp", e.target.files);
+    console.log("temp2", e.target.files);
+    setFormData({
+      ...formData,
+      images: e.target.files,
+      thumbnail: e.target.files[0],
+    });
 
     setErrors({
       ...errors,
@@ -74,6 +85,7 @@ export const useFormHandler = (query, productId, setOpenModal) => {
 
   const handleQuill = (content, delta, source, editor) => {
     setValue(content);
+    console.log("value", value);
     setFormData({
       ...formData,
       description: content,
@@ -82,11 +94,20 @@ export const useFormHandler = (query, productId, setOpenModal) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    if (name === "category" || name === "subcategory") {
+      const selectedOption = e.target.options[e.target.selectedIndex];
+      const id = selectedOption.getAttribute("data-id");
 
+      setFormData({
+        ...formData,
+        [name]: { id, name: value },
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
     setErrors({
       ...errors,
       [name]: false,
@@ -132,21 +153,24 @@ export const useFormHandler = (query, productId, setOpenModal) => {
 
     const data = new FormData(formRef.current);
 
-    for (let i = 0; i < tempImage.length; i++) {
-      data.append("images", URL.createObjectURL(tempImage[i]));
+    data.append("images", formData.images);
+    data.append("name", formData.name);
+    data.append("category", formData.category);
+    data.append("subcategory", formData.subcategory);
+    data.append("quantity", Number(formData.stock));
+    data.append("price", Number(formData.price));
+    data.append("rating", 3.6);
+    data.append("description", formData.description);
+    for (let pair of data.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
     }
+    console.log(formData);
 
-    if (tempImage.length > 0) {
-      setFormData({
-        ...formData,
-        thumbnail: URL.createObjectURL(tempImage[0]),
-      });
-    }
-    console.log(data.entries());
+    // Reset form after data has been logged
     resetForm();
   };
+
   const resetForm = () => {
-    console.log("rested");
     setFormData({
       name: "",
       stock: "",
@@ -172,7 +196,7 @@ export const useFormHandler = (query, productId, setOpenModal) => {
       images: false,
     });
   };
-  // ... (rest of the code for form handling)
+
   return {
     formRef,
     handleInputFile,
