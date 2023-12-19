@@ -1,130 +1,33 @@
 import { Modal, FileInput } from "flowbite-react";
-import { useRef, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-function ModalAddProduct({ openModal, setOpenModal }) {
-  const [tempImage, setImage] = useState([]);
-  const [value, setValue] = useState("");
-  const [formData, setFormData] = useState({
-    name: "",
-    stock: "",
-    price: "",
-    sizes: "",
-    category: "",
-    subcategory: "",
-    description: "",
-    images: [],
-    thumbnail: "",
+import { useFormHandler } from "../../../utils/addEditProductFormHandler";
+import { getData } from "../../../api/defaultApi";
+import { useQuery } from "@tanstack/react-query";
+function ModalAddProduct({ openModal, setOpenModal, productId }) {
+  const isProductIdDefined = productId !== undefined;
+
+  const fetchData = () => {
+    const response = getData(`products/${productId}`);
+    return response;
+  };
+  const query = useQuery({
+    queryKey: ["editProduct", productId],
+    queryFn: fetchData,
+    enabled: isProductIdDefined,
   });
-  const [errors, setErrors] = useState({
-    name: false,
-    stock: false,
-    price: false,
-    sizes: false,
-    category: false,
-    subcategory: false,
-    description: false,
-    images: false,
-  });
-
-  const formRef = useRef();
-
-  const handleInputFile = async (e) => {
-    setImage(e.target.files);
-
-    setErrors({
-      ...errors,
-      images: false,
-    });
-  };
-
-  const handleQuill = (content, delta, source, editor) => {
-    setValue(content);
-    setFormData({
-      ...formData,
-      description: content,
-    });
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-
-    setErrors({
-      ...errors,
-      [name]: false,
-    });
-  };
-
-  const formSubmit = async (event) => {
-    event.preventDefault();
-
-    const requiredFields = [
-      "name",
-      "stock",
-      "price",
-      "sizes",
-      "category",
-      "subcategory",
-      "description",
-    ];
-    let formIsValid = true;
-
-    requiredFields.forEach((field) => {
-      if (!formData[field]) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          [field]: true,
-        }));
-        formIsValid = false;
-      }
-    });
-
-    if (tempImage.length === 0) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        images: true,
-      }));
-      formIsValid = false;
-    }
-
-    if (!formIsValid) {
-      toast.error("لطفا اطلاعات را تکمیل کنید", {
-        position: "top-right",
-        autoClose: 2500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      return;
-    }
-
-    const data = new FormData(formRef.current);
-
-    for (let i = 0; i < tempImage.length; i++) {
-      data.append("images", tempImage[i]);
-    }
-
-    if (tempImage.length > 0) {
-      setFormData({
-        ...formData,
-        thumbnail: URL.createObjectURL(tempImage[0]),
-      });
-    }
-  };
-
-  const closeModal = () => {
-    setOpenModal(false);
-    setImage([]);
-  };
+  const {
+    formRef,
+    handleInputFile,
+    handleQuill,
+    handleInputChange,
+    formSubmit,
+    closeModal,
+    formData,
+    errors,
+    value,
+    tempImage,
+  } = useFormHandler(query, productId, setOpenModal);
 
   return (
     <>
