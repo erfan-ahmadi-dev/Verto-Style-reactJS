@@ -4,6 +4,8 @@ import "react-toastify/dist/ReactToastify.css";
 export const useFormHandler = (query, productId, setOpenModal) => {
   const closeModal = () => {
     setOpenModal(false);
+    productId = undefined;
+    console.log(productId);
   };
 
   const [tempImage, setImage] = useState([]);
@@ -47,6 +49,8 @@ export const useFormHandler = (query, productId, setOpenModal) => {
         images: [response.images],
         thumbnail: response.thumbnail,
       });
+    } else if (productId === undefined) {
+      resetForm();
     }
   }, [query.isFetched, productId]);
   const handleInputFile = async (e) => {

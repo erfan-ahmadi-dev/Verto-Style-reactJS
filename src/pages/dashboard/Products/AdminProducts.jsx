@@ -7,10 +7,12 @@ import Button from "../../../components/ui/button/Button";
 import { useQuery } from "@tanstack/react-query";
 import { LuLoader as Loading } from "react-icons/lu";
 import ModalAddProduct from "../../../components/ui/modal/ModalAddProduct";
+import { useFormHandler } from "../../../utils/addEditProductFormHandler";
 function AdminProducts() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [page, setPage] = useState(1);
   const [productId, setId] = useState();
+
   const fetchData = async () => {
     const response = await getProductsWithCatAndSubCat(page, 4, "createdAt");
     return response;
@@ -24,6 +26,7 @@ function AdminProducts() {
 
   const openModal = () => {
     setModalOpen(true);
+    setId(undefined);
   };
 
   return (
