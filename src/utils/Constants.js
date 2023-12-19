@@ -68,7 +68,7 @@ const faTexts = {
   image: "تصویر",
   edit: "ویرایش",
   delete: "حذف",
-
+  save: "ذخیره",
   errorFetchCategory:
     "خطایی در زمان دریافت اطلاعات دسته بندی برای محصول  مورد نظر رخ داده",
   errorFetchSubCategory:
