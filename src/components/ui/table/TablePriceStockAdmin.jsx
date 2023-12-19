@@ -1,4 +1,4 @@
-import faTexts from "../../../utils/Constants";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   cancelPriceEdit,
@@ -8,8 +8,51 @@ import {
 
 function TablePriceStockAdmin(data) {
   const state = useSelector((state) => state.updatePriceAndQuantity);
-
   const editorDispatch = useDispatch();
+
+  const [priceInputValue, setPriceInputValue] = useState("");
+  const [quantityInputValue, setQuantityInputValue] = useState("");
+
+  useEffect(() => {
+    const editingItem = state.items.find(
+      (item) => item.isEditingPrice || item.isEditingQuantity
+    );
+    if (editingItem) {
+      setPriceInputValue(editingItem.isEditingPrice ? editingItem.price : "");
+      setQuantityInputValue(
+        editingItem.isEditingQuantity ? editingItem.quantity : ""
+      );
+    }
+  }, [state.items]);
+
+  function handleEscPrice(event, id) {
+    if (event.key === "Escape") {
+      // handle cancel
+      const quantity =
+        state.items.find((editingItem) => editingItem.id === id)
+          ?.isEditingQuantity || false;
+      editorDispatch(
+        cancelPriceEdit({
+          id,
+          isEditingPrice: false,
+          isEditingQuantity: quantity,
+        })
+      );
+    }
+  }
+
+  function handleEscQuantity(event, id) {
+    if (event.key === "Escape") {
+      // handle cancel
+      editorDispatch(cancelQuantityEdit({ id, isEditingQuantity: false }));
+    }
+  }
+
+  // function handleInputChange(event) {
+  //   console.log(event.target.value);
+  //   // handle input change
+  // }
+
   const addToItemsForEdit = (
     itemId,
     itemPrice,
@@ -27,47 +70,12 @@ function TablePriceStockAdmin(data) {
 
     editorDispatch(editPriceAndQuantity(newItem));
   };
-  function handleEscPrice(event, id) {
-    if (event.key === "Escape") {
-      const quantity =
-        state.items.find((editingItem) => editingItem.id === id)
-          ?.isEditingQuantity || false;
-      editorDispatch(
-        cancelPriceEdit({
-          id,
-          isEditingPrice: false,
-          isEditingQuantity: quantity,
-        })
-      );
-      const itemToEdit = state.items.find((item) => item.id === id);
-      console.warn(itemToEdit);
-    }
-  }
-  function handleEscQuantity(event, id) {
-    if (event.key === "Escape") {
-      editorDispatch(cancelQuantityEdit({ id, isEditingQuantity: false }));
-      const itemToEdit = state.items.find((item) => item.id === id);
-      console.warn(itemToEdit);
-    }
-  }
+
   const { products } = data.data;
 
   return (
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-      <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th scope="col" className="w-3/4 px-6 py-3" colSpan={10}>
-            {faTexts.producName}
-          </th>
-          <th scope="col" className="px-6 py-3" colSpan={1}>
-            {faTexts.productPrice}
-          </th>
-
-          <th scope="col" className="px-6 py-3" colSpan={1}>
-            {faTexts.stock}
-          </th>
-        </tr>
-      </thead>
+      <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"></thead>
       <tbody>
         {products &&
           products.map((item) => {
@@ -96,6 +104,8 @@ function TablePriceStockAdmin(data) {
                       className="editPriceQuantityStyle"
                       onKeyDown={(e) => handleEscPrice(e, item._id)}
                       autoFocus
+                      value={priceInputValue}
+                      onChange={(e) => setPriceInputValue(e.target.value)}
                     />
                   ) : (
                     <span
@@ -128,6 +138,8 @@ function TablePriceStockAdmin(data) {
                       className="editPriceQuantityStyle"
                       onKeyDown={(e) => handleEscQuantity(e, item._id)}
                       autoFocus
+                      value={quantityInputValue}
+                      onChange={(e) => setQuantityInputValue(e.target.value)}
                     />
                   ) : (
                     <span
