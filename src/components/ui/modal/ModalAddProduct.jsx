@@ -37,15 +37,17 @@ function ModalAddProduct({ openModal, setOpenModal, productId }) {
     queryKey: ["categories"],
     queryFn: fetchCategories,
   });
+
   const fetchSubCategories = () => {
-    const response = getData(`subcategories?category=${formData.category}`);
+    const response = getData(`subcategories?category=${formData.category.id}`);
     return response;
   };
-  console.log("cat", formData.category.length >= 1);
+
   const querySubCategory = useQuery({
-    queryKey: ["subcategories"],
+    queryKey: ["subcategories", formData.category.id],
     queryFn: fetchSubCategories,
-    enabled: formData.category.length >= 1,
+    enabled: formData.category.id !== undefined,
+    retry: false,
   });
   return (
     <>
@@ -213,7 +215,11 @@ function ModalAddProduct({ openModal, setOpenModal, productId }) {
                         ? ""
                         : queryCategory.data.data.categories.map((item) => {
                             return (
-                              <option value={item._id} key={item._id}>
+                              <option
+                                value={item.name}
+                                key={item._id}
+                                data-id={item._id}
+                              >
                                 {item.name}
                               </option>
                             );
@@ -237,23 +243,26 @@ function ModalAddProduct({ openModal, setOpenModal, productId }) {
                         errors.subcategory ? "border-red-500" : ""
                       }`}
                       required
-                      value={formData.subcategory}
+                      value={formData.subcategory.name}
                       onChange={handleInputChange}
+                      defaultValue="hint"
                     >
-                      <option value="" disabled>
+                      <option value="hint" disabled>
                         لطفا زیر دسته بندی را انتخاب کنید
                       </option>
                       {querySubCategory.data === undefined
-                        ? console.log("sub", "undi")
+                        ? ""
                         : !querySubCategory.isLoading &&
                           querySubCategory.data.data.subcategories.map(
-                            (item) => {
-                              return (
-                                <option value={item._id} key={item._id}>
-                                  {item.name}
-                                </option>
-                              );
-                            }
+                            (item) => (
+                              <option
+                                value={item.name}
+                                key={item._id}
+                                data-id={item._id}
+                              >
+                                {item.name}
+                              </option>
+                            )
                           )}
                     </select>
                   </div>
@@ -261,6 +270,7 @@ function ModalAddProduct({ openModal, setOpenModal, productId }) {
                 <ReactQuill
                   theme="snow"
                   value={value}
+                  name="description"
                   onChange={handleQuill}
                   id="my-editor"
                   modules={{
