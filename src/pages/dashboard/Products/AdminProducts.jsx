@@ -13,7 +13,7 @@ function AdminProducts() {
   const [productId, setId] = useState();
 
   const fetchData = async () => {
-    const response = await getProductsWithCatAndSubCat(page, 4, "createdAt");
+    const response = await getProductsWithCatAndSubCat(page, 4, "-createdAt");
     return response;
   };
 
@@ -28,10 +28,16 @@ function AdminProducts() {
     setId(undefined);
   };
 
-  const handleRefetch = async () => {
+  const handleRefetch = async (isAddedProduct = false) => {
     await query.refetch();
     const calcCurrentPage = Math.round(query.data.total / query.data.per_page);
-    setPage(calcCurrentPage);
+    if (isAddedProduct) {
+      setPage(1);
+    } else if (query.data.page < query.data.total) {
+      setPage(calcCurrentPage);
+    } else {
+      setPage(query.data.page);
+    }
   };
 
   return (
@@ -61,6 +67,7 @@ function AdminProducts() {
         openModal={isModalOpen}
         setOpenModal={setModalOpen}
         productId={productId}
+        onRefetch={handleRefetch}
       />
     </div>
   );
