@@ -1,7 +1,16 @@
 import axios from "axios";
 import { BASE_URL } from "../utils/Constants";
 import faTexts from "../utils/Constants";
-
+import api from "./Api";
+const handleRequest = async (request) => {
+  try {
+    const response = await request();
+    console.log("safsa", response);
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+};
 export const getProductsWithCatAndSubCat = async (
   pageNum,
   limitNum,
@@ -22,4 +31,15 @@ export const getProductsWithCatAndSubCat = async (
 
     throw error;
   }
+};
+export const sendProductData = async (query, data) => {
+  return handleRequest(async () => {
+    const response = await api.post(query, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log(response);
+    return response;
+  });
 };
