@@ -69,6 +69,9 @@ const faTexts = {
   edit: "ویرایش",
   delete: "حذف",
   save: "ذخیره",
+  sureToDelete: " آیا مطمعئن هستید که میخواهید این محصول را حذف کنید؟",
+  yes: "بله",
+  no: "خیر",
   errorFetchCategory:
     "خطایی در زمان دریافت اطلاعات دسته بندی برای محصول  مورد نظر رخ داده",
   errorFetchSubCategory:
