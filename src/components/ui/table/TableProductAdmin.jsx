@@ -5,10 +5,15 @@ import { useState } from "react";
 function TableProductAdmin({ data, setOpenModal, setId }) {
   const { products } = data.data;
   const [isConfirmOpen, setOpenConfirm] = useState(false);
+  const [itemToDelete, setItemId] = useState();
   const handleEdit = (id) => {
     setOpenModal(true);
     setId(id);
     console.log(id);
+  };
+  const handleDelete = (itemIdToDelete) => {
+    setOpenConfirm(true);
+    setItemId(itemIdToDelete);
   };
   return (
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -64,7 +69,7 @@ function TableProductAdmin({ data, setOpenModal, setId }) {
                   </span>
                   <span
                     className="w-fit cursor-pointer underline underline-offset-4 text-red-500"
-                    onClick={() => setOpenConfirm(true)}
+                    onClick={() => handleDelete(item._id)}
                   >
                     {`  ${faTexts.delete}  `}
                   </span>
@@ -73,7 +78,11 @@ function TableProductAdmin({ data, setOpenModal, setId }) {
             );
           })}
       </tbody>
-      <ConfirmModal isOpen={isConfirmOpen} setOpenConfirm={setOpenConfirm} />
+      <ConfirmModal
+        isOpen={isConfirmOpen}
+        setOpenConfirm={setOpenConfirm}
+        itemId={itemToDelete}
+      />
     </table>
   );
 }
