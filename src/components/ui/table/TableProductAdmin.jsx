@@ -2,7 +2,7 @@ import faTexts, { BASE_IMAGE_URL } from "../../../utils/Constants";
 import { FaSort as SortIcon } from "react-icons/fa6";
 import ConfirmModal from "../modal/ConfirmModal";
 import { useState } from "react";
-function TableProductAdmin({ data, setOpenModal, setId }) {
+function TableProductAdmin({ data, setOpenModal, setId, onRefetch }) {
   const { products } = data.data;
   const [isConfirmOpen, setOpenConfirm] = useState(false);
   const [itemToDelete, setItemId] = useState();
@@ -82,6 +82,7 @@ function TableProductAdmin({ data, setOpenModal, setId }) {
         isOpen={isConfirmOpen}
         setOpenConfirm={setOpenConfirm}
         itemId={itemToDelete}
+        onRefetch={onRefetch}
       />
     </table>
   );

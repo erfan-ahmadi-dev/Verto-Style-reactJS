@@ -7,7 +7,6 @@ import Button from "../../../components/ui/button/Button";
 import { useQuery } from "@tanstack/react-query";
 import { LuLoader as Loading } from "react-icons/lu";
 import ModalAddProduct from "../../../components/ui/modal/ModalAddProduct";
-import { useFormHandler } from "../../../utils/addEditProductFormHandler";
 function AdminProducts() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [page, setPage] = useState(1);
@@ -29,6 +28,10 @@ function AdminProducts() {
     setId(undefined);
   };
 
+  const handleRefetch = () => {
+    query.refetch();
+  };
+
   return (
     <div className="w-full flex flex-col gap-5">
       <div className="flex justify-between w-full p-5 items-center bg-gray-800 text-white">
@@ -46,6 +49,7 @@ function AdminProducts() {
               data={query.data}
               setOpenModal={setModalOpen}
               setId={setId}
+              onRefetch={handleRefetch}
             />
             <Pagination setPage={setPage} data={query.data} page={page} />
           </>
