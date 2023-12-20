@@ -1,7 +1,10 @@
 import faTexts, { BASE_IMAGE_URL } from "../../../utils/Constants";
 import { FaSort as SortIcon } from "react-icons/fa6";
+import ConfirmModal from "../modal/ConfirmModal";
+import { useState } from "react";
 function TableProductAdmin({ data, setOpenModal, setId }) {
   const { products } = data.data;
+  const [isConfirmOpen, setOpenConfirm] = useState(false);
   const handleEdit = (id) => {
     setOpenModal(true);
     setId(id);
@@ -59,7 +62,10 @@ function TableProductAdmin({ data, setOpenModal, setId }) {
                   >
                     {`  ${faTexts.edit}  `}
                   </span>
-                  <span className="w-fit cursor-pointer underline underline-offset-4 text-red-500">
+                  <span
+                    className="w-fit cursor-pointer underline underline-offset-4 text-red-500"
+                    onClick={() => setOpenConfirm(true)}
+                  >
                     {`  ${faTexts.delete}  `}
                   </span>
                 </td>
@@ -67,6 +73,7 @@ function TableProductAdmin({ data, setOpenModal, setId }) {
             );
           })}
       </tbody>
+      <ConfirmModal isOpen={isConfirmOpen} setOpenConfirm={setOpenConfirm} />
     </table>
   );
 }
