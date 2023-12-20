@@ -39,7 +39,17 @@ export const sendProductData = async (query, data) => {
         "Content-Type": "multipart/form-data",
       },
     });
-    console.log(response);
+    return response;
+  });
+};
+
+export const updateProductData = async (productId, data) => {
+  return handleRequest(async () => {
+    const response = await api.patch(`products/${productId}`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response;
   });
 };
