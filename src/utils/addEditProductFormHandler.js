@@ -2,16 +2,18 @@ import { useMutation } from "@tanstack/react-query";
 import { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { sendData } from "../api/defaultApi";
-export const useFormHandler = (query, productId, setOpenModal) => {
+
+import { sendProductData } from "../api/productApi";
+export const useFormHandler = (query, productId, setOpenModal, onRefetch) => {
   const addProductMutation = useMutation({
     mutationKey: ["addProduct"],
     mutationFn: (data) => {
-      return sendData(`products`, data);
+      return sendProductData(`products`, data);
     },
     onSuccess: (data) => {
-      if (data) {
-        toast.success("محصول مورد نظر حذف شد");
+      if (data.data.status === "success") {
+        toast.success("محصول مورداضافه شد");
+        onRefetch(true);
       } else {
         toast.error("خطایی رخ داده است");
       }
@@ -163,18 +165,22 @@ export const useFormHandler = (query, productId, setOpenModal) => {
       return;
     }
 
-    const data = new FormData(formRef.current);
+    const fdata = new FormData();
+    fdata.append("category", String(formData.category.id));
+    fdata.append("subcategory", String(formData.subcategory.id));
+    fdata.append("name", formData.name);
+    fdata.append("price", Number(formData.price));
+    fdata.append("quantity", Number(formData.stock));
+    fdata.append("brand", "ورتو");
+    fdata.append("description", formData.description);
+    fdata.append("thumbnail", formData.images[0]);
+    for (let i = 0; i < formData.images.length; i++) {
+      fdata.append("images", formData.images[i]);
+    }
 
-    data.append("images", formData.images);
-    data.append("name", formData.name);
-    data.append("category", formData.category);
-    data.append("subcategory", formData.subcategory);
-    data.append("quantity", Number(formData.stock));
-    data.append("price", Number(formData.price));
-    data.append("rating", 3.6);
-    data.append("description", formData.description);
-    addProductMutation.mutate(data);
+    addProductMutation.mutate(fdata);
     resetForm();
+    setOpenModal(false);
   };
 
   const resetForm = () => {

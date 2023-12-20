@@ -4,7 +4,7 @@ import "react-quill/dist/quill.snow.css";
 import { useFormHandler } from "../../../utils/addEditProductFormHandler";
 import { getData } from "../../../api/defaultApi";
 import { useQuery } from "@tanstack/react-query";
-function ModalAddProduct({ openModal, setOpenModal, productId }) {
+function ModalAddProduct({ openModal, setOpenModal, productId, onRefetch }) {
   const isProductIdDefined = productId !== undefined;
 
   const fetchData = () => {
@@ -27,7 +27,7 @@ function ModalAddProduct({ openModal, setOpenModal, productId }) {
     errors,
     value,
     // tempImage,
-  } = useFormHandler(query, productId, setOpenModal);
+  } = useFormHandler(query, productId, setOpenModal,onRefetch);
 
   const fetchCategories = () => {
     const response = getData("categories");
