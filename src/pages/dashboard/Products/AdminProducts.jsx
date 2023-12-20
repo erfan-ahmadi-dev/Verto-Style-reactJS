@@ -20,7 +20,7 @@ function AdminProducts() {
   const query = useQuery({
     queryKey: ["products", page],
     queryFn: fetchData,
-    staleTime: 500,
+    staleTime: 1000,
   });
 
   const openModal = () => {
@@ -28,8 +28,10 @@ function AdminProducts() {
     setId(undefined);
   };
 
-  const handleRefetch = () => {
-    query.refetch();
+  const handleRefetch = async () => {
+    await query.refetch();
+    const calcCurrentPage = Math.round(query.data.total / query.data.per_page);
+    setPage(calcCurrentPage);
   };
 
   return (

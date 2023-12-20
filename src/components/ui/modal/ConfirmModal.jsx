@@ -5,22 +5,17 @@ import faTexts from "../../../utils/Constants";
 import { deleteData } from "../../../api/defaultApi";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { setPage, setProducts } from "../../../Redux/products/productSlice";
-function ConfirmModal({ isOpen, setOpenConfirm, itemId, onRefetch }) {
-  const dispatch = useDispatch(); // Access the dispatch function
 
+function ConfirmModal({ isOpen, setOpenConfirm, itemId, onRefetch }) {
   const deleteMutation = useMutation({
     mutationKey: ["deleteProduct"],
     mutationFn: (id) => {
       return deleteData(`products/`, id);
     },
     onSuccess: (data) => {
-      if (data.status === 200) {
+      if (data) {
         toast.success("محصول مورد نظر حذف شد");
-        // Dispatch the setProducts and setPage actions to update the Redux store
-        dispatch(setProducts(data));
-        dispatch(setPage(1)); // Reset page to 1 after deletion
+        onRefetch();
       } else {
         toast.error("خطایی رخ داده است");
       }
@@ -33,7 +28,6 @@ function ConfirmModal({ isOpen, setOpenConfirm, itemId, onRefetch }) {
   const deleteHandler = async () => {
     setOpenConfirm(false);
     deleteMutation.mutate(itemId);
-    onRefetch();
   };
   return (
     <>
