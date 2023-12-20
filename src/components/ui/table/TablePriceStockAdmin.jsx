@@ -10,24 +10,29 @@ function TablePriceStockAdmin(data) {
   const state = useSelector((state) => state.updatePriceAndQuantity);
   const editorDispatch = useDispatch();
 
-  const [priceInputValue, setPriceInputValue] = useState("");
-  const [quantityInputValue, setQuantityInputValue] = useState("");
+  const [inputValues, setInputValues] = useState({});
 
   useEffect(() => {
-    const editingItem = state.items.find(
-      (item) => item.isEditingPrice || item.isEditingQuantity
-    );
-    if (editingItem) {
-      setPriceInputValue(editingItem.isEditingPrice ? editingItem.price : "");
-      setQuantityInputValue(
-        editingItem.isEditingQuantity ? editingItem.quantity : ""
-      );
-    }
+    const newInputValues = {};
+    state.items.forEach((editingItem) => {
+      if (editingItem.isEditingPrice) {
+        newInputValues[editingItem.id] = {
+          ...newInputValues[editingItem.id],
+          price: editingItem.price,
+        };
+      }
+      if (editingItem.isEditingQuantity) {
+        newInputValues[editingItem.id] = {
+          ...newInputValues[editingItem.id],
+          quantity: editingItem.quantity,
+        };
+      }
+    });
+    setInputValues(newInputValues);
   }, [state.items]);
 
   function handleEscPrice(event, id) {
     if (event.key === "Escape") {
-      // handle cancel
       const quantity =
         state.items.find((editingItem) => editingItem.id === id)
           ?.isEditingQuantity || false;
@@ -43,15 +48,20 @@ function TablePriceStockAdmin(data) {
 
   function handleEscQuantity(event, id) {
     if (event.key === "Escape") {
-      // handle cancel
       editorDispatch(cancelQuantityEdit({ id, isEditingQuantity: false }));
     }
   }
 
-  // function handleInputChange(event) {
-  //   console.log(event.target.value);
-  //   // handle input change
-  // }
+  function handleInputChange(event, id, type) {
+    const newValue = event.target.value;
+    setInputValues((prevInputValues) => ({
+      ...prevInputValues,
+      [id]: {
+        ...(prevInputValues[id] || {}),
+        [type]: newValue,
+      },
+    }));
+  }
 
   const addToItemsForEdit = (
     itemId,
@@ -75,10 +85,12 @@ function TablePriceStockAdmin(data) {
 
   return (
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-      <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"></thead>
       <tbody>
         {products &&
           products.map((item) => {
+            const priceInputValue = inputValues[item._id]?.price || "";
+            const quantityInputValue = inputValues[item._id]?.quantity || "";
+
             return (
               <tr
                 className="w-full border-b  hover:bg-gray-200 h-fit"
@@ -93,7 +105,6 @@ function TablePriceStockAdmin(data) {
                     <div className="text-base font-semibold">{item.name}</div>
                   </div>
                 </td>
-
                 <td className="px-6 py-4" colSpan={1}>
                   {state.items.find(
                     (editingItem) =>
@@ -105,7 +116,7 @@ function TablePriceStockAdmin(data) {
                       onKeyDown={(e) => handleEscPrice(e, item._id)}
                       autoFocus
                       value={priceInputValue}
-                      onChange={(e) => setPriceInputValue(e.target.value)}
+                      onChange={(e) => handleInputChange(e, item._id, "price")}
                     />
                   ) : (
                     <span
@@ -139,7 +150,9 @@ function TablePriceStockAdmin(data) {
                       onKeyDown={(e) => handleEscQuantity(e, item._id)}
                       autoFocus
                       value={quantityInputValue}
-                      onChange={(e) => setQuantityInputValue(e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange(e, item._id, "quantity")
+                      }
                     />
                   ) : (
                     <span

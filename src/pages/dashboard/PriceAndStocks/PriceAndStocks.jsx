@@ -4,9 +4,11 @@ import TableOrdersAdmin from "../../../components/ui/table/TablePriceStockAdmin"
 import { getData } from "../../../api/defaultApi";
 import Pagination from "../../../components/ui/pagination/Pagination";
 import Button from "../../../components/ui/button/Button";
+import { useSelector } from "react-redux";
 function PriceAndStocks() {
   const [priceStockData, setData] = useState({ data: [] });
   const [page, setPage] = useState(1);
+  const state = useSelector((state) => state.updatePriceAndQuantity);
   useEffect(() => {
     getData(`products?page=${page}&limit=4`).then((Response) => {
       setData(Response || { data: [] });
