@@ -1,7 +1,25 @@
+import { useMutation } from "@tanstack/react-query";
 import { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { sendData } from "../api/defaultApi";
 export const useFormHandler = (query, productId, setOpenModal) => {
+  const addProductMutation = useMutation({
+    mutationKey: ["addProduct"],
+    mutationFn: (data) => {
+      return sendData(`products`, data);
+    },
+    onSuccess: (data) => {
+      if (data) {
+        toast.success("محصول مورد نظر حذف شد");
+      } else {
+        toast.error("خطایی رخ داده است");
+      }
+    },
+    onError: () => {
+      toast.error("خطایی رخ داده است");
+    },
+  });
   const closeModal = () => {
     setOpenModal(false);
     productId = undefined;
@@ -155,7 +173,7 @@ export const useFormHandler = (query, productId, setOpenModal) => {
     data.append("price", Number(formData.price));
     data.append("rating", 3.6);
     data.append("description", formData.description);
-
+    addProductMutation.mutate(data);
     resetForm();
   };
 
