@@ -24,7 +24,7 @@ export const getData = async (query) => {
 
 export const sendData = async (query, data) => {
   return handleRequest(async () => {
-    const response = await defaultApi.post(query, data);
+    const response = await api.post(query, data);
     console.log(response);
     return response;
   });
