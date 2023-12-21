@@ -6,8 +6,9 @@ import {
   editPriceAndQuantity,
 } from "../../../Redux/priceAndQuantity/priceSlice";
 import faTexts from "../../../utils/Constants";
-
-function TablePriceStockAdmin(data) {
+import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
+function TablePriceStockAdmin({ data, isSendingData }) {
   const state = useSelector((state) => state.updatePriceAndQuantity);
   const editorDispatch = useDispatch();
 
@@ -32,6 +33,27 @@ function TablePriceStockAdmin(data) {
     setInputValues(newInputValues);
   }, [state.items]);
 
+  const updateProduct = async (changes) => {
+    // Assuming your server supports individual patch requests
+    const responses = await Promise.all(
+      changes.map(async (change) => {
+        const response = await axios.patch(`/api/products/${change.id}`, {
+          price: change.price,
+          quantity: change.quantity,
+        });
+        return response.data;
+      })
+    );
+
+    return responses;
+  };
+
+  // const saveEditsMutation = useMutation(updateProduct, {
+  //   onSuccess: () => {
+  //     // Invalidate and refetch the data on success
+  //     console.log("success");
+  //   },
+  // });
   function handleEscPrice(event, id) {
     if (event.key === "Escape") {
       const quantity =
