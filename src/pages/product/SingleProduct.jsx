@@ -6,8 +6,10 @@ import { Link, useParams } from "react-router-dom";
 import { getData } from "../../api/defaultApi";
 import { useQuery } from "@tanstack/react-query";
 import parse from "html-react-parser";
+import faTexts from "../../utils/Constants";
 import { IoIosArrowBack as ArrowIcon } from "react-icons/io";
 import QuantityInput from "../../components/ui/input/QuantityInput";
+import { PATHS } from "../../configs/RoutesConfig";
 // TODO disable button when is loading / add dynamic size
 function SingleProduct() {
   const params = useParams();
@@ -32,13 +34,26 @@ function SingleProduct() {
           <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
             <li className="inline-flex items-center">
               <Link to="/" className="breadcumpText">
+                {query.isLoading ? <Skeleton /> : faTexts.home}
+              </Link>
+            </li>
+            <ArrowIcon className="ml-2" />
+            <li className="inline-flex items-center">
+              <Link to="/" className="breadcumpText">
                 {query.isLoading ? <Skeleton /> : data.category.name}
               </Link>
             </li>
             <li>
               <div className="flex items-center">
                 <ArrowIcon className="ml-2" />
-                <Link to="/" className="breadcumpText">
+                <Link
+                  to={
+                    query.isLoading
+                      ? "/"
+                      : `${PATHS.PRODUCTS}/${data.subcategory._id}`
+                  }
+                  className="breadcumpText"
+                >
                   {query.isLoading ? <Skeleton /> : data.subcategory.name}
                 </Link>
               </div>
