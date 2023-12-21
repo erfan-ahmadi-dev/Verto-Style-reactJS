@@ -3,7 +3,6 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function QuantityInput({ stock }) {
-  console.log("stock", stock);
   const [quantity, setQuantity] = useState(1);
   const [isDisabled, setDisabled] = useState(
     stock !== false && stock <= 0 ? true : false

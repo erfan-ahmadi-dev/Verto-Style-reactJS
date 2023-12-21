@@ -2,7 +2,7 @@ import React from "react";
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 
 function Pagination({ data, setPage, page }) {
-  console.log(data.total_pages);
+
   const handleNext = () => {
     if (page !== data.total_pages) {
       setPage(page + 1);
