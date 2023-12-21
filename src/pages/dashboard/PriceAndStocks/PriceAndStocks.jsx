@@ -1,4 +1,4 @@
-import { createRef, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import faTexts from "../../../utils/Constants";
 import TableOrdersAdmin from "../../../components/ui/table/TablePriceStockAdmin";
 import { getData } from "../../../api/defaultApi";
@@ -19,10 +19,9 @@ function PriceAndStocks() {
   const query = useQuery({
     queryKey: ["productPriceQuantity", page],
     queryFn: fetchData,
-    staleTime: 1000,
   });
+
   const handleSaveButtonClick = () => {
-    // Access the saveEditsMutation instance from the table component
     const saveEditsMutation = tableRef.current.saveEditsMutation;
     saveEditsMutation.mutate();
   };
@@ -55,6 +54,7 @@ function PriceAndStocks() {
               data={query.data}
               ref={tableRef}
               onRefetch={handleRefetch}
+              page={page}
             />
             <Pagination setPage={setPage} data={query.data} page={page} />
           </>

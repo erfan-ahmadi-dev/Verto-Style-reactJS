@@ -17,7 +17,7 @@ import { PATHS } from "../../../configs/RoutesConfig";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import api from "../../../api/Api";
-function TablePriceStockAdmin({ data, onRefetch }, ref) {
+function TablePriceStockAdmin({ data, onRefetch, page }, ref) {
   const state = useSelector((state) => state.updatePriceAndQuantity);
   const editorDispatch = useDispatch();
   const [inputValues, setInputValues] = useState({});
@@ -40,6 +40,11 @@ function TablePriceStockAdmin({ data, onRefetch }, ref) {
     });
     setInputValues(newInputValues);
   }, [state.items]);
+
+  // remove input on page change
+  useEffect(() => {
+    editorDispatch(clearData());
+  }, [page]);
 
   const updateProduct = async (changes) => {
     const responses = await Promise.all(
