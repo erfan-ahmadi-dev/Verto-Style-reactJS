@@ -24,19 +24,32 @@ const priceQuantitySlice = createSlice({
     cancelPriceEdit: (state, action) => {
       const { id, isEditing } = action.payload;
       const itemToCancel = state.items.find((item) => item.id === id);
-      // console.log("price", itemToCancel);
       if (itemToCancel) {
-        itemToCancel.isEditingPrice = isEditing;
+        if (itemToCancel.isEditingPrice) {
+          itemToCancel.isEditingPrice = isEditing;
+          itemToCancel.price = itemToCancel.previousPrice;
+        }
       }
     },
+
     cancelQuantityEdit: (state, action) => {
-      const itemToCancel = state.items.find(
+      const { id, isEditingQuantity } = action.payload;
+      const itemToCancel = state.items.find((item) => item.id === id);
+      if (itemToCancel) {
+        if (itemToCancel.isEditingQuantity) {
+          itemToCancel.isEditingQuantity = isEditingQuantity;
+          itemToCancel.price = itemToCancel.previousQuantity;
+        }
+      }
+    },
+    updateData: (state, action) => {
+      const findIdOfprice = state.items.find(
         (item) => item.id === action.payload.id
       );
-      if (itemToCancel) {
-        itemToCancel.isEditingQuantity = action.payload.isEditingQuantity;
+      if (findIdOfprice) {
+        findIdOfprice.price = action.payload.price;
+        findIdOfprice.quantity = action.payload.quantity;
       }
-      console.log(state.items);
     },
   },
 });
@@ -46,6 +59,7 @@ export const {
   saveEdits,
   cancelPriceEdit,
   cancelQuantityEdit,
+  updateData,
 } = priceQuantitySlice.actions;
 
 export default priceQuantitySlice.reducer;
