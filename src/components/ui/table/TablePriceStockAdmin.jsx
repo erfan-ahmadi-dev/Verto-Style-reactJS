@@ -5,6 +5,7 @@ import {
   cancelQuantityEdit,
   editPriceAndQuantity,
 } from "../../../Redux/priceAndQuantity/priceSlice";
+import faTexts from "../../../utils/Constants";
 
 function TablePriceStockAdmin(data) {
   const state = useSelector((state) => state.updatePriceAndQuantity);
@@ -85,6 +86,19 @@ function TablePriceStockAdmin(data) {
 
   return (
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" className="w-3/4 px-6 py-3" colSpan={10}>
+            {faTexts.producName}
+          </th>
+          <th scope="col" className="px-6 py-3" colSpan={1}>
+            {faTexts.productPrice}
+          </th>
+          <th scope="col" className="px-6 py-3" colSpan={1}>
+            {faTexts.stock}
+          </th>
+        </tr>
+      </thead>
       <tbody>
         {products &&
           products.map((item) => {
