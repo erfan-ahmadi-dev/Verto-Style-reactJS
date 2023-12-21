@@ -127,7 +127,19 @@ export const useFormHandler = (query, productId, setOpenModal, onRefetch) => {
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    if (name === "price") {
+      if (value < 1) {
+        value = 1;
+        toast.error("تعداد نمیتواند کمتر از صفر باشد");
+      }
+    }
+    if (name === "stock") {
+      if (value < 1) {
+        value = 1;
+        toast.error("تعداد نمیتواند کمتر از صفر باشد");
+      }
+    }
     if (name === "category" || name === "subcategory") {
       const selectedOption = e.target.options[e.target.selectedIndex];
       const id = selectedOption.getAttribute("data-id");
