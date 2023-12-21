@@ -25,7 +25,7 @@ function Login() {
   useEffect(() => {
     if (!query.isPending && !query.isLoading) {
       if (query.data.status === 200) {
-        localStorage.setItem("accessToken", query.data.data.token.accessToken);
+        localStorage.setItem("accessToken", query.data.data.token.refreshToken);
         navigate(PATHS.DASHBOARD);
       } else if (query.data.status === 401) {
         toast.error("رمز و یا نام کاربری اشتباه است");
