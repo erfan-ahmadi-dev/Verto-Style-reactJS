@@ -26,7 +26,7 @@ function Navigation() {
           <div className="grid grid-cols-2 grid-rows-3 gap-2 place-content-center-center h-full">
             {SUB_CATEGOREIS_LINK.map((item, index) => {
               return (
-                <Dropdown.Item>
+                <Dropdown.Item key={index}>
                   <Link to={`${PATHS.PRODUCTS}/${item.link}`}>
                     {item.title}
                   </Link>
