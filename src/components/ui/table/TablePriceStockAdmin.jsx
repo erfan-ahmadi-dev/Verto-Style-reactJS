@@ -10,6 +10,7 @@ import {
 import faTexts from "../../../utils/Constants";
 
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 function TablePriceStockAdmin({ data, isSendingData }) {
   const state = useSelector((state) => state.updatePriceAndQuantity);
   const editorDispatch = useDispatch();
@@ -82,7 +83,7 @@ function TablePriceStockAdmin({ data, isSendingData }) {
   }
 
   function handleInputChange(event, id, type) {
-    const newValue = event.target.value;
+    let newValue = event.target.value;
     setInputValues((prevInputValues) => ({
       ...prevInputValues,
       [id]: {
@@ -90,19 +91,23 @@ function TablePriceStockAdmin({ data, isSendingData }) {
         [type]: newValue,
       },
     }));
+    if (newValue < 1) {
+      toast.error("تعداد نمیتواند کمتر از یک باشد");
+      newValue = 1;
+    } else {
+      const currentPrice = type === "price" ? newValue : inputValues[id].price;
+      const currentQuantity =
+        type === "quantity" ? newValue : inputValues[id].quantity;
+      setCurrent({ price: currentPrice, quantity: currentQuantity });
 
-    const currentPrice = type === "price" ? newValue : inputValues[id].price;
-    const currentQuantity =
-      type === "quantity" ? newValue : inputValues[id].quantity;
-    setCurrent({ price: currentPrice, quantity: currentQuantity });
-
-    editorDispatch(
-      updateData({
-        id,
-        price: currentPrice,
-        quantity: currentQuantity,
-      })
-    );
+      editorDispatch(
+        updateData({
+          id,
+          price: currentPrice,
+          quantity: currentQuantity,
+        })
+      );
+    }
   }
 
   function addToItemsForEdit(
@@ -177,7 +182,6 @@ function TablePriceStockAdmin({ data, isSendingData }) {
                       className="editPriceQuantityStyle"
                       onKeyDown={(e) => handleEscPrice(e, item._id)}
                       autoFocus
-                      min={1000}
                       value={priceInputValue}
                       onChange={(e) => handleInputChange(e, item._id, "price")}
                     />
@@ -213,7 +217,6 @@ function TablePriceStockAdmin({ data, isSendingData }) {
                       onKeyDown={(e) => handleEscQuantity(e, item._id)}
                       autoFocus
                       type="number"
-                      min={0}
                       value={quantityInputValue}
                       onChange={(e) =>
                         handleInputChange(e, item._id, "quantity")
