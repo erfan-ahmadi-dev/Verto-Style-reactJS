@@ -2,6 +2,7 @@ import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import { PATHS } from "../configs/RoutesConfig";
 import Main from "../layout/Main/Main";
+import LodingModal from "../components/ui/modal/LoadingModal";
 import Admin from "../layout/Admin/Admin";
 import ProtectedRoute from "./ProtectedRoute";
 const Home = React.lazy(() => import("../pages/home/Home"));
@@ -35,7 +36,13 @@ const routes = createBrowserRouter([
       {
         index: true,
         element: (
-          <React.Suspense fallback={<>...</>}>
+          <React.Suspense
+            fallback={
+              <>
+                <LodingModal />
+              </>
+            }
+          >
             <Home />
           </React.Suspense>
         ),
@@ -43,7 +50,13 @@ const routes = createBrowserRouter([
       {
         path: PATHS.PRODUCTS,
         element: (
-          <React.Suspense fallback={<>...</>}>
+          <React.Suspense
+            fallback={
+              <>
+                <LodingModal />
+              </>
+            }
+          >
             <Products />
           </React.Suspense>
         ),
@@ -51,7 +64,13 @@ const routes = createBrowserRouter([
       {
         path: `${PATHS.PRODUCTS}/:category`,
         element: (
-          <React.Suspense fallback={<>...</>}>
+          <React.Suspense
+            fallback={
+              <>
+                <LodingModal />
+              </>
+            }
+          >
             <Products />
           </React.Suspense>
         ),
@@ -59,7 +78,13 @@ const routes = createBrowserRouter([
       {
         path: PATHS.PRODUCT,
         element: (
-          <React.Suspense fallback={<>...</>}>
+          <React.Suspense
+            fallback={
+              <>
+                <LodingModal />
+              </>
+            }
+          >
             <SingleProduct />
           </React.Suspense>
         ),
@@ -67,7 +92,13 @@ const routes = createBrowserRouter([
       {
         path: PATHS.BASKET,
         element: (
-          <React.Suspense fallback={<>...</>}>
+          <React.Suspense
+            fallback={
+              <>
+                <LodingModal />
+              </>
+            }
+          >
             <Cart />
           </React.Suspense>
         ),
@@ -75,7 +106,13 @@ const routes = createBrowserRouter([
       {
         path: PATHS.CHECKOUT,
         element: (
-          <React.Suspense fallback={<>...</>}>
+          <React.Suspense
+            fallback={
+              <>
+                <LodingModal />
+              </>
+            }
+          >
             <Checkout />
           </React.Suspense>
         ),
@@ -83,7 +120,13 @@ const routes = createBrowserRouter([
       {
         path: PATHS.PAYMENT,
         element: (
-          <React.Suspense fallback={<>...</>}>
+          <React.Suspense
+            fallback={
+              <>
+                <LodingModal />
+              </>
+            }
+          >
             <Payment />
           </React.Suspense>
         ),
@@ -91,7 +134,13 @@ const routes = createBrowserRouter([
       {
         path: PATHS.CONTACTUS,
         element: (
-          <React.Suspense fallback={<>...</>}>
+          <React.Suspense
+            fallback={
+              <>
+                <LodingModal />
+              </>
+            }
+          >
             <ContactUs />
           </React.Suspense>
         ),
@@ -105,7 +154,13 @@ const routes = createBrowserRouter([
       {
         index: true,
         element: (
-          <React.Suspense fallback={<>...</>}>
+          <React.Suspense
+            fallback={
+              <>
+                <LodingModal />
+              </>
+            }
+          >
             <ProtectedRoute>
               <AdminDashboard />
             </ProtectedRoute>
@@ -115,7 +170,13 @@ const routes = createBrowserRouter([
       {
         path: PATHS.DASHBOARD_PRODUCTS,
         element: (
-          <React.Suspense fallback={<>...</>}>
+          <React.Suspense
+            fallback={
+              <>
+                <LodingModal />
+              </>
+            }
+          >
             <ProtectedRoute>
               <AdminProducst />
             </ProtectedRoute>
@@ -125,7 +186,13 @@ const routes = createBrowserRouter([
       {
         path: PATHS.DASHBOARD_ORDERS,
         element: (
-          <React.Suspense fallback={<>...</>}>
+          <React.Suspense
+            fallback={
+              <>
+                <LodingModal />
+              </>
+            }
+          >
             <ProtectedRoute>
               <AdminOrders />
             </ProtectedRoute>
@@ -135,7 +202,13 @@ const routes = createBrowserRouter([
       {
         path: PATHS.DASHBOARD_PRICES_STOCK,
         element: (
-          <React.Suspense fallback={<>...</>}>
+          <React.Suspense
+            fallback={
+              <>
+                <LodingModal />
+              </>
+            }
+          >
             <ProtectedRoute>
               <AdminPriceStock />
             </ProtectedRoute>
@@ -147,7 +220,13 @@ const routes = createBrowserRouter([
   {
     path: PATHS.LOGIN,
     element: (
-      <React.Suspense fallback={<>...</>}>
+      <React.Suspense
+        fallback={
+          <>
+            <LodingModal />
+          </>
+        }
+      >
         <Login />
       </React.Suspense>
     ),
@@ -155,7 +234,13 @@ const routes = createBrowserRouter([
   {
     path: "*",
     element: (
-      <React.Suspense fallback={<>...</>}>
+      <React.Suspense
+        fallback={
+          <>
+            <LodingModal />
+          </>
+        }
+      >
         <NotFound />
       </React.Suspense>
     ),
