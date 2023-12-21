@@ -13,7 +13,7 @@ function AdminProducts() {
   const [productId, setId] = useState();
 
   const fetchData = async () => {
-    const response = await getProductsWithCatAndSubCat(page, 4, "-createdAt");
+    const response = await getProductsWithCatAndSubCat(page, 4, "-updatedAt");
     return response;
   };
 
