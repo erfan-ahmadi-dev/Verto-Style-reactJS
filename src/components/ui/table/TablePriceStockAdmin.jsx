@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  useImperativeHandle,
+  forwardRef,
+} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   cancelPriceEdit,
   cancelQuantityEdit,
   editPriceAndQuantity,
-  saveEdits,
   updateData,
+  clearData,
 } from "../../../Redux/priceAndQuantity/priceSlice";
 import faTexts from "../../../utils/Constants";
-
+import { PATHS } from "../../../configs/RoutesConfig";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-function TablePriceStockAdmin({ data, isSendingData }) {
+import api from "../../../api/Api";
+function TablePriceStockAdmin({ data, onRefetch }, ref) {
   const state = useSelector((state) => state.updatePriceAndQuantity);
   const editorDispatch = useDispatch();
   const [inputValues, setInputValues] = useState({});
-  const [currentValue, setCurrent] = useState();
-  const [editedItems, setEditedItems] = useState([]);
 
   useEffect(() => {
     const newInputValues = {};
@@ -37,30 +41,38 @@ function TablePriceStockAdmin({ data, isSendingData }) {
     setInputValues(newInputValues);
   }, [state.items]);
 
-  // const updateProduct = async (changes) => {
-  //   const responses = await Promise.all(
-  //     changes.map(async (change) => {
-  //       const response = await axios.patch(`/api/products/${change.id}`, {
-  //         price: change.price,
-  //         quantity: change.quantity,
-  //       });
-  //       return response.data;
-  //     })
-  //   );
-  //   return responses;
-  // };
+  const updateProduct = async (changes) => {
+    const responses = await Promise.all(
+      changes.map(async (change) => {
+        const response = await api.patch(`${PATHS.PRODUCTS}/${change.id}`, {
+          price: change.price,
+          quantity: change.quantity,
+        });
+        return response.data;
+      })
+    );
+    return responses;
+  };
 
-  // const saveEditsMutation = useMutation(updateProduct, {
-  //   onSuccess: () => {
-  //     // Handle success, e.g., show a success message
-  //     editorDispatch(saveEdits(editedItems));
-  //     setEditedItems([]); // Clear editedItems after successful save
-  //   },
-  //   onError: (error) => {
-  //     // Handle error, e.g., show an error message
-  //   },
-  // });
-
+  const saveEditsMutation = useMutation({
+    mutationKey: ["priceAndQuantityEdit"],
+    mutationFn: () => updateProduct(state.items),
+    onSuccess: (data) => {
+      if (data) {
+        toast.success("اطلاعات مورد نظر آپدیت شد");
+        editorDispatch(clearData());
+        onRefetch();
+      } else {
+        toast.error("خطایی رخ داده است");
+      }
+    },
+    onError: () => {
+      toast.error("خطایی رخ داده است");
+    },
+  });
+  useImperativeHandle(ref, () => ({
+    saveEditsMutation,
+  }));
   function handleEscPrice(event, id) {
     if (event.key === "Escape") {
       const quantity =
@@ -98,7 +110,6 @@ function TablePriceStockAdmin({ data, isSendingData }) {
       const currentPrice = type === "price" ? newValue : inputValues[id].price;
       const currentQuantity =
         type === "quantity" ? newValue : inputValues[id].quantity;
-      setCurrent({ price: currentPrice, quantity: currentQuantity });
 
       editorDispatch(
         updateData({
@@ -128,9 +139,6 @@ function TablePriceStockAdmin({ data, isSendingData }) {
     };
 
     editorDispatch(editPriceAndQuantity(newItem));
-
-    // Add the edited item to editedItems array
-    setEditedItems((prevEditedItems) => [...prevEditedItems, newItem]);
   }
 
   const { products } = data.data;
@@ -249,4 +257,4 @@ function TablePriceStockAdmin({ data, isSendingData }) {
   );
 }
 
-export default TablePriceStockAdmin;
+export default forwardRef(TablePriceStockAdmin);
