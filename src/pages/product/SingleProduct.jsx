@@ -5,7 +5,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { Link, useParams } from "react-router-dom";
 import { getData } from "../../api/defaultApi";
 import { useQuery } from "@tanstack/react-query";
-
+import parse from "html-react-parser";
 import { IoIosArrowBack as ArrowIcon } from "react-icons/io";
 import QuantityInput from "../../components/ui/input/QuantityInput";
 // TODO disable button when is loading / add dynamic size
@@ -197,7 +197,7 @@ function SingleProduct() {
               {query.isLoading ? (
                 <Skeleton width={200} count={8} />
               ) : (
-                data.description
+                parse(data.description)
               )}
             </div>
           </div>
