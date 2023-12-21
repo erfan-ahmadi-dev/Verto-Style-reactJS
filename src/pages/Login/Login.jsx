@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { loginSchema } from "../../validation/Schema";
 import logoPic from "../../assets/images/logoblack.svg";
@@ -10,37 +10,32 @@ import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PATHS } from "../../configs/RoutesConfig";
+import { tuple } from "yup";
 function Login() {
   const [userData, setData] = useState(null);
   const navigate = useNavigate();
   const postAuthData = async (values) => {
     const response = await sendData("auth/login", values);
-    console.log("inside", response.status);
-    if (response.status === 200) {
-      console.warn("ok");
-      return response.data;
-    } else if (response.status === 401) {
-      toast.error("رمز و یا نام کاربری اشتباه است", {
-        position: "top-right",
-        autoClose: 2500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
+    return response;
   };
   const query = useQuery({
     queryKey: ["login", userData],
     queryFn: () => postAuthData(userData),
     enabled: !!userData,
   });
-  if (!query.isPending) {
-    localStorage.setItem("accessToken", query.data.token.accessToken);
-    navigate(PATHS.DASHBOARD);
-  }
+  useEffect(() => {
+    if (!query.isPending && !query.isLoading) {
+      if (query.data.status === 200) {
+        console.log(query.data);
+        localStorage.setItem("accessToken", query.data.data.token.accessToken);
+        navigate(PATHS.DASHBOARD);
+      } else if (query.data.status === 401) {
+        toast.error("رمز و یا نام کاربری اشتباه است");
+      } else {
+        toast.error("خطا رخ داده است");
+      }
+    }
+  }, [query.isLoading]);
   query.isPending ? console.log("pending") : console.log(query);
   return (
     <div>
@@ -57,7 +52,7 @@ function Login() {
                 validationSchema={loginSchema}
                 onSubmit={(values, { setSubmitting, resetForm }) => {
                   setData(values);
-
+                  resetForm();
                   setSubmitting(false);
                   // navigate("/dashboard");
                 }}
@@ -90,12 +85,15 @@ function Login() {
                         component="div"
                       />
                     </div>
-                    <Button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="m-10"
-                      label={faTexts.login}
-                    />
+
+                    <button
+                      className={
+                        query.isLoading ? "disableButton" : "primaryButton"
+                      }
+                      disabled={query.isLoading ? true : false}
+                    >
+                      {faTexts.login}
+                    </button>
                   </Form>
                 )}
               </Formik>
