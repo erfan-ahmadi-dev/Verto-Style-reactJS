@@ -15,7 +15,7 @@ function ConfirmModal({ isOpen, setOpenConfirm, itemId, onRefetch }) {
     onSuccess: (data) => {
       if (data) {
         toast.success("محصول مورد نظر حذف شد");
-        onRefetch();
+        onRefetch(false, true);
       } else {
         toast.error("خطایی رخ داده است");
       }

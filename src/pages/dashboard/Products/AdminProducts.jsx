@@ -28,13 +28,24 @@ function AdminProducts() {
     setId(undefined);
   };
 
-  const handleRefetch = async (isAddedProduct = false) => {
+  const handleRefetch = async (isAddedProduct = false, isDeleted = false) => {
     await query.refetch();
-    const calcCurrentPage = Math.round(query.data.total / query.data.per_page);
+
     if (isAddedProduct) {
       setPage(1);
-    } else if (query.data.page < query.data.total) {
-      setPage(calcCurrentPage);
+    } else if (isDeleted) {
+      const totalPagesAfterDeletion = Math.floor(
+        query.data.total / query.data.per_page
+      );
+
+      if (
+        totalPagesAfterDeletion === 0 ||
+        (page > totalPagesAfterDeletion && totalPagesAfterDeletion > 0)
+      ) {
+        setPage(totalPagesAfterDeletion);
+      } else {
+        setPage(page);
+      }
     } else {
       setPage(query.data.page);
     }
