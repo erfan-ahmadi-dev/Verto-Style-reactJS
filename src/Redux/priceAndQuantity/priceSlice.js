@@ -25,6 +25,11 @@ const priceQuantitySlice = createSlice({
           itemToCancel.isEditingPrice = isEditing;
           itemToCancel.price = itemToCancel.previousPrice;
         }
+        if (!itemToCancel.isEditingPrice && !itemToCancel.isEditingPrice) {
+          state.items = state.items.filter(
+            (item) => item.id !== itemToCancel.id
+          );
+        }
       }
     },
 
@@ -35,6 +40,11 @@ const priceQuantitySlice = createSlice({
         if (itemToCancel.isEditingQuantity) {
           itemToCancel.isEditingQuantity = isEditingQuantity;
           itemToCancel.quantity = itemToCancel.previousQuantity;
+        }
+        if (!itemToCancel.isEditingPrice && !itemToCancel.isEditingPrice) {
+          state.items = state.items.filter(
+            (item) => item.id !== itemToCancel.id
+          );
         }
       }
     },
