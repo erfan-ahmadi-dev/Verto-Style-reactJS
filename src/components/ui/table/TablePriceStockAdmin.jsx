@@ -4,15 +4,18 @@ import {
   cancelPriceEdit,
   cancelQuantityEdit,
   editPriceAndQuantity,
+  saveEdits,
+  updateData,
 } from "../../../Redux/priceAndQuantity/priceSlice";
 import faTexts from "../../../utils/Constants";
-import axios from "axios";
+
 import { useMutation } from "@tanstack/react-query";
 function TablePriceStockAdmin({ data, isSendingData }) {
   const state = useSelector((state) => state.updatePriceAndQuantity);
   const editorDispatch = useDispatch();
-
   const [inputValues, setInputValues] = useState({});
+  const [currentValue, setCurrent] = useState();
+  const [editedItems, setEditedItems] = useState([]);
 
   useEffect(() => {
     const newInputValues = {};
@@ -33,27 +36,30 @@ function TablePriceStockAdmin({ data, isSendingData }) {
     setInputValues(newInputValues);
   }, [state.items]);
 
-  const updateProduct = async (changes) => {
-    // Assuming your server supports individual patch requests
-    const responses = await Promise.all(
-      changes.map(async (change) => {
-        const response = await axios.patch(`/api/products/${change.id}`, {
-          price: change.price,
-          quantity: change.quantity,
-        });
-        return response.data;
-      })
-    );
-
-    return responses;
-  };
+  // const updateProduct = async (changes) => {
+  //   const responses = await Promise.all(
+  //     changes.map(async (change) => {
+  //       const response = await axios.patch(`/api/products/${change.id}`, {
+  //         price: change.price,
+  //         quantity: change.quantity,
+  //       });
+  //       return response.data;
+  //     })
+  //   );
+  //   return responses;
+  // };
 
   // const saveEditsMutation = useMutation(updateProduct, {
   //   onSuccess: () => {
-  //     // Invalidate and refetch the data on success
-  //     console.log("success");
+  //     // Handle success, e.g., show a success message
+  //     editorDispatch(saveEdits(editedItems));
+  //     setEditedItems([]); // Clear editedItems after successful save
+  //   },
+  //   onError: (error) => {
+  //     // Handle error, e.g., show an error message
   //   },
   // });
+
   function handleEscPrice(event, id) {
     if (event.key === "Escape") {
       const quantity =
@@ -84,25 +90,43 @@ function TablePriceStockAdmin({ data, isSendingData }) {
         [type]: newValue,
       },
     }));
+
+    const currentPrice = type === "price" ? newValue : inputValues[id].price;
+    const currentQuantity =
+      type === "quantity" ? newValue : inputValues[id].quantity;
+    setCurrent({ price: currentPrice, quantity: currentQuantity });
+
+    editorDispatch(
+      updateData({
+        id,
+        price: currentPrice,
+        quantity: currentQuantity,
+      })
+    );
   }
 
-  const addToItemsForEdit = (
+  function addToItemsForEdit(
     itemId,
     itemPrice,
     itemQuantity,
     isUpdatingPrice,
     isUpdatingQuantity
-  ) => {
+  ) {
     const newItem = {
       id: itemId,
       price: itemPrice,
+      previousPrice: itemPrice,
       quantity: itemQuantity,
+      previousQuantity: itemQuantity,
       isEditingPrice: isUpdatingPrice,
       isEditingQuantity: isUpdatingQuantity,
     };
 
     editorDispatch(editPriceAndQuantity(newItem));
-  };
+
+    // Add the edited item to editedItems array
+    setEditedItems((prevEditedItems) => [...prevEditedItems, newItem]);
+  }
 
   const { products } = data.data;
 
@@ -124,8 +148,9 @@ function TablePriceStockAdmin({ data, isSendingData }) {
       <tbody>
         {products &&
           products.map((item) => {
-            const priceInputValue = inputValues[item._id]?.price || "";
-            const quantityInputValue = inputValues[item._id]?.quantity || "";
+            const priceInputValue = inputValues[item._id]?.price || item.price;
+            const quantityInputValue =
+              inputValues[item._id]?.quantity || item.quantity;
 
             return (
               <tr
@@ -148,9 +173,11 @@ function TablePriceStockAdmin({ data, isSendingData }) {
                   ) ? (
                     <input
                       placeholder="price"
+                      type="number"
                       className="editPriceQuantityStyle"
                       onKeyDown={(e) => handleEscPrice(e, item._id)}
                       autoFocus
+                      min={1000}
                       value={priceInputValue}
                       onChange={(e) => handleInputChange(e, item._id, "price")}
                     />
@@ -185,6 +212,8 @@ function TablePriceStockAdmin({ data, isSendingData }) {
                       className="editPriceQuantityStyle"
                       onKeyDown={(e) => handleEscQuantity(e, item._id)}
                       autoFocus
+                      type="number"
+                      min={0}
                       value={quantityInputValue}
                       onChange={(e) =>
                         handleInputChange(e, item._id, "quantity")

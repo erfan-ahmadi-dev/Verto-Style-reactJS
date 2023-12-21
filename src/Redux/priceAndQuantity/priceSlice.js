@@ -38,7 +38,7 @@ const priceQuantitySlice = createSlice({
       if (itemToCancel) {
         if (itemToCancel.isEditingQuantity) {
           itemToCancel.isEditingQuantity = isEditingQuantity;
-          itemToCancel.price = itemToCancel.previousQuantity;
+          itemToCancel.quantity = itemToCancel.previousQuantity;
         }
       }
     },
