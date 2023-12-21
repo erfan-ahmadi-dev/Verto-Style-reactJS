@@ -2,8 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { sendProductData, updateProductData } from "../api/productApi";
 
-import { sendProductData } from "../api/productApi";
 export const useFormHandler = (query, productId, setOpenModal, onRefetch) => {
   const addProductMutation = useMutation({
     mutationKey: ["addProduct"],
@@ -13,6 +13,25 @@ export const useFormHandler = (query, productId, setOpenModal, onRefetch) => {
     onSuccess: (data) => {
       if (data.data.status === "success") {
         toast.success("محصول مورداضافه شد");
+        onRefetch(true);
+      } else {
+        toast.error("خطایی رخ داده است");
+      }
+    },
+    onError: () => {
+      toast.error("خطایی رخ داده است");
+    },
+  });
+
+  const updateProductMutation = useMutation({
+    mutationKey: ["updateProduct"],
+    mutationFn: (data) => {
+      const response = updateProductData(productId, data);
+      return response;
+    },
+    onSuccess: (data) => {
+      if (data.data.status === "success") {
+        toast.success("محصول مورداصلاح شد");
         onRefetch(true);
       } else {
         toast.error("خطایی رخ داده است");
@@ -62,6 +81,7 @@ export const useFormHandler = (query, productId, setOpenModal, onRefetch) => {
     images: false,
   });
   const isProductIdDefined = productId !== undefined;
+
   const formRef = useRef();
   useEffect(() => {
     if (query.isFetched && isProductIdDefined) {
@@ -77,8 +97,8 @@ export const useFormHandler = (query, productId, setOpenModal, onRefetch) => {
           name: response.subcategory.name,
         },
         description: response.description,
-        images: [response.images],
-        thumbnail: response.thumbnail,
+        images: [],
+        thumbnail: "",
       });
     } else if (productId === undefined) {
       resetForm();
@@ -122,10 +142,12 @@ export const useFormHandler = (query, productId, setOpenModal, onRefetch) => {
         [name]: value,
       });
     }
-    setErrors({
-      ...errors,
-      [name]: false,
-    });
+    if (!isProductIdDefined) {
+      setErrors({
+        ...errors,
+        [name]: false,
+      });
+    }
   };
 
   const formSubmit = async (event) => {
@@ -142,45 +164,87 @@ export const useFormHandler = (query, productId, setOpenModal, onRefetch) => {
     ];
     let formIsValid = true;
 
-    requiredFields.forEach((field) => {
-      if (!formData[field]) {
+    if (isProductIdDefined) {
+      const fdata = new FormData();
+      if (formData.category.id !== "") {
+        fdata.append("category", String(formData.category.id));
+      }
+
+      if (formData.subcategory.id !== "") {
+        fdata.append("subcategory", String(formData.subcategory.id));
+      }
+      if (formData.name !== "") {
+        fdata.append("name", formData.name);
+      }
+      if (formData.price !== "") {
+        fdata.append("price", Number(formData.price));
+      }
+
+      if (formData.stock !== "") {
+        fdata.append("quantity", Number(formData.stock));
+      }
+      if (formData.description !== "") {
+        fdata.append("description", formData.description);
+      }
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        thumbnail: "",
+        images: [],
+      }));
+
+      if (formData.images.length > 0) {
+        fdata.append("thumbnail", formData.images[0]);
+      }
+
+      if (formData.images.length > 0) {
+        for (let i = 0; i < formData.images.length; i++) {
+          fdata.append("images", formData.images[i]);
+        }
+      }
+
+      updateProductMutation.mutate(fdata);
+
+      setOpenModal(false);
+    } else {
+      requiredFields.forEach((field) => {
+        if (!formData[field]) {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            [field]: true,
+          }));
+          formIsValid = false;
+        }
+      });
+
+      if (tempImage.length === 0) {
         setErrors((prevErrors) => ({
           ...prevErrors,
-          [field]: true,
+          images: true,
         }));
         formIsValid = false;
       }
-    });
 
-    if (tempImage.length === 0) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        images: true,
-      }));
-      formIsValid = false;
+      if (!formIsValid) {
+        toast.error("لطفا اطلاعات را تکمیل کنید");
+        return;
+      }
+      const fdata = new FormData();
+      fdata.append("category", String(formData.category.id));
+      fdata.append("subcategory", String(formData.subcategory.id));
+      fdata.append("name", formData.name);
+      fdata.append("price", Number(formData.price));
+      fdata.append("quantity", Number(formData.stock));
+      fdata.append("brand", "ورتو");
+      fdata.append("description", formData.description);
+      fdata.append("thumbnail", formData.images[0]);
+      for (let i = 0; i < formData.images.length; i++) {
+        fdata.append("images", formData.images[i]);
+      }
+
+      addProductMutation.mutate(fdata);
+      resetForm();
+      setOpenModal(false);
     }
-
-    if (!formIsValid) {
-      toast.error("لطفا اطلاعات را تکمیل کنید");
-      return;
-    }
-
-    const fdata = new FormData();
-    fdata.append("category", String(formData.category.id));
-    fdata.append("subcategory", String(formData.subcategory.id));
-    fdata.append("name", formData.name);
-    fdata.append("price", Number(formData.price));
-    fdata.append("quantity", Number(formData.stock));
-    fdata.append("brand", "ورتو");
-    fdata.append("description", formData.description);
-    fdata.append("thumbnail", formData.images[0]);
-    for (let i = 0; i < formData.images.length; i++) {
-      fdata.append("images", formData.images[i]);
-    }
-
-    addProductMutation.mutate(fdata);
-    resetForm();
-    setOpenModal(false);
   };
 
   const resetForm = () => {
