@@ -3,14 +3,13 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { loginSchema } from "../../validation/Schema";
 import logoPic from "../../assets/images/logoblack.svg";
 import faTexts from "../../utils/Constants";
-import Button from "../../components/ui/button/Button";
 import { useNavigate } from "react-router-dom";
 import { sendData } from "../../api/defaultApi";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PATHS } from "../../configs/RoutesConfig";
-import { tuple } from "yup";
+
 function Login() {
   const [userData, setData] = useState(null);
   const navigate = useNavigate();
@@ -26,7 +25,6 @@ function Login() {
   useEffect(() => {
     if (!query.isPending && !query.isLoading) {
       if (query.data.status === 200) {
-        console.log(query.data);
         localStorage.setItem("accessToken", query.data.data.token.accessToken);
         navigate(PATHS.DASHBOARD);
       } else if (query.data.status === 401) {
@@ -36,7 +34,7 @@ function Login() {
       }
     }
   }, [query.isLoading]);
-  query.isPending ? console.log("pending") : console.log(query);
+
   return (
     <div>
       <section className="bg-gray-100 dark:bg-gray-900 font-IranRegular">
