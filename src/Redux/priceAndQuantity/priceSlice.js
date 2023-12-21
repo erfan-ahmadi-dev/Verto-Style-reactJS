@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   items: [],
-  priceEidts: [],
 };
 const priceQuantitySlice = createSlice({
   name: "editor",
@@ -17,9 +16,6 @@ const priceQuantitySlice = createSlice({
       } else {
         state.items.push(action.payload);
       }
-    },
-    saveEdits: (state, action) => {
-      state.priceEidts.push(action.payload);
     },
     cancelPriceEdit: (state, action) => {
       const { id, isEditing } = action.payload;
@@ -51,6 +47,9 @@ const priceQuantitySlice = createSlice({
         findIdOfprice.quantity = action.payload.quantity;
       }
     },
+    clearData: (state) => {
+      state.items = [];
+    },
   },
 });
 
@@ -60,6 +59,7 @@ export const {
   cancelPriceEdit,
   cancelQuantityEdit,
   updateData,
+  clearData,
 } = priceQuantitySlice.actions;
 
 export default priceQuantitySlice.reducer;
