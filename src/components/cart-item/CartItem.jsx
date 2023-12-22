@@ -6,10 +6,10 @@ import QuantityInput from "../ui/input/QuantityInput";
 function CartItem({ data }) {
   // TODO add alt to image and data
   return (
-    <div className="flex items-center gap-4 border-b-2 w-full h-fit justify-between px-4 ">
+    <div className="flex items-center gap-4 border-b-2 w-full h-fit justify-between px-4 font-IranRegular ">
       <img
-        src=""
-        className="rounded-t-lg aspect-square w-3/12 h-fit p-2"
+        src={`${BASE_THUMBNAIL_URL}/products-6583d45bfd72bb1bc6e1bbe1-1703138395969.jpeg`}
+        className="rounded-t-lg aspect-square w-32 h-fit p-2"
         alt=""
       />
       <span className=" text-sm line-clamp-2 w-3/12">'تی شرت فلان'</span>
@@ -22,9 +22,9 @@ function CartItem({ data }) {
         />
         <FaMinus className="w-4 h-4 p-1 cursor-pointer" />
       </div> */}
-      <QuantityInput />
+      <QuantityInput className="w-10" />
       <span className="w-3/12 text-center line-clamp-1">130,000 تومان</span>
-      <MdDeleteForever className="w-5 cursor-pointer" />
+      <span className="deleteSpan ">حذف</span>
     </div>
   );
 }

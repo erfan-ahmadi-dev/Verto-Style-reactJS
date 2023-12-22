@@ -136,4 +136,7 @@
   .breadcumpText {
     @apply inline-flex items-center text-sm font-medium text-gray-700 hover:text-red-600 dark:text-gray-400 dark:hover:text-white;
   }
+  .deleteSpan {
+    @apply w-fit cursor-pointer underline underline-offset-4 text-red-500;
+  }
 }
