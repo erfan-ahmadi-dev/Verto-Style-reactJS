@@ -59,7 +59,7 @@ function AdminProducts() {
           <Button label={faTexts.addProduct} onClick={openModal} />
         </div>
       </div>
-      <div className="relative h-full overflow-x-auto sm:rounded-lg w-full px-5 ">
+      <div className="relative h-full overflow-x-auto sm:rounded-lg w-full px-5 flex items-center flex-col ">
         {query.isLoading ? (
           <Loading className="animate-spin aanimate-infinite animate-duration-1000 w-12 h-12" />
         ) : (
