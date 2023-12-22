@@ -1,7 +1,38 @@
 import React from "react";
+import CartItem from "../../components/cart-item/CartItem";
 
 function Cart() {
-  return <div></div>;
+  return (
+    <div className="font-IranRegular px-10 py-5 flex flex-col gap-5">
+      <div className="flex w-full  gap-8  justify-between">
+        <div className="w-7/12 h-fit py-10 flex flex-col gap-10 ">
+          <h3 className="text-2xl">سبد خرید</h3>
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+        </div>
+        <div className="w-4/12 h-fit px-5 py-10 flex flex-col gap-10">
+          <h3 className="text-2xl">خلاصه سفارش</h3>
+          <div className="flex items-center">
+            <span className="w-3/12 font-IranRegular text-base">کد تخفیف</span>
+            <input
+              type="text"
+              className="editInput"
+              placeholder="کد تخفیف را وارد کنید"
+            />
+          </div>
+          <div className="flex flex-col gap-5">
+            <span className="text-gray-500">جمع کل سفارش</span>
+            <span className="text-xl text-left">1,500,000 تومان</span>
+          </div>
+          <button className="outlineButton">نهایی کردن خرید</button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Cart;
