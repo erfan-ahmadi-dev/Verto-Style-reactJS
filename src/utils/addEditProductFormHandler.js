@@ -42,7 +42,6 @@ export const useFormHandler = (query, productId, setOpenModal, onRefetch) => {
     },
   });
   const closeModal = () => {
-    setOpenModal(false);
     productId = undefined;
     setErrors({
       name: false,
@@ -54,6 +53,20 @@ export const useFormHandler = (query, productId, setOpenModal, onRefetch) => {
       description: false,
       images: false,
     });
+    setFormData({
+      name: "",
+      stock: "",
+      price: "",
+      sizes: "",
+      category: "",
+      subcategory: "",
+      description: "",
+      images: [],
+      thumbnail: "",
+      rating: "",
+    });
+    console.log("modal ", formData);
+    setOpenModal(false);
   };
 
   const [tempImage, setImage] = useState([]);
@@ -100,6 +113,7 @@ export const useFormHandler = (query, productId, setOpenModal, onRefetch) => {
         images: [],
         thumbnail: "",
       });
+      console.log(formData);
     } else if (productId === undefined) {
       resetForm();
     }

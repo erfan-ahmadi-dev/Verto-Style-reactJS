@@ -27,7 +27,7 @@ function ModalAddProduct({ openModal, setOpenModal, productId, onRefetch }) {
     errors,
     value,
     // tempImage,
-  } = useFormHandler(query, productId, setOpenModal,onRefetch);
+  } = useFormHandler(query, productId, setOpenModal, onRefetch);
 
   const fetchCategories = () => {
     const response = getData("categories");
@@ -205,10 +205,10 @@ function ModalAddProduct({ openModal, setOpenModal, productId, onRefetch }) {
                         errors.category ? "border-red-500" : ""
                       }`}
                       required
-                      value={formData.category}
+                      value={formData.category.name || "hint"}
                       onChange={handleInputChange}
                     >
-                      <option value="" disabled>
+                      <option value="hint" disabled>
                         لطفا دسته بندی را انتخاب کنید
                       </option>
                       {queryCategory.isLoading
