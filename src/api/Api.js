@@ -5,6 +5,9 @@ import { Navigate } from "react-router-dom";
 const api = axios.create({
   baseURL: BASE_URL,
   timeout: 5000,
+  headers: {
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+  },
 });
 
 // Add a request interceptor
