@@ -1,4 +1,7 @@
-import faTexts, { BASE_IMAGE_URL } from "../../../utils/Constants";
+import faTexts, {
+  BASE_IMAGE_URL,
+  BASE_THUMBNAIL_URL,
+} from "../../../utils/Constants";
 import { FaSort as SortIcon } from "react-icons/fa6";
 import ConfirmModal from "../modal/ConfirmModal";
 import { useState } from "react";
@@ -44,7 +47,7 @@ function TableProductAdmin({ data, setOpenModal, setId, onRefetch }) {
                 <th className="w-20">
                   <img
                     className="w-20 h-20 "
-                    src={`${BASE_IMAGE_URL}${item.images[0]}`}
+                    src={`${BASE_THUMBNAIL_URL}${item.thumbnail}`}
                     alt="Jese"
                   />
                 </th>
