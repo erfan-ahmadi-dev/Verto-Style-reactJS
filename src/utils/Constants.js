@@ -116,22 +116,22 @@ export const BANNERS_DATA = [
   },
   {
     imageSrc: banner.menShoesBanner,
-    link: SUB_CATEGOREIS_LINK[1].link,
+    link: SUB_CATEGOREIS_LINK[2].link,
     alt: "mens shoes category",
   },
   {
     imageSrc: banner.menSportBanner,
-    link: SUB_CATEGOREIS_LINK[2].link,
+    link: SUB_CATEGOREIS_LINK[4].link,
     alt: "mens sport category",
   },
   {
     imageSrc: banner.womenClotheBanner,
-    link: SUB_CATEGOREIS_LINK[3].link,
+    link: SUB_CATEGOREIS_LINK[1].link,
     alt: "womens clothe category",
   },
   {
     imageSrc: banner.womenShoesBanner,
-    link: SUB_CATEGOREIS_LINK[4].link,
+    link: SUB_CATEGOREIS_LINK[3].link,
     alt: "womens shoes category",
   },
   {
