@@ -8,7 +8,7 @@ import ProductShowCase from "../../components/productShowCase/ProductShowCase";
 import Banner from "../../components/banner/Banner";
 import { getData } from "../../api/defaultApi";
 import { useQuery } from "@tanstack/react-query";
-
+// TODO rename variables and query names
 function Home() {
   const fetchProductWithOffer = (urlQuery) => {
     return getData(urlQuery);
@@ -16,27 +16,29 @@ function Home() {
   const offerQuery = useQuery({
     queryKey: ["productsWithOffer"],
     queryFn: () =>
-      fetchProductWithOffer("products?page=1&limit=6&quantity[lt]=15"),
+      fetchProductWithOffer(
+        "products?sort=-updatedAt&page=1&limit=6&subcategory=6561eb0c1adeb81260019951"
+      ),
   });
   const menClotheQuery = useQuery({
     queryKey: ["manclothe"],
     queryFn: () =>
       fetchProductWithOffer(
-        "products?page=1&limit=6&category=6561eaa51adeb81260019942"
+        "products?sort=-updatedAt&page=1&limit=6&subcategory=6561eaf51adeb8126001994d"
       ),
   });
   const womenClotheQuery = useQuery({
     queryKey: ["womanclothe"],
     queryFn: () =>
       fetchProductWithOffer(
-        "products?page=1&limit=6&category=6561eaa51adeb81260019942"
+        "products?sort=-updatedAt&page=1&limit=6&subcategory=6561ec371adeb8126001996b"
       ),
   });
   const womenShoesQuery = useQuery({
     queryKey: ["womanShoes"],
     queryFn: () =>
       fetchProductWithOffer(
-        "products?page=1&limit=6&category=6561eaa51adeb81260019942"
+        "products?sort=-updatedAt&page=1&limit=6&subcategory=6561ec3b1adeb8126001996f"
       ),
   });
 
@@ -57,7 +59,7 @@ function Home() {
             );
           })}
         </div>
-        <ProductShowCase title={faTexts.offer}>
+        <ProductShowCase title="لباس مردانه">
           <ProductSlider
             isLoading={offerQuery.isLoading}
             data={offerQuery.data?.data.products}
@@ -66,7 +68,7 @@ function Home() {
 
         <Banner classStyle="bannerWide" bannerindex={0} />
 
-        <ProductShowCase title={faTexts.offer}>
+        <ProductShowCase title="کفش مردانه">
           <ProductSlider
             isLoading={menClotheQuery.isLoading}
             data={menClotheQuery.data?.data.products}
@@ -78,14 +80,14 @@ function Home() {
           bannerindex2={2}
         />
 
-        <ProductShowCase title={faTexts.offer}>
+        <ProductShowCase title="لباس زنانه">
           <ProductSlider
             isLoading={womenClotheQuery.isLoading}
             data={womenClotheQuery.data?.data.products}
           />
         </ProductShowCase>
         <Banner classStyle="bannerWide" bannerindex={3} />
-        <ProductShowCase title={faTexts.offer}>
+        <ProductShowCase title="کفش زنانه">
           <ProductSlider
             isLoading={womenShoesQuery.isLoading}
             data={womenShoesQuery.data?.data.products}
