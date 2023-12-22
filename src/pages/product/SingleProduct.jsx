@@ -39,12 +39,12 @@ function SingleProduct() {
                 {query.isLoading ? <Skeleton /> : faTexts.home}
               </Link>
             </li>
-            <ArrowIcon className="ml-2" />
+            {/* <ArrowIcon className="ml-2" />
             <li className="inline-flex items-center">
               <Link to="/" className="breadcumpText">
                 {query.isLoading ? <Skeleton /> : data.category.name}
               </Link>
-            </li>
+            </li> */}
             <li>
               <div className="flex items-center">
                 <ArrowIcon className="ml-2" />
