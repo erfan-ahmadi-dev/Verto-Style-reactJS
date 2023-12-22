@@ -2,26 +2,31 @@ import React, { useEffect, useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { loginSchema } from "../../validation/Schema";
 import logoPic from "../../assets/images/logoblack.svg";
-import faTexts from "../../utils/Constants";
+import faTexts, { BASE_URL } from "../../utils/Constants";
 import { useNavigate } from "react-router-dom";
-import { sendData } from "../../api/defaultApi";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PATHS } from "../../configs/RoutesConfig";
+import axios from "axios";
 
 function Login() {
   const [userData, setData] = useState(null);
   const navigate = useNavigate();
 
   const postAuthData = async (values) => {
-    const response = await sendData("auth/login", values);
-    return response;
+    try {
+      const response = await axios.post(`${BASE_URL}auth/login`, values);
+      return response;
+    } catch (error) {
+      return error;
+    }
   };
   const query = useQuery({
     queryKey: ["login", userData],
     queryFn: () => postAuthData(userData),
     enabled: !!userData,
+    retry: false,
   });
   useEffect(() => {
     if (localStorage.hasOwnProperty("accessToken")) {
@@ -34,7 +39,7 @@ function Login() {
       if (query.data.status === 200) {
         localStorage.setItem("accessToken", query.data.data.token.refreshToken);
         navigate(PATHS.DASHBOARD);
-      } else if (query.data.status === 401) {
+      } else if (query.data.response.status === 401) {
         toast.error("رمز و یا نام کاربری اشتباه است");
       } else {
         toast.error("خطا رخ داده است");
@@ -92,6 +97,7 @@ function Login() {
                     </div>
 
                     <button
+                      type="submit"
                       className={
                         query.isLoading ? "disableButton" : "primaryButton"
                       }
