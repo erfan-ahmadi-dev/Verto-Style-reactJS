@@ -13,6 +13,7 @@ import { PATHS } from "../../configs/RoutesConfig";
 function Login() {
   const [userData, setData] = useState(null);
   const navigate = useNavigate();
+  const localData = localStorage.getItem("accessToken");
   const postAuthData = async (values) => {
     const response = await sendData("auth/login", values);
     return response;
@@ -23,6 +24,9 @@ function Login() {
     enabled: !!userData,
   });
   useEffect(() => {
+    if (localData.length > 0) {
+      navigate(PATHS.DASHBOARD);
+    }
     if (!query.isPending && !query.isLoading) {
       if (query.data.status === 200) {
         localStorage.setItem("accessToken", query.data.data.token.refreshToken);
@@ -33,7 +37,7 @@ function Login() {
         toast.error("خطا رخ داده است");
       }
     }
-  }, [query.isLoading]);
+  }, [query.isLoading, localData]);
 
   return (
     <div>
