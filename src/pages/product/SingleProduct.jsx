@@ -10,6 +10,8 @@ import faTexts from "../../utils/Constants";
 import { IoIosArrowBack as ArrowIcon } from "react-icons/io";
 import QuantityInput from "../../components/ui/input/QuantityInput";
 import { PATHS } from "../../configs/RoutesConfig";
+import SingleProcutSlider from "../../components/slider/singleProduct/SingleProcutSlider";
+
 // TODO disable button when is loading / add dynamic size
 function SingleProduct() {
   const params = useParams();
@@ -61,17 +63,12 @@ function SingleProduct() {
           </ol>
         </nav>
         <div className="flex flex-col md:flex-row -mx-4 border-b-2 py-4">
-          <div className="md:flex-1 px-4">
-            <div className="h-fit rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
+          <div className="md:flex-1 px-4 w-1/2">
+            <div className="h-fit rounded-lg mb-4 ">
               {query.isLoading ? (
                 <Skeleton height={500} />
               ) : (
-                <img
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  src={`http://localhost:8000/images/products/images/${data.images[0]}`}
-                  alt="Product"
-                />
+                <SingleProcutSlider data={data.images} />
               )}
             </div>
           </div>
