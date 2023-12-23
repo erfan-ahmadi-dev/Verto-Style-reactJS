@@ -43,6 +43,7 @@ function SingleProduct() {
       thumbnail: data.thumbnail,
       name: data.name,
       price: data.price,
+      stock: data.quantity,
     };
     const existingItemIndex = cartState.cart.findIndex(
       (item) => item.id === cartItem.id
