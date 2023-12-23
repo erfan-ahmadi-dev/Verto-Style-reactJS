@@ -23,7 +23,7 @@ function Header() {
     }
   }, [cartState]);
   return (
-    <header className="shadow-md px-2 py-2 font-IranRegular">
+    <header className="shadow-md  font-IranRegular">
       <nav className="flex bg-white border-gray-200  dark:bg-gray-800 h-fit py-5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl w-full self-start">
           <Link to="/" className="flex items-center">
