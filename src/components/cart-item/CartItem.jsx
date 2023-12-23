@@ -25,6 +25,8 @@ function CartItem({ data }) {
         setQuantity={setQuantity}
         quantity={quantity}
         stock={data.stock}
+        isInCart={true}
+        itemId={data.id}
       />
       <span className="w-3/12 text-center line-clamp-1">
         {data.price.toLocaleString("fa-IR")} تومان
