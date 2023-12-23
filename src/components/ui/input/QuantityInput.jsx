@@ -2,8 +2,9 @@ import { useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-function QuantityInput({ stock }) {
-  const [quantity, setQuantity] = useState(1);
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../../../Redux/cart/CartSlice";
+function QuantityInput({ stock, quantity, setQuantity }) {
   const [isDisabled, setDisabled] = useState(
     stock !== false && stock <= 0 ? true : false
   );
@@ -11,43 +12,16 @@ function QuantityInput({ stock }) {
     let value = parseInt(e.target.value);
     if (value > 100) {
       value = 100;
-      toast.error("حداکثر تعداد محصول 100 هست", {
-        position: "top-right",
-        autoClose: 2500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error("حداکثر تعداد محصول 100 هست");
     } else if (value < 1) {
       value = 1;
-      toast.error("تعداد سفارش نمیتواند کمتر از یک باشد", {
-        position: "top-right",
-        autoClose: 2500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error("تعداد سفارش نمیتواند کمتر از یک باشد");
     } else if (stock <= 0) {
       value = 0;
     }
     if (value > stock) {
       value = 1;
-      toast.error("تعداد سفارش نمیتواند بیشتر از موجودی باشد", {
-        position: "top-right",
-        autoClose: 2500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error("تعداد سفارش نمیتواند بیشتر از موجودی باشد");
     }
     setQuantity(isNaN(value) ? "" : value);
   };
@@ -55,16 +29,7 @@ function QuantityInput({ stock }) {
   const handleIncrement = () => {
     if (quantity >= stock) {
       setQuantity(stock);
-      toast.error("تعداد سفارش نمیتواند بیشتر از موجودی باشد", {
-        position: "top-right",
-        autoClose: 2500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error("تعداد سفارش نمیتواند بیشتر از موجودی باشد");
     } else if (!isDisabled) {
       setQuantity(quantity + 1);
     }
