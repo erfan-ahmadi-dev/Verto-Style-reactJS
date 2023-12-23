@@ -37,7 +37,12 @@ function SingleProduct() {
   }
   const handleAddToCart = (stock) => {
     console.log("hi", stock);
-    const cartItem = { id: params.productId, count: quantity };
+    const cartItem = {
+      id: params.productId,
+      count: quantity,
+      thumbnail: data.thumbnail,
+      name: data.name,
+    };
     const existingItemIndex = cartState.cart.findIndex(
       (item) => item.id === cartItem.id
     );
