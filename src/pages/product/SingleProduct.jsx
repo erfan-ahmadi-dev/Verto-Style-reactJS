@@ -42,6 +42,7 @@ function SingleProduct() {
       count: quantity,
       thumbnail: data.thumbnail,
       name: data.name,
+      price: data.price,
     };
     const existingItemIndex = cartState.cart.findIndex(
       (item) => item.id === cartItem.id
