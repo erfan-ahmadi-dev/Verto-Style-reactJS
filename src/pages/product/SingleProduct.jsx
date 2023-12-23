@@ -11,10 +11,17 @@ import { IoIosArrowBack as ArrowIcon } from "react-icons/io";
 import QuantityInput from "../../components/ui/input/QuantityInput";
 import { PATHS } from "../../configs/RoutesConfig";
 import SingleProcutSlider from "../../components/slider/singleProduct/SingleProcutSlider";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../Redux/cart/CartSlice";
+import { ToastContainer, toast } from "react-toastify";
 
 // TODO disable button when is loading / add dynamic size
 function SingleProduct() {
   const params = useParams();
+  const [quantity, setQuantity] = useState(1);
+  const cartState = useSelector((state) => state.cart);
+  const cartDispatch = useDispatch();
 
   let data;
   const fetchProduct = () => {
@@ -28,6 +35,27 @@ function SingleProduct() {
   if (!query.isLoading) {
     data = query.data.data.product;
   }
+  const handleAddToCart = (stock) => {
+    console.log("hi", stock);
+    const cartItem = { id: params.productId, count: quantity };
+    const existingItemIndex = cartState.cart.findIndex(
+      (item) => item.id === cartItem.id
+    );
+
+    if (
+      existingItemIndex !== -1 &&
+      cartState.cart[existingItemIndex].count + quantity > stock
+    ) {
+      toast.error(
+        `تعداد سفارش نمیتواند بیشتر از موجودی باشد سبد شما شامل ${cartState.cart[existingItemIndex].count} عدد از این محصول هست`
+      );
+    } else {
+      cartDispatch(addToCart(cartItem));
+
+      toast.success(`${quantity} عدد ${data.name} به سبد خرید اضافه شد`);
+      setQuantity(1);
+    }
+  };
 
   return (
     <div className=" dark:bg-gray-800 py-8 font-IranRegular">
@@ -165,7 +193,11 @@ function SingleProduct() {
                 `موجودی : ${data.quantity}`
               )}
             </span>
-            <QuantityInput stock={!query.isLoading && data.quantity} />
+            <QuantityInput
+              stock={!query.isLoading && data.quantity}
+              setQuantity={setQuantity}
+              quantity={quantity}
+            />
             <div className="flex   py-4   items-center justify-between">
               <div className="w-2/5 px-2">
                 {query.isLoading ? (
@@ -179,6 +211,7 @@ function SingleProduct() {
                       query.isLoading ||
                       (!query.isLoading && data.quantity <= 0)
                     }
+                    onClick={() => handleAddToCart(data.quantity)}
                   >
                     افزودن به سبد
                   </button>
