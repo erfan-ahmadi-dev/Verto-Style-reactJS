@@ -2,8 +2,14 @@ import React, { useState } from "react";
 
 import { BASE_THUMBNAIL_URL } from "../../utils/Constants";
 import QuantityInput from "../ui/input/QuantityInput";
+import { useDispatch } from "react-redux";
+import { deleteItem } from "../../Redux/cart/CartSlice";
 function CartItem({ data }) {
   const [quantity, setQuantity] = useState(data.count);
+  const cartDispatch = useDispatch();
+  const handleDelete = () => {
+    cartDispatch(deleteItem(data.id));
+  };
   // TODO add alt to image and data
   return (
     <div className="flex items-center gap-4 border-b-2 w-full h-fit justify-between px-4 font-IranRegular ">
@@ -23,7 +29,9 @@ function CartItem({ data }) {
       <span className="w-3/12 text-center line-clamp-1">
         {data.price.toLocaleString("fa-IR")} تومان
       </span>
-      <span className="deleteSpan ">حذف</span>
+      <span className="deleteSpan" onClick={handleDelete}>
+        حذف
+      </span>
     </div>
   );
 }
