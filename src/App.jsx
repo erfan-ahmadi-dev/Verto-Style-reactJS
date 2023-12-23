@@ -4,9 +4,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import { Provider } from "react-redux";
-import { store } from "./Redux/Store";
+import { persistor, store } from "./Redux/Store";
+import { PersistGate } from "redux-persist/integration/react";
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: { staleTime: 60 * 1000 },
@@ -17,7 +18,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ToastContainer />
       <Provider store={store}>
-        <RouterProvider router={routes} />
+        <PersistGate loading={null} persistor={persistor}>
+          <RouterProvider router={routes} />
+        </PersistGate>
       </Provider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
