@@ -3,10 +3,23 @@ import CartItem from "../../components/cart-item/CartItem";
 import { useSelector } from "react-redux";
 import { MdOutlineShoppingCart as CartIcon } from "react-icons/md";
 function Cart() {
+  // TODO fix counter and validation
   const cartState = useSelector((state) => state.cart);
+  console.log(cartState.cart.length > 1);
+  const total = cartState.cart.reduce(
+    (accumulator, product) => accumulator + product.price * product.count,
+    0
+  );
+  console.log("total", total);
+  // const calculateSubtotalAndCount = () => {
+
+  //   console.log("total", total);
+  //   return total;
+  // };
+
   return (
     <div className="font-IranRegular px-10 py-5 flex flex-col gap-5 justify-center items-center">
-      {cartState.cart.length > 1 ? (
+      {cartState.cart.length >= 1 ? (
         <div className="flex w-full  gap-8  justify-between">
           <div className="w-7/12 h-fit py-10 flex flex-col gap-10 ">
             <h3 className="text-2xl ">سبد خرید</h3>
@@ -28,7 +41,10 @@ function Cart() {
             </div>
             <div className="flex flex-col gap-5">
               <span className="text-gray-500">جمع کل سفارش</span>
-              <span className="text-xl text-left">1,500,000 تومان</span>
+              <span className="text-xl text-left">
+                {" "}
+                {total.toLocaleString("fa-IR")} تومان
+              </span>
             </div>
             <button className="outlineButton">نهایی کردن خرید</button>
           </div>
