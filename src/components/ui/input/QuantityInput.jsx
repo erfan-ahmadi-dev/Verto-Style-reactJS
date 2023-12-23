@@ -3,10 +3,16 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart } from "../../../Redux/cart/CartSlice";
-function QuantityInput({ stock, quantity, setQuantity }) {
+import { decreaseCount, increaseCount } from "../../../Redux/cart/CartSlice";
+function QuantityInput({ stock, quantity, setQuantity, isInCart, itemId }) {
+  const cartState = useSelector((state) => state.cart);
+  const cartDispatch = useDispatch();
+
   const [isDisabled, setDisabled] = useState(
     stock !== false && stock <= 0 ? true : false
+  );
+  const existingItemIndex = cartState.cart.findIndex(
+    (item) => item.id === itemId
   );
   const handleChange = (e) => {
     let value = parseInt(e.target.value);
@@ -31,12 +37,19 @@ function QuantityInput({ stock, quantity, setQuantity }) {
       setQuantity(stock);
       toast.error("تعداد سفارش نمیتواند بیشتر از موجودی باشد");
     } else if (!isDisabled) {
+      if (isInCart) {
+        console.log(cartState.cart[existingItemIndex].count);
+        cartDispatch(increaseCount(itemId));
+      }
       setQuantity(quantity + 1);
     }
   };
 
   const handleDecrement = () => {
     if (quantity > 1 && !isDisabled) {
+      if (isInCart) {
+        cartDispatch(decreaseCount(itemId));
+      }
       setQuantity(quantity - 1);
     }
   };
