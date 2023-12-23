@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   cart: [],
+  tempCart: [],
 };
 
 export const cartSlice = createSlice({
@@ -9,10 +10,12 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const findIdOfprice = state.items.find(
+      const existingItemIndex = state.cart.findIndex(
         (item) => item.id === action.payload.id
       );
-      if (!findIdOfprice) {
+      if (existingItemIndex !== -1) {
+        state.cart[existingItemIndex].count += action.payload.count;
+      } else {
         state.cart.push(action.payload);
       }
     },
