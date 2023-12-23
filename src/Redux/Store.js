@@ -23,6 +23,10 @@ const rootReducer = combineReducers({
 // Configure the store
 export const store = configureStore({
   reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 // Create the persistor
