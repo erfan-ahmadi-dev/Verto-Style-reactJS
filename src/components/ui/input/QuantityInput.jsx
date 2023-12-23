@@ -4,7 +4,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { decreaseCount, increaseCount } from "../../../Redux/cart/CartSlice";
-function QuantityInput({ stock, quantity, setQuantity, isInCart, itemId }) {
+function QuantityInput({
+  stock,
+  quantity,
+  setQuantity,
+  isInCart = false,
+  itemId,
+}) {
   const cartState = useSelector((state) => state.cart);
   const cartDispatch = useDispatch();
 
