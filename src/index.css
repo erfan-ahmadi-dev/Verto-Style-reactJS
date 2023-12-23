@@ -59,6 +59,8 @@
 }
 .Toastify__toast-body > div:last-child {
   direction: rtl;
+  font-family: IranRegular;
+  font-size: small;
 }
 @layer components {
   .errorStyleText {
