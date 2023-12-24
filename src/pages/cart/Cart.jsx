@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineShoppingCart as CartIcon } from "react-icons/md";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { PATHS } from "../../configs/RoutesConfig";
 import { addBillDetail } from "../../Redux/cart/CartSlice";
 function Cart() {
   const cartState = useSelector((state) => state.cart);
   const cartDispatch = useDispatch();
+  const navigate = useNavigate();
   const [total, setTotal] = useState(0);
   const [totalDiscount, setDiscount] = useState();
 
@@ -50,7 +51,7 @@ function Cart() {
       deliveryDate: new Date(),
     };
     cartDispatch(addBillDetail(billData));
-    Navigate(PATHS.CHECKOUT);
+    navigate(PATHS.CHECKOUT);
   };
   return (
     <div className="font-IranRegular px-10 py-5 flex flex-col gap-5 justify-center items-center">
