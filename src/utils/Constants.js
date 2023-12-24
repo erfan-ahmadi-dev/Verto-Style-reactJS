@@ -85,6 +85,14 @@ const faTexts = {
   phoneFor: "جهت هماهنگی سفارش ",
   pay: "پرداخت",
   confirmOrder: "نهایی کردن خرید",
+
+  errorNameRequired: "وارد کردن نام الزامی هست",
+  errorLastNameRequired: "وارد کردن نام خانوداگی الزامی هست",
+  errorPhoneRequired: "وارد کردن شماره تماس الزامی هست",
+  errorAddressRequired: "وارد کردن آدرس الزامی هست",
+  errorDateRequired: "وارد کردن تاریخ تحویل الزامی هست",
+  errorEmaileRequired: "وارد کردن ایمیل الزامی هست",
+  wrongInput: "لطفا مقادیر را به درستی وارد کنید",
 };
 
 // TODO define links insde PATHS
