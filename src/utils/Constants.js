@@ -77,6 +77,14 @@ const faTexts = {
   errorFetchSubCategory:
     "خطایی در زمان دریافت اطلاعات زیر دسته بندی برای محصول  مورد نظر رخ داده",
   erroFetchingProduct: "خطایی در زمان دریافت محصولات رخ داده ",
+  firstName: "نام",
+  lastName: "نام خانوداگی",
+  phone: "تلفن همراه",
+  address: "آدرس",
+  deliveryDate: "تاریخ تحویل",
+  phoneFor: "جهت هماهنگی سفارش ",
+  pay: "پرداخت",
+  confirmOrder: "نهایی کردن خرید",
 };
 
 // TODO define links insde PATHS
