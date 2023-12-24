@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import CartItem from "../../components/cart-item/CartItem";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineShoppingCart as CartIcon } from "react-icons/md";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
+import { Navigate } from "react-router-dom";
+import { PATHS } from "../../configs/RoutesConfig";
+import { addBillDetail } from "../../Redux/cart/CartSlice";
 function Cart() {
   const cartState = useSelector((state) => state.cart);
+  const cartDispatch = useDispatch();
   const [total, setTotal] = useState(0);
   const [totalDiscount, setDiscount] = useState();
 
@@ -36,6 +40,18 @@ function Cart() {
       }
     },
   });
+  const handlePurchase = () => {
+    const billData = {
+      total: totalDiscount !== undefined ? totalDiscount : total,
+      firstName: "",
+      lastName: "",
+      address: "",
+      phone: "",
+      deliveryDate: new Date(),
+    };
+    cartDispatch(addBillDetail(billData));
+    Navigate(PATHS.CHECKOUT);
+  };
   return (
     <div className="font-IranRegular px-10 py-5 flex flex-col gap-5 justify-center items-center">
       {cartState.cart.length >= 1 ? (
@@ -99,7 +115,9 @@ function Cart() {
                 تومان
               </span>
             </div>
-            <button className="outlineButton ">نهایی کردن خرید</button>
+            <button className="outlineButton" onClick={handlePurchase}>
+              نهایی کردن خرید
+            </button>
           </div>
         </div>
       ) : (
