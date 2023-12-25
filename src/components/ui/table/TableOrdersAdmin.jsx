@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaSort as SortIcon } from "react-icons/fa6";
 import faTexts from "../../../utils/Constants";
 import { formatDate } from "../../../utils/functions";
-function TableOrdersAdmin(data) {
-  const { orders } = data.data.data;
-
+import OrderModal from "../modal/OrderModal";
+function TableOrdersAdmin({ data, setOpenModal, setID }) {
+  const { orders } = data.data;
+  const [modal, setModal] = useState(false);
+  const [itemData, setdata] = useState("");
+  console.log(orders);
+  const handleModal = (id, item) => {
+    // setOpenModal(true);
+    // setID(id);
+    // console.log(item);
+    setModal(true);
+    setdata(item);
+  };
   return (
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 px-4">
       <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -32,7 +42,7 @@ function TableOrdersAdmin(data) {
       </thead>
       <tbody>
         {orders &&
-          orders.map((item) => {
+          orders.map((item, index) => {
             return (
               <tr
                 className="w-full border-b  hover:bg-gray-200 h-fit"
@@ -50,7 +60,10 @@ function TableOrdersAdmin(data) {
                 </td>
                 <td className="px-6 py-4">{formatDate(item.createdAt)}</td>
                 <td className="px-6 py-4 gap-4 items-center">
-                  <span className="w-fit ml-4 text-red-500 cursor-pointer underline-offset-4 underline">
+                  <span
+                    className="w-fit ml-4 text-red-500 cursor-pointer underline-offset-4 underline"
+                    onClick={() => handleModal(item.user._id, item)}
+                  >
                     {faTexts.orderReview}
                   </span>
                 </td>
@@ -58,6 +71,7 @@ function TableOrdersAdmin(data) {
             );
           })}
       </tbody>
+      <OrderModal isOpen={modal} setModalOpen={setModal} data={itemData} />
     </table>
   );
 }
