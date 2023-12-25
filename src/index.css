@@ -62,6 +62,9 @@
   font-family: IranRegular;
   font-size: small;
 }
+.max-w-md {
+  max-width: 60%;
+}
 @layer components {
   .errorStyleText {
     @apply w-full flex p-2 text-red-500  text-xs text-start;
