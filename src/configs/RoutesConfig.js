@@ -7,6 +7,7 @@ export const PATHS = {
   BASKET: "/basket",
   CHECKOUT: "/checkout",
   PAYMENT: "/payment",
+  PAYMENT_RESULT: "/payment-result",
   LOGIN: "/login",
   REGISTER: "/resgister",
   CONTACTUS: "/contact-us",

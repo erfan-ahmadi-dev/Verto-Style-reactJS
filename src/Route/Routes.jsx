@@ -13,6 +13,9 @@ const SingleProduct = React.lazy(() =>
 const Cart = React.lazy(() => import("../pages/cart/Cart"));
 const Checkout = React.lazy(() => import("../pages/checkout/Checkout"));
 const Payment = React.lazy(() => import("../pages/payment/Payment"));
+const PaymentResult = React.lazy(() =>
+  import("../pages/payment/result/PaymentResult")
+);
 const Login = React.lazy(() => import("../pages/login/Login"));
 const NotFound = React.lazy(() => import("../pages/notfound/NotFound"));
 const ContactUs = React.lazy(() => import("../pages/contactUs/ContactUs"));
@@ -129,6 +132,20 @@ const routes = createBrowserRouter([
             }
           >
             <ContactUs />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: `${PATHS.PAYMENT_RESULT}/:status`,
+        element: (
+          <React.Suspense
+            fallback={
+              <>
+                <LodingModal />
+              </>
+            }
+          >
+            <PaymentResult />
           </React.Suspense>
         ),
       },
