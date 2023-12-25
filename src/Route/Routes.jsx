@@ -117,20 +117,7 @@ const routes = createBrowserRouter([
           </React.Suspense>
         ),
       },
-      {
-        path: PATHS.PAYMENT,
-        element: (
-          <React.Suspense
-            fallback={
-              <>
-                <LodingModal />
-              </>
-            }
-          >
-            <Payment />
-          </React.Suspense>
-        ),
-      },
+
       {
         path: PATHS.CONTACTUS,
         element: (
@@ -228,6 +215,20 @@ const routes = createBrowserRouter([
         }
       >
         <Login />
+      </React.Suspense>
+    ),
+  },
+  {
+    path: PATHS.PAYMENT,
+    element: (
+      <React.Suspense
+        fallback={
+          <>
+            <LodingModal />
+          </>
+        }
+      >
+        <Payment />
       </React.Suspense>
     ),
   },
