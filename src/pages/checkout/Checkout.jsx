@@ -8,9 +8,15 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import "react-multi-date-picker/styles/colors/red.css";
 import { toast } from "react-toastify";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addBillDetail } from "../../Redux/cart/CartSlice";
+import { PATHS } from "../../configs/RoutesConfig";
+import { useNavigate } from "react-router-dom";
 function Checkout() {
   const [dateValue, setDate] = useState();
+  const cartState = useSelector((state) => state.cart);
+  const cartDispatch = useDispatch();
+  const navigate = useNavigate();
   const handleDateChange = (newValue, { setFieldValue }) => {
     const selectedDate = new Date(newValue);
     const today = new Date();
@@ -20,7 +26,6 @@ function Checkout() {
     if (selectedDate <= today) {
       toast.error(faTexts.incorrectDate);
     } else {
-      console.log(typeof selectedDate.toISOString());
       setDate(selectedDate.toISOString());
       setFieldValue("date", selectedDate.toISOString());
     }
@@ -38,13 +43,21 @@ function Checkout() {
           date: "",
         }}
         validationSchema={checkoutSchema}
-        onSubmit={(values, { setSubmitting, isValidating }) => {
-          values.date = dateValue;
+        onSubmit={(values) => {
+          const newBill = {
+            total: cartState.bill[0].total,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            address: values.address,
+            phone: values.phone,
+            date: values.date,
+          };
+          cartDispatch(addBillDetail(newBill));
 
-          console.log(values);
+          navigate(PATHS.PAYMENT);
         }}
       >
-        {({ errors, touched, setFieldValue }) => (
+        {({ setFieldValue }) => (
           <Form className="w-1/2 flex flex-col items-center gap-10">
             <div className="w-full grid grid-cols-2 gap-5 ">
               <div className="flex flex-col gap-2">
