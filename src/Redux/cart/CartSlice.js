@@ -47,6 +47,10 @@ export const cartSlice = createSlice({
         state.bill.push(action.payload);
       }
     },
+    clearData: (state) => {
+      state.bill = [];
+      state.cart = [];
+    },
   },
 });
 
@@ -56,6 +60,7 @@ export const {
   decreaseCount,
   increaseCount,
   addBillDetail,
+  clearData,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
