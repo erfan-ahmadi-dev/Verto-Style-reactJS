@@ -36,7 +36,12 @@ export const patchData = async (query, id) => {
     return response.status === 200;
   });
 };
-
+export const patchOrder = async (query, data) => {
+  return handleRequest(async () => {
+    const response = await defaultApi.patch(query, data);
+    return response.status === 200;
+  });
+};
 export const deleteData = async (query, id) => {
   return handleRequest(async () => {
     const response = await api.delete(`${query}${id}`);
