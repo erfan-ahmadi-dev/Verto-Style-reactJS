@@ -41,7 +41,7 @@ export const cartSlice = createSlice({
       }
     },
     addBillDetail: (state, action) => {
-      if (state.bill.length > 1) {
+      if (state.bill.length > 0) {
         state.bill[0] = action.payload;
       } else {
         state.bill.push(action.payload);
