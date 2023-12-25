@@ -3,15 +3,12 @@ import { FaSort as SortIcon } from "react-icons/fa6";
 import faTexts from "../../../utils/Constants";
 import { formatDate } from "../../../utils/functions";
 import OrderModal from "../modal/OrderModal";
-function TableOrdersAdmin({ data, setOpenModal, setID }) {
+function TableOrdersAdmin({ data, refetch }) {
   const { orders } = data.data;
   const [modal, setModal] = useState(false);
   const [itemData, setdata] = useState("");
   console.log(orders);
   const handleModal = (id, item) => {
-    // setOpenModal(true);
-    // setID(id);
-    // console.log(item);
     setModal(true);
     setdata(item);
   };
@@ -71,7 +68,12 @@ function TableOrdersAdmin({ data, setOpenModal, setID }) {
             );
           })}
       </tbody>
-      <OrderModal isOpen={modal} setModalOpen={setModal} data={itemData} />
+      <OrderModal
+        isOpen={modal}
+        setModalOpen={setModal}
+        data={itemData}
+        refetch={refetch}
+      />
     </table>
   );
 }
