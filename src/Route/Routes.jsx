@@ -149,6 +149,20 @@ const routes = createBrowserRouter([
           </React.Suspense>
         ),
       },
+      {
+        path: "*",
+        element: (
+          <React.Suspense
+            fallback={
+              <>
+                <LodingModal />
+              </>
+            }
+          >
+            <NotFound />
+          </React.Suspense>
+        ),
+      },
     ],
   },
   {
@@ -246,20 +260,6 @@ const routes = createBrowserRouter([
         }
       >
         <Payment />
-      </React.Suspense>
-    ),
-  },
-  {
-    path: "*",
-    element: (
-      <React.Suspense
-        fallback={
-          <>
-            <LodingModal />
-          </>
-        }
-      >
-        <NotFound />
       </React.Suspense>
     ),
   },
