@@ -21,7 +21,10 @@ function AdminOrders() {
     queryFn: fetchData,
     staleTime: 500,
   });
+  const handleRefetch = async () => {
+    await query.refetch();
 
+  };
   return (
     <div className="w-full flex flex-col ">
       <div className="flex justify-between w-full p-5 items-center bg-gray-800 text-white">
@@ -56,7 +59,7 @@ function AdminOrders() {
           <Loading className="animate-spin aanimate-infinite animate-duration-1000 w-12 h-12" />
         ) : (
           <>
-            <TableOrdersAdmin data={query.data} />
+            <TableOrdersAdmin data={query.data} refetch={handleRefetch}/>
             <Pagination setPage={setPage} data={query.data} page={page} />
           </>
         )}
