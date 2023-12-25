@@ -90,9 +90,11 @@ const faTexts = {
   errorLastNameRequired: "وارد کردن نام خانوداگی الزامی هست",
   errorPhoneRequired: "وارد کردن شماره تماس الزامی هست",
   errorAddressRequired: "وارد کردن آدرس الزامی هست",
-  errorDateRequired: "وارد کردن تاریخ تحویل الزامی هست",
+  errorDateRequired: "وارد کردن تاریخ تحویل صحیح الزامی هست",
   errorEmaileRequired: "وارد کردن ایمیل الزامی هست",
   wrongInput: "لطفا مقادیر را به درستی وارد کنید",
+
+  incorrectDate: "تاریخ تحویل باید از روز های آتی انتخاب شود",
 };
 
 // TODO define links insde PATHS

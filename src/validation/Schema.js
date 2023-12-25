@@ -8,10 +8,7 @@ export const loginSchema = yup.object().shape({
 export const checkoutSchema = yup.object().shape({
   firstName: yup.string(Texts.wrongInput).required(Texts.errorNameRequired),
   lastName: yup.string(Texts.wrongInput).required(Texts.errorLastNameRequired),
-  email: yup
-    .string(Texts.wrongInput)
-    .email(Texts.wrongEmail)
-    .required(Texts.errorEmaileRequired),
+  phone: yup.number(Texts.wrongInput).required(Texts.errorPhoneRequired),
   address: yup.string(Texts.wrongInput).required(Texts.errorAddressRequired),
-  date: yup.date(Texts.wrongInput).required(Texts.errorDateRequired),
+  date: yup.string(Texts.wrongInput).required(Texts.errorDateRequired),
 });
