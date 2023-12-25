@@ -12,11 +12,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { addBillDetail } from "../../Redux/cart/CartSlice";
 import { PATHS } from "../../configs/RoutesConfig";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { sendData } from "../../api/defaultApi";
 function Checkout() {
   const [dateValue, setDate] = useState();
   const cartState = useSelector((state) => state.cart);
   const cartDispatch = useDispatch();
   const navigate = useNavigate();
+  const addProductMutation = useMutation({
+    mutationKey: ["addUser"],
+    mutationFn: (data) => {
+      return sendData(`users`, data);
+    },
+  });
   const handleDateChange = (newValue, { setFieldValue }) => {
     const selectedDate = new Date(newValue);
     const today = new Date();
@@ -53,7 +61,15 @@ function Checkout() {
             date: values.date,
           };
           cartDispatch(addBillDetail(newBill));
-
+          addProductMutation.mutate({
+            firstname: values.firstName,
+            lastname: values.lastName,
+            username: `user${Math.random() * 100}`,
+            password: "ZAQwsx123",
+            phoneNumber: values.phone,
+            address: values.address,
+            role: "USER",
+          });
           navigate(PATHS.PAYMENT);
         }}
       >
