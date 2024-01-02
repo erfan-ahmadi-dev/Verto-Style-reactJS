@@ -93,7 +93,7 @@ const faTexts = {
   errorDateRequired: "وارد کردن تاریخ تحویل صحیح الزامی هست",
   errorEmaileRequired: "وارد کردن ایمیل الزامی هست",
   wrongInput: "لطفا مقادیر را به درستی وارد کنید",
-
+  wrongPhoneNum: "شماره تماس وارد شده اشتباه هست",
   incorrectDate: "تاریخ تحویل باید از روز های آتی انتخاب شود",
 };
 
