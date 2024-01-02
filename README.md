@@ -7,6 +7,14 @@ A clothing store made by React JS
 ![ComponentStructureMap](https://github.com/dornadev/maktab99-project-erfan-ahmadi/assets/40805510/4429b10d-54c8-4869-a415-91a9c53d1d7a)
 
 
+<h3>Screen Shots</h3>
+
+| Home Page                                                     | Categories Page                                               | Product Page                                                    |
+| ------------------------------------------------------------- | ------------------------------------------------------------- | --------------------------------------------------------------- |
+| <img  width="300"  alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://github.com/erfan-ahmadi-dev/maktab99-project-erfan-ahmadi/assets/40805510/6892ee16-e7f4-4d88-bcaa-8adbe7f7319d">                                    | <img  width="300"  alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://github.com/erfan-ahmadi-dev/maktab99-project-erfan-ahmadi/assets/40805510/fb5d1d67-44f8-4900-aefe-8f50eb12ae29">                                    | <img  width="300"  alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://github.com/erfan-ahmadi-dev/maktab99-project-erfan-ahmadi/assets/40805510/91942217-268c-45ae-9ad5-b83ad7d54c68">                                                                |
+
+
+
 
 # Getting Started with Create React App
 
