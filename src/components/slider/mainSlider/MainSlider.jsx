@@ -3,6 +3,8 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { slide1, slide2, slide3 } from "../../../assets/images";
 import "swiper/css";
 import "swiper/css/navigation";
+import { Link } from "react-router-dom";
+import { SUB_CATEGOREIS_LINK } from "../../../utils/Constants";
 function MainSlider() {
   return (
     <Swiper
@@ -20,13 +22,19 @@ function MainSlider() {
       direction="horizontal"
     >
       <SwiperSlide className="flex">
-        <img src={slide1} alt="friday discount" loading="lazy" />
+        <Link to={`products/${SUB_CATEGOREIS_LINK[0].link}`}>
+          <img src={slide1} alt="friday discount" loading="lazy" />
+        </Link>
       </SwiperSlide>
       <SwiperSlide>
-        <img src={slide2} alt="women clothes" loading="lazy" />
+        <Link to={`products/${SUB_CATEGOREIS_LINK[2].link}`}>
+          <img src={slide2} alt="men shoes" loading="lazy" />
+        </Link>
       </SwiperSlide>
       <SwiperSlide>
-        <img src={slide3} alt="men shoes" loading="lazy" />
+        <Link to={`products/${SUB_CATEGOREIS_LINK[1].link}`}>
+          <img src={slide3} alt="women clothes" loading="lazy" />
+        </Link>
       </SwiperSlide>
     </Swiper>
   );
